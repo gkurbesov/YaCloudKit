@@ -6,7 +6,8 @@ namespace YaCloudKit.MQ
 {
     public class YandexMqConfig
     {
-        public const string DEFAULT_SERVICENAME = "sqs";
+        public const string DEFAULT_SERVICE_NAME = "sqs";
+        public const string DEFAULT_SERVICE_VERSION = "2012-11-05";
         public const string DEFAULT_REGION = "ru-central1";
         public const string DEFAULT_ENDPOINT = "https://message-queue.api.cloud.yandex.net/";
 
@@ -33,7 +34,7 @@ namespace YaCloudKit.MQ
 
         public YandexMqConfig()
         {
-            ServiceName = DEFAULT_SERVICENAME;
+            ServiceName = DEFAULT_SERVICE_NAME;
             Region = DEFAULT_REGION;
             EndPoint = new Uri(DEFAULT_ENDPOINT);
         }
@@ -53,7 +54,7 @@ namespace YaCloudKit.MQ
                 throw new ArgumentNullException(nameof(secretAccessKey));
             SecretAccessKey = secretAccessKey; 
             
-            ServiceName = DEFAULT_SERVICENAME;
+            ServiceName = DEFAULT_SERVICE_NAME;
             Region = DEFAULT_REGION;
             EndPoint = new Uri(DEFAULT_ENDPOINT);
         }
@@ -83,7 +84,7 @@ namespace YaCloudKit.MQ
                 throw new ArgumentNullException(nameof(endpoint));
             EndPoint = new Uri(endpoint);
 
-            ServiceName = DEFAULT_SERVICENAME;
+            ServiceName = DEFAULT_SERVICE_NAME;
         }
     }
 }
