@@ -11,5 +11,6 @@ namespace YaCloudKit.MQ
     {
         public BaseRequest OriginalRequest { get; set; }
         public IMarshaller<BaseRequest> RequestMarshaller { get; set; }
+        public IUnmarshallerr ResponseUnmarshaller { get; set; }
     }
 }
