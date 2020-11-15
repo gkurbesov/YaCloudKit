@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,7 +30,24 @@ namespace YaCloudKit.MQ
             var signature = new YandexMqSigner(Config).Create(requestContext);
             YandexMqHeaderBuilder.AddHeaderAuthorization(requestContext, signature);
 
-            return default;
+            var content = new ByteArrayContent(requestContext.GetContent());
+            YandexMqHeaderBuilder.AddHttpHeaders(content.Headers, requestContext.Headers);
+
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Config.EndPoint);
+            request.Content = content;
+            YandexMqHeaderBuilder.AddHttpHeaders(request.Headers, requestContext.Headers);
+
+            var httpResponse = await GetHttpClient().SendAsync(request, cancellationToken);
+            var response = await options.ResponseUnmarshaller.UnmarshallAsync<TResponse>(httpResponse);
+
+            return response;
+        }
+
+        protected HttpClient GetHttpClient()
+        {
+            var client = new HttpClient();
+            client.Timeout = Config.HttpClientTimeout;
+            return client;
         }
 
         protected void ThrowIfDisposed()
