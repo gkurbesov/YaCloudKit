@@ -10,7 +10,6 @@ namespace YaCloudKit.MQ
         public IDictionary<string, string> RequestParameters { get; set; } = new Dictionary<string, string>();
         public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
         public DateTime RequestDateTime { get; set; } = DateTime.UtcNow;
-
         private byte[] content;
 
         public RequestContext() { }

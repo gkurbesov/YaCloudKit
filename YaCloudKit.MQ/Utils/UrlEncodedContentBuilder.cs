@@ -6,6 +6,11 @@ namespace YaCloudKit.MQ.Utils
 {
     internal static class UrlEncodedContentBuilder
     {
+        /// <summary>
+        /// Создает содержимое формата Url Encoded для выполнения запроса
+        /// </summary>
+        /// <param name="nameValueCollection">Словарь с параметрами POST запроса</param>
+        /// <returns></returns>
         public static byte[] GetContentByteArray(IEnumerable<KeyValuePair<string, string>> nameValueCollection)
         {
             if (nameValueCollection == null)
