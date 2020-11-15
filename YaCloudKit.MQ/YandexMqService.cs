@@ -42,11 +42,11 @@ namespace YaCloudKit.MQ
             YandexMqHeaderBuilder.AddHeaderAuthorization(requestContext, signature);
 
             var content = new ByteArrayContent(requestContext.GetContent());
-            YandexMqHeaderBuilder.AddHttpHeaders(content.Headers, requestContext.Headers);
+            YandexMqHeaderBuilder.AddHttpHeaders(requestContext, content.Headers);
 
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Config.EndPoint);
             request.Content = content;
-            YandexMqHeaderBuilder.AddHttpHeaders(request.Headers, requestContext.Headers);
+            YandexMqHeaderBuilder.AddHttpHeaders(requestContext, request.Headers);
 
             var httpResponse = await GetHttpClient().SendAsync(request, cancellationToken);
             var response = await options.ResponseUnmarshaller.UnmarshallAsync<TResponse>(httpResponse);
