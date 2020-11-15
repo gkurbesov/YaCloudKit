@@ -31,6 +31,10 @@ namespace YaCloudKit.MQ
         /// Секретный ключ сервисного аккаунта
         /// </summary>
         public string SecretAccessKey { get; set; }
+        /// <summary>
+        /// Максимальный таймаут выполнения HTTP запроса
+        /// </summary>
+        public TimeSpan HttpClientTimeout { get; set; } = TimeSpan.FromMinutes(1);
 
         public YandexMqConfig()
         {
