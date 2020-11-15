@@ -8,7 +8,7 @@ using YaCloudKit.MQ.Utils;
 
 namespace YaCloudKit.MQ
 {
-    public abstract class YandexMqService
+    public abstract class YandexMqService : IDisposable
     {
         public YandexMqConfig Config { get; set; }
 
@@ -52,7 +52,39 @@ namespace YaCloudKit.MQ
 
         protected void ThrowIfDisposed()
         {
-
+            if (disposedValue)
+                throw new ObjectDisposedException(GetType().Name);
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // Для определения избыточных вызовов
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: освободить управляемое состояние (управляемые объекты).
+                }
+                Config = null;
+                disposedValue = true;
+            }
+        }
+
+        // TODO: переопределить метод завершения, только если Dispose(bool disposing) выше включает код для освобождения неуправляемых ресурсов.
+        // ~YandexMqService()
+        // {
+        //   // Не изменяйте этот код. Разместите код очистки выше, в методе Dispose(bool disposing).
+        //   Dispose(false);
+        // }
+
+        // Этот код добавлен для правильной реализации шаблона высвобождаемого класса.
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }
