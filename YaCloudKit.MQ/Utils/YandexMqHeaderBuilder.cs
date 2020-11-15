@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace YaCloudKit.MQ.Utils
@@ -18,7 +19,9 @@ namespace YaCloudKit.MQ.Utils
         {
             context.AddHeader(HEAD_CONENT_LEN, context.GetContent().Length.ToString());
             context.AddHeader(HEAD_CONENT_TYPE, HEAD_CONENT_TYPE_VALUE);
+
             context.AddHeader(X_Amz_Date, context.RequestDateTime.ToString(YandexMqSigner.ISO8601BasicFormat, CultureInfo.InvariantCulture));
+
             var hostHeader = endpoint.Host;
             if (!endpoint.IsDefaultPort)
                 hostHeader += ":" + endpoint.Port;
@@ -28,6 +31,12 @@ namespace YaCloudKit.MQ.Utils
         public static void AddHeaderAuthorization(IRequestContext context, string signature)
         {
             context.AddHeader(HEAD_AUTH, signature);
+        }
+
+        public static void AddHttpHeaders(HttpHeaders headers, IDictionary<string, string> values)
+        {
+            foreach (var headItem in values)
+                headers.TryAddWithoutValidation(headItem.Key, headItem.Value);
         }
 
     }
