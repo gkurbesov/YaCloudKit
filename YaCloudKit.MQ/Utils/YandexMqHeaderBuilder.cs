@@ -15,6 +15,11 @@ namespace YaCloudKit.MQ.Utils
         public const string HEAD_HOST = "Host";
         public const string HEAD_AUTH = "Authorization";
 
+        /// <summary>
+        /// Добавляет заголовки в контекст запроса
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="endpoint"></param>
         public static void AddHeaders(IRequestContext context, Uri endpoint)
         {
             context.AddHeader(HEAD_CONENT_LEN, context.GetContent().Length.ToString());
@@ -28,14 +33,24 @@ namespace YaCloudKit.MQ.Utils
             context.AddHeader(HEAD_HOST, hostHeader);
         }
 
+        /// <summary>
+        /// Добавляет заголовок авторизации в контекст
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="signature"></param>
         public static void AddHeaderAuthorization(IRequestContext context, string signature)
         {
             context.AddHeader(HEAD_AUTH, signature);
         }
 
-        public static void AddHttpHeaders(HttpHeaders headers, IDictionary<string, string> values)
+        /// <summary>
+        /// Добавляет недостающие заголовки из контекста в класс HttpHeaders запроса или http-контента
+        /// </summary>
+        /// <param name="headers"></param>
+        /// <param name="values"></param>
+        public static void AddHttpHeaders(IRequestContext context, HttpHeaders headers)
         {
-            foreach (var headItem in values)
+            foreach (var headItem in context.Headers)
                 headers.TryAddWithoutValidation(headItem.Key, headItem.Value);
         }
 

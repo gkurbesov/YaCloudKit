@@ -20,8 +20,19 @@ namespace YaCloudKit.MQ
             Config = config;
         }
 
+        /// <summary>
+        /// Асинхронно выполняет запрос к сервису 
+        /// </summary>
+        /// <typeparam name="TResponse">Тип ожидаемого ответа</typeparam>
+        /// <param name="options">опчии для выполнения запроса</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         protected async Task<TResponse> InvokeAsync<TResponse>(InvokeOptions options, CancellationToken cancellationToken)
         {
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+
+
             ThrowIfDisposed();
 
             IRequestContext requestContext = options.RequestMarshaller.Marshall(options.OriginalRequest);
@@ -43,6 +54,10 @@ namespace YaCloudKit.MQ
             return response;
         }
 
+        /// <summary>
+        /// Получить новый экземпляр http-клиента
+        /// </summary>
+        /// <returns></returns>
         protected HttpClient GetHttpClient()
         {
             var client = new HttpClient();
@@ -50,6 +65,9 @@ namespace YaCloudKit.MQ
             return client;
         }
 
+        /// <summary>
+        /// Проверяет не проведена ли очистка ресурсов
+        /// </summary>
         protected void ThrowIfDisposed()
         {
             if (disposedValue)
