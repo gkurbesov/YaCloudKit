@@ -20,6 +20,6 @@ namespace YaCloudKit.MQ
         /// <summary>
         /// Унмаршаллер для получения результатов ответа от сервера
         /// </summary>
-        public IUnmarshallerr ResponseUnmarshaller { get; set; }
+        public IUnmarshaller ResponseUnmarshaller { get; set; }
     }
 }

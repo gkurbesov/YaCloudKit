@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YaCloudKit.MQ.Marshallers
 {
-    public interface IUnmarshallerr
+    public interface IUnmarshaller
     {
         Task<T> UnmarshallAsync<T>(HttpResponseMessage response);
     }
