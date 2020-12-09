@@ -9,7 +9,7 @@ namespace YaCloudKit.MQ.Model.Requests
         /// <summary>
         /// Имя метода вызываемого API
         /// </summary>
-        public string ActionName { get; set; }
+        public string ActionName { get; private set; }
 
         public BaseRequest(string actionName)
         {
