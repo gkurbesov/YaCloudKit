@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using YaCloudKit.MQ.Utils;
+using YaCloudKit.MQ.Marshallers;
+using System.Diagnostics;
+using System.Globalization;
+using YaCloudKit.MQ.Model.Responses;
 
 namespace YaCloudKit.MQ
 {
@@ -27,31 +31,38 @@ namespace YaCloudKit.MQ
         /// <param name="options">опчии для выполнения запроса</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        protected async Task<TResponse> InvokeAsync<TResponse>(InvokeOptions options, CancellationToken cancellationToken)
+        protected async Task<TResponse> InvokeAsync<TResponse>(InvokeOptions options, CancellationToken cancellationToken) where TResponse: YandexMessageQueueResponse, new()
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-
             ThrowIfDisposed();
+            cancellationToken.ThrowIfCancellationRequested();
 
             IRequestContext requestContext = options.RequestMarshaller.Marshall(options.OriginalRequest);
-            YandexMqHeaderBuilder.AddHeaders(requestContext, Config.EndPoint);
-
-            var signature = new YandexMqSigner(Config).Create(requestContext);
-            YandexMqHeaderBuilder.AddHeaderAuthorization(requestContext, signature);
+            YandexMqHeaderBuilder.AddMainHeaders(requestContext, Config.EndPoint);
 
             var content = new ByteArrayContent(requestContext.GetContent());
             YandexMqHeaderBuilder.AddHttpHeaders(requestContext, content.Headers);
 
+            YandexMqHeaderBuilder.AddAWSDateHeaders(requestContext);
+
+            var signature = new YandexMqSigner(Config).Create(requestContext);
+            YandexMqHeaderBuilder.AddHeaderAuthorization(requestContext, signature);
+
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Config.EndPoint);
-            request.Content = content;
             YandexMqHeaderBuilder.AddHttpHeaders(requestContext, request.Headers);
+            request.Content = content;
 
             var httpResponse = await GetHttpClient().SendAsync(request, cancellationToken);
-            var response = await options.ResponseUnmarshaller.UnmarshallAsync<TResponse>(httpResponse);
 
-            return response;
+            var stream = await httpResponse.Content.ReadAsStreamAsync();
+            IResponseContext responseContext = new ResponseContext(httpResponse.StatusCode, httpResponse.Headers, stream);
+
+            if (httpResponse.IsSuccessStatusCode)
+                return options.ResponseUnmarshaller.Unmarshall<TResponse>(responseContext);
+            else
+                throw options.ResponseUnmarshaller.UnmarshallException(responseContext);
         }
 
         /// <summary>
