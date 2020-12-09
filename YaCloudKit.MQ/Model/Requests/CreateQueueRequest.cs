@@ -9,7 +9,7 @@ namespace YaCloudKit.MQ.Model.Requests
     /// По умолчанию создается стандартная очередь.
     /// Чтобы создать очередь FIFO необходимо использовать параметр <code>FifoQueue</code>
     /// </summary>
-    public class CreateQueueRequest
+    public class CreateQueueRequest : BaseRequest
     {
         /// <summary>
         /// Имя очереди. Максимальная длина — 80 символов. 
@@ -21,5 +21,8 @@ namespace YaCloudKit.MQ.Model.Requests
         /// Список атрибутов очереди.
         /// </summary>
         public Dictionary<string, string> Attributes = new Dictionary<string, string>();
+
+        public CreateQueueRequest()
+            : base("CreateQueue") { }
     }
 }

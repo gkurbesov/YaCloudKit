@@ -7,7 +7,7 @@ namespace YaCloudKit.MQ.Model.Requests
     /// <summary>
     /// Метод для отправки сообщения в указанную очередь. В теле сообщения можно передавать только XML, JSON и неформатированный текст
     /// </summary>
-    public class SendMessageRequest
+    public class SendMessageRequest : BaseRequest
     {
         /// <summary>
         /// Время в секундах, на которое сообщение будет скрыто после отправки. 
@@ -44,5 +44,8 @@ namespace YaCloudKit.MQ.Model.Requests
         /// Подробнее см. Дедупликация.
         /// </summary>
         public string MessageGroupId { get; set; }
+
+        public SendMessageRequest()
+            : base("SendMessage") { }
     }
 }

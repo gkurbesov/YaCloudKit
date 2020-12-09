@@ -9,7 +9,7 @@ namespace YaCloudKit.MQ.Model.Requests
     /// Изменение атрибутов может занять до 60 секунд. 
     /// Изменение атрибута <code>MessageRetentionPeriod</code> может занять до 15 минут.
     /// </summary>
-    public class SetQueueAttributesRequest
+    public class SetQueueAttributesRequest : BaseRequest
     {
         /// <summary>
         /// URL очереди
@@ -19,5 +19,8 @@ namespace YaCloudKit.MQ.Model.Requests
         /// Список атрибутов очереди
         /// </summary>
         public Dictionary<string, string> Attributes = new Dictionary<string, string>();
+
+        public SetQueueAttributesRequest()
+            : base("SetQueueAttributes") { }
     }
 }

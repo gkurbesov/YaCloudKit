@@ -8,7 +8,7 @@ namespace YaCloudKit.MQ.Model.Requests
     /// Метод для установки таймаута видимости сообщению, находящемуся в обработке. 
     /// Суммарная длительность таймаута не может быть более 12 часов.
     /// </summary>
-    public class ChangeMessageVisibilityRequest
+    public class ChangeMessageVisibilityRequest : BaseRequest
     {
         /// <summary>
         /// URL очереди, в которой находится сообщение
@@ -24,5 +24,8 @@ namespace YaCloudKit.MQ.Model.Requests
         /// Значение по умолчанию: 30
         /// </summary>
         public int VisibilityTimeout { get; set; } = 30;
+
+        public ChangeMessageVisibilityRequest()
+            : base("ChangeMessageVisibility") { }
     }
 }

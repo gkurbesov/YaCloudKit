@@ -8,7 +8,7 @@ namespace YaCloudKit.MQ.Model.Requests
     /// Метод для удаления нескольких сообщений из очереди.
     /// Удалять можно не более 10 сообщений одновременно.
     /// </summary>
-    public class DeleteMessageBatchRequest
+    public class DeleteMessageBatchRequest : BaseRequest
     {
         /// <summary>
         /// URL очереди, в которой находится сообщение
@@ -18,5 +18,8 @@ namespace YaCloudKit.MQ.Model.Requests
         /// Массив DeleteMessageBatchRequestEntry, содержащий параметры ReceiptHandle сообщений, которые требуется удалить.
         /// </summary>
         public List<DeleteMessageBatchRequestEntry> DeleteMessageBatchRequestEntry { get; set; } = new List<DeleteMessageBatchRequestEntry>();
+
+        public DeleteMessageBatchRequest()
+            : base("DeleteMessageBatch") { }
     }
 }

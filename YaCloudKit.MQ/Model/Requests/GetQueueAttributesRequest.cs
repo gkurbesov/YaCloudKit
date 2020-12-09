@@ -8,7 +8,7 @@ namespace YaCloudKit.MQ.Model.Requests
     /// Метод для получения атрибутов указанной очереди.
     /// Если в конце названия очереди стоит суффикс <code>.fifo</code> — запрашиваемая очередь имеет тип FIFO.
     /// </summary>
-    public class GetQueueAttributesRequest
+    public class GetQueueAttributesRequest : BaseRequest
     {
         /// <summary>
         /// URL очереди
@@ -19,5 +19,8 @@ namespace YaCloudKit.MQ.Model.Requests
         /// Атрибут <code>All</code> - возвращает все атрибуты очереди.
         /// </summary>
         public List<string> AttributeNames = new List<string>();
+
+        public GetQueueAttributesRequest()
+            : base("GetQueueAttributes") { }
     }
 }

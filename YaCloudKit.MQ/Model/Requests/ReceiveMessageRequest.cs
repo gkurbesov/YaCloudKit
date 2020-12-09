@@ -8,7 +8,7 @@ namespace YaCloudKit.MQ.Model.Requests
     /// Метод для приема от одного до десяти сообщений из указанной очереди. 
     /// С помощью параметра WaitTimeSeconds выполняются long-polling запросы.
     /// </summary>
-    public class ReceiveMessageRequest
+    public class ReceiveMessageRequest : BaseRequest
     {
         /// <summary>
         /// Максимальное количество сообщений, которое будет принято. 
@@ -44,5 +44,8 @@ namespace YaCloudKit.MQ.Model.Requests
         /// Если сообщения не появились после истечения <code>WaitTimeSeconds</code> будет возвращен пустой список.
         /// </summary>
         public string WaitTimeSeconds { get; set; }
+
+        public ReceiveMessageRequest()
+            : base("ReceiveMessage") { }
     }
 }

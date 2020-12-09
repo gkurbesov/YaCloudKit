@@ -11,11 +11,14 @@ namespace YaCloudKit.MQ.Model.Requests
     /// Процесс удаления очереди занимает до 60 секунд.
     /// В течение этого времени некоторые запросы, например, отправка сообщений в очередь, могут выполняться, но очередь все равно будет удалена вместе со всеми сообщениями.
     /// </summary>
-    public class DeleteQueueRequest
+    public class DeleteQueueRequest : BaseRequest
     {
         /// <summary>
         /// URL очереди. Чувствителен к регистру
         /// </summary>
         public string QueueUrl { get; set; }
+
+        public DeleteQueueRequest()
+            : base("DeleteQueue") { }
     }
 }

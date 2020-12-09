@@ -10,7 +10,7 @@ namespace YaCloudKit.MQ.Model.Requests
     /// Сообщение можно удалить, даже если сообщение получено и обрабатывается другим получателем. 
     /// Message Queue автоматически удаляет сообщения, если период, указанный в параметре <code>RetentionPeriod</code> закончился.
     /// </summary>
-    public class DeleteMessageRequest
+    public class DeleteMessageRequest : BaseRequest
     {
         /// <summary>
         /// URL очереди, в которой находится сообщение.
@@ -20,5 +20,8 @@ namespace YaCloudKit.MQ.Model.Requests
         /// Параметр <code>ReceiptHandle</code> из запроса <code>ReceiveMessage</code>.
         /// </summary>
         public string ReceiptHandle { get; set; }
+
+        public DeleteMessageRequest()
+            : base("DeleteMessage") { }
     }
 }

@@ -8,7 +8,7 @@ namespace YaCloudKit.MQ.Model.Requests
     /// Метод для одновременной отправки до десяти сообщений в указанную очередь. 
     /// При отправке сообщений в очередь FIFO они будут поступать в порядке отправления.
     /// </summary>
-    public class SendMessageBatchRequest
+    public class SendMessageBatchRequest : BaseRequest
     {
         /// <summary>
         /// Массив сообщений представленный сущностью <code>SendMessageBatchRequestEntry</code>.
@@ -18,5 +18,8 @@ namespace YaCloudKit.MQ.Model.Requests
         /// URL очереди, в которую посылаются сообщения
         /// </summary>
         public string QueueUrl { get; set; }
+
+        public SendMessageBatchRequest()
+            : base("SendMessageBatch") { }
     }
 }
