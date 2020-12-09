@@ -57,6 +57,7 @@ namespace YaCloudKit.MQ.Utils
             
             return authString.ToString();
         }
+
         protected string CanonicalizeRequest(string httpMethod, string canonicalizedHeaders, string signedHeaders, string bodyHash)
         {
             var canonicalRequest = new StringBuilder();
