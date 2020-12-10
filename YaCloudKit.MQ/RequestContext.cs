@@ -39,7 +39,7 @@ namespace YaCloudKit.MQ
                 throw new ArgumentNullException(nameof(key));
 
             if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentNullException(nameof(value));
+                throw new ArgumentNullException(key);
 
             RequestParameters.Add(key, value);
 
@@ -52,7 +52,7 @@ namespace YaCloudKit.MQ
                 throw new ArgumentNullException(nameof(key));
 
             if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentNullException(nameof(value));
+                throw new ArgumentNullException(key);
 
             Headers.Add(key, value);
 
