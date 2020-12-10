@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace YaCloudKit.Http
+{
+    public class HttpClientOptions
+    {
+        public TimeSpan HttpClientTimeout { get; set; } = TimeSpan.FromMinutes(1);
+#if !NETCOREAPP
+        /// <summary>
+        /// Указывает, сколько одновременных подключений можно создавать для каждого домена
+        /// </summary>
+        public int DefaultConnectionLimit { get; set; } = 5;
+#endif
+    }
+}
