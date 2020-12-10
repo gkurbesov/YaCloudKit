@@ -9,19 +9,24 @@ using YaCloudKit.MQ.Marshallers;
 using System.Diagnostics;
 using System.Globalization;
 using YaCloudKit.MQ.Model.Responses;
+using YaCloudKit.Http;
 
 namespace YaCloudKit.MQ
 {
     public abstract class YandexMqService : IDisposable
     {
         public YandexMqConfig Config { get; set; }
+        private IHttpServiceCaller ServiceCaller { get; }
 
-        protected YandexMqService(YandexMqConfig config)
+        protected YandexMqService(YandexMqConfig config, IHttpServiceCaller httpServiceCaller)
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
+            if (httpServiceCaller == null)
+                throw new ArgumentNullException(nameof(httpServiceCaller));
 
             Config = config;
+            ServiceCaller = httpServiceCaller;
         }
 
         /// <summary>
@@ -31,7 +36,7 @@ namespace YaCloudKit.MQ
         /// <param name="options">опчии для выполнения запроса</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        protected async Task<TResponse> InvokeAsync<TResponse>(InvokeOptions options, CancellationToken cancellationToken) where TResponse: YandexMessageQueueResponse, new()
+        protected async Task<TResponse> InvokeAsync<TResponse>(InvokeOptions options, CancellationToken cancellationToken) where TResponse : YandexMessageQueueResponse, new()
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
@@ -54,27 +59,30 @@ namespace YaCloudKit.MQ
             YandexMqHeaderBuilder.AddHttpHeaders(requestContext, request.Headers);
             request.Content = content;
 
-            var httpResponse = await GetHttpClient().SendAsync(request, cancellationToken);
 
-            var stream = await httpResponse.Content.ReadAsStreamAsync();
-            IResponseContext responseContext = new ResponseContext(httpResponse.StatusCode, httpResponse.Headers, stream);
+            return await ServiceCaller.CallService<TResponse>(GetHttpOptions(), async(client) =>
+            {
+                var httpResponse = await client.SendAsync(request, cancellationToken);
 
-            if (httpResponse.IsSuccessStatusCode)
-                return options.ResponseUnmarshaller.Unmarshall<TResponse>(responseContext);
-            else
-                throw options.ResponseUnmarshaller.UnmarshallException(responseContext);
+                var stream = await httpResponse.Content.ReadAsStreamAsync();
+                IResponseContext responseContext = new ResponseContext(httpResponse.StatusCode, httpResponse.Headers, stream);
+
+                if (httpResponse.IsSuccessStatusCode)
+                    return options.ResponseUnmarshaller.Unmarshall<TResponse>(responseContext);
+                else
+                    throw options.ResponseUnmarshaller.UnmarshallException(responseContext);
+            });
         }
 
         /// <summary>
         /// Получить новый экземпляр http-клиента
         /// </summary>
         /// <returns></returns>
-        protected HttpClient GetHttpClient()
+        protected HttpClientOptions GetHttpOptions() => new HttpClientOptions()
         {
-            var client = new HttpClient();
-            client.Timeout = Config.HttpClientTimeout;
-            return client;
-        }
+            HttpClientTimeout = Config.HttpClientTimeout,
+            EndPoint = Config.EndPoint
+        };
 
         /// <summary>
         /// Проверяет не проведена ли очистка ресурсов
