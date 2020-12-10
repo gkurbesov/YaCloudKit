@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit", "YaCloudKit\YaCloudKit.csproj", "{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit", "YaCloudKit\YaCloudKit.csproj", "{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ", "YaCloudKit.MQ\YaCloudKit.MQ.csproj", "{EC003CF3-2892-46FA-BF19-2629E12CCBA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.MQ", "YaCloudKit.MQ\YaCloudKit.MQ.csproj", "{EC003CF3-2892-46FA-BF19-2629E12CCBA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MainTest", "YaCloudKit.MainTest\YaCloudKit.MainTest.csproj", "{1007701A-CFA0-46FE-99F2-B480D01F9563}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EC003CF3-2892-46FA-BF19-2629E12CCBA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC003CF3-2892-46FA-BF19-2629E12CCBA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC003CF3-2892-46FA-BF19-2629E12CCBA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1007701A-CFA0-46FE-99F2-B480D01F9563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1007701A-CFA0-46FE-99F2-B480D01F9563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1007701A-CFA0-46FE-99F2-B480D01F9563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1007701A-CFA0-46FE-99F2-B480D01F9563}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
