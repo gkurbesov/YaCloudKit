@@ -20,6 +20,9 @@ namespace YaCloudKit.Http
             {
 #if !NETCOREAPP
                 ServicePointManager.DefaultConnectionLimit = options.DefaultConnectionLimit;
+                var servicePoint = ServicePointManager.FindServicePoint(options.EndPoint);
+                if (servicePoint != null)
+                    servicePoint.ConnectionLeaseTimeout = options.ConnectionLeaseTimeoutMs;
 #endif
                 client = new HttpClient();
                 client.Timeout = options.HttpClientTimeout;
