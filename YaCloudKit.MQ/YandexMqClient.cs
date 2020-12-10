@@ -56,7 +56,17 @@ namespace YaCloudKit.MQ
 
         public Task<ListQueuesResponse> ListQueuesAsync(ListQueuesRequest request, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var option = new InvokeOptions()
+            {
+                OriginalRequest = request,
+                RequestMarshaller = new ListQueuesRequestMarshaller(),
+                ResponseUnmarshaller = new ListQueuesResponseUnmarshaller()
+            };
+
+            return InvokeAsync<ListQueuesResponse>(option, cancellationToken);
         }
 
         public Task<PurgeQueueResponse> PurgeQueueAsync(PurgeQueueRequest request, CancellationToken cancellationToken = default)
