@@ -6,16 +6,9 @@ namespace YaCloudKit.MQ.Model.Responses
 {
     public class GetQueueAttributesResponse : YandexMessageQueueResponse
     {
-        private IDictionary<string, string> _attributes;
-        public IDictionary<string, string> Attributes
-        {
-            get
-            {
-                if (_attributes == null)
-                    _attributes = new Dictionary<string, string>();
-
-                return _attributes;
-            }
-        }
+        /// <summary>
+        /// Словарь перечисления атрибутов очереди.
+        /// </summary>
+        public Dictionary<string, string> Attributes { get; set; } = new Dictionary<string, string>();
     }
 }

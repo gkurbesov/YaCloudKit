@@ -61,7 +61,17 @@ namespace YaCloudKit.MQ
 
         public Task<GetQueueAttributesResponse> GetQueueAttributesAsync(GetQueueAttributesRequest request, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var option = new InvokeOptions()
+            {
+                OriginalRequest = request,
+                RequestMarshaller = new GetQueueAttributesRequestMarshaller(),
+                ResponseUnmarshaller = new GetQueueAttributesResponseUnmarshaller()
+            };
+
+            return InvokeAsync<GetQueueAttributesResponse>(option, cancellationToken);
         }
 
         public Task<GetQueueUrlResponse> GetQueueUrlAsync(GetQueueUrlRequest request, CancellationToken cancellationToken = default)
