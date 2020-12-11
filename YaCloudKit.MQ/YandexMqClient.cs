@@ -29,14 +29,6 @@ namespace YaCloudKit.MQ
             base(config, httpCaller)
         { }
 
-        public Task<CreateQueueResponse> CreateQueueAsync(string queueName, CancellationToken cancellationToken = default)
-        {
-            if (string.IsNullOrWhiteSpace(queueName))
-                throw new ArgumentNullException(nameof(queueName));
-
-            return CreateQueueAsync(new CreateQueueRequest() { QueueName = queueName }, cancellationToken);
-        }
-
         public Task<CreateQueueResponse> CreateQueueAsync(CreateQueueRequest request, CancellationToken cancellationToken = default)
         {
             if (request == null)
@@ -54,7 +46,17 @@ namespace YaCloudKit.MQ
 
         public Task<DeleteQueueResponse> DeleteQueueAsync(DeleteQueueRequest request, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var option = new InvokeOptions()
+            {
+                OriginalRequest = request,
+                RequestMarshaller = new DeleteQueueRequestMarshaller(),
+                ResponseUnmarshaller = new DeleteQueueResponseUnmarshaller()
+            };
+
+            return InvokeAsync<DeleteQueueResponse>(option, cancellationToken);
         }
 
         public Task<GetQueueAttributesResponse> GetQueueAttributesAsync(GetQueueAttributesRequest request, CancellationToken cancellationToken = default)
