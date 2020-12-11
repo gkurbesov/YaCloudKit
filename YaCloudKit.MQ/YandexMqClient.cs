@@ -31,12 +31,25 @@ namespace YaCloudKit.MQ
 
         public Task<CreateQueueResponse> CreateQueueAsync(string queueName, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(queueName))
+                throw new ArgumentNullException(nameof(queueName));
+
+            return CreateQueueAsync(new CreateQueueRequest() { QueueName = queueName }, cancellationToken);
         }
 
         public Task<CreateQueueResponse> CreateQueueAsync(CreateQueueRequest request, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var option = new InvokeOptions()
+            {
+                OriginalRequest = request,
+                RequestMarshaller = new CreateQueueRequestMarshaller(),
+                ResponseUnmarshaller = new CreateQueueResponseUnmarshaller()
+            };
+
+            return InvokeAsync<CreateQueueResponse>(option, cancellationToken);
         }
 
         public Task<DeleteQueueResponse> DeleteQueueAsync(DeleteQueueRequest request, CancellationToken cancellationToken = default)

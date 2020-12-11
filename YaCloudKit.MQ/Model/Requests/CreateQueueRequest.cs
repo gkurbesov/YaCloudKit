@@ -20,7 +20,7 @@ namespace YaCloudKit.MQ.Model.Requests
         /// <summary>
         /// Список атрибутов очереди.
         /// </summary>
-        public Dictionary<string, string> Attributes = new Dictionary<string, string>();
+        public Dictionary<string, string> Attributes { get; set; } = new Dictionary<string, string>();
 
         public CreateQueueRequest()
             : base("CreateQueue") { }
