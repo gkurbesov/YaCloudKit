@@ -121,7 +121,17 @@ namespace YaCloudKit.MQ
 
         public Task<SetQueueAttributesResponse> SetQueueAttributesAsync(SetQueueAttributesRequest request, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var option = new InvokeOptions()
+            {
+                OriginalRequest = request,
+                RequestMarshaller = new SetQueueAttributesRequestMarshaller(),
+                ResponseUnmarshaller = new SetQueueAttributesResponseUnmarshaller()
+            };
+
+            return InvokeAsync<SetQueueAttributesResponse>(option, cancellationToken);
         }
 
         public Task<ChangeMessageVisibilityResponse> ChangeMessageVisibilityAsync(ChangeMessageVisibilityRequest request, CancellationToken cancellationToken = default)
