@@ -8,17 +8,6 @@ namespace YaCloudKit.MQ.Model.Responses
     public class ResponseMetadata
     {
         public string RequestId { get; set; }
-
-        private IDictionary<string, string> _metadata;
-        public IDictionary<string, string> Metadata
-        {
-            get
-            {
-                if (_metadata == null)
-                    _metadata = new Dictionary<string, string>();
-
-                return _metadata;
-            }
-        }
+        public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
     }
 }
