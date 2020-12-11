@@ -5,42 +5,24 @@ using YaCloudKit.MQ.Model.Responses;
 
 namespace YaCloudKit.MQ.Marshallers
 {
-    public class GetQueueUrlResponseUnmarshaller : IUnmarshaller
+    public class GetQueueUrlResponseUnmarshaller : ResponseUnmarshaller
     {
-        public T Unmarshall<T>(IResponseContext context) where T : YandexMessageQueueResponse, new()
+        public override T Unmarshall<T>(IResponseContext context)
         {
             try
             {
                 var response = new GetQueueUrlResponse();
-                response.ContentLength = context.ContentStream.Length;
-                response.HttpStatusCode = context.StatusCode;
+                ResultUnmarshall(context, response);
 
-                var xmlRootNode = ResponseUnmarshaller.GetXmlElement(context.ContentStream);
-
+                var xmlRootNode = GetXmlElement(context.ContentStream);
                 response.QueueUrl = xmlRootNode.SelectSingleNode("GetQueueUrlResult/QueueUrl")?.InnerText;
-                response.ResponseMetadata = new ResponseMetadata()
-                {
-                    RequestId = xmlRootNode.SelectSingleNode("ResponseMetadata/RequestId")?.InnerText
-                };
-
+                response.ResponseMetadata.RequestId = xmlRootNode.SelectSingleNode("ResponseMetadata/RequestId")?.InnerText;
 
                 return response as T;
             }
             catch (Exception ex)
             {
-                throw ResponseUnmarshaller.ErrorUnmarshall(ex.Message, ex, context.StatusCode);
-            }
-        }
-
-        public YandexMqServiceException UnmarshallException(IResponseContext context)
-        {
-            try
-            {
-                return ResponseUnmarshaller.ErrorUnmarshall(context);
-            }
-            catch (Exception ex)
-            {
-                return ResponseUnmarshaller.ErrorUnmarshall(ex.Message, ex, context.StatusCode);
+                throw ErrorUnmarshall(ex.Message, ex, context.StatusCode);
             }
         }
     }

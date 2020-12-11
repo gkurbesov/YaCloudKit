@@ -8,13 +8,19 @@ using YaCloudKit.MQ.Model.Responses;
 
 namespace YaCloudKit.MQ.Marshallers
 {
-    public class ResponseUnmarshaller
+    public class ResponseUnmarshaller : IUnmarshaller
     {
         public static XmlElement GetXmlElement(Stream stream)
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(stream);
             return doc.DocumentElement;
+        }
+
+        public static void ResultUnmarshall(IResponseContext context, YandexMessageQueueResponse response)
+        {
+            response.ContentLength = context.ContentStream.Length;
+            response.HttpStatusCode = context.StatusCode;
         }
 
         public static YandexMqServiceException ErrorUnmarshall(IResponseContext context)
@@ -50,6 +56,23 @@ namespace YaCloudKit.MQ.Marshallers
                 StatusCode = httpStatusCode
             };
             return exception;
+        }
+
+        public virtual T Unmarshall<T>(IResponseContext context) where T : YandexMessageQueueResponse, new()
+        {
+            throw new NotImplementedException();
+        }
+
+        public YandexMqServiceException UnmarshallException(IResponseContext context)
+        {
+            try
+            {
+                return ErrorUnmarshall(context);
+            }
+            catch (Exception ex)
+            {
+                return ErrorUnmarshall(ex.Message, ex, context.StatusCode);
+            }
         }
     }
 }
