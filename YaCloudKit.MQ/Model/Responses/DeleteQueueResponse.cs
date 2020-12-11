@@ -6,6 +6,5 @@ namespace YaCloudKit.MQ.Model.Responses
 {
     public class DeleteQueueResponse : YandexMessageQueueResponse
     {
-        public string QueueUrl { get; set; }
     }
 }

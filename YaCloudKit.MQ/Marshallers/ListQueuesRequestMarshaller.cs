@@ -21,6 +21,5 @@ namespace YaCloudKit.MQ.Marshallers
 
             return context;
         }
-
     }
 }

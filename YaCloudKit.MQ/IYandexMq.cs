@@ -11,7 +11,6 @@ namespace YaCloudKit.MQ
 {
     public interface IYandexMq : IDisposable
     {
-        Task<CreateQueueResponse> CreateQueueAsync(string queueName, CancellationToken cancellationToken = default);
         Task<CreateQueueResponse> CreateQueueAsync(CreateQueueRequest request, CancellationToken cancellationToken = default);
         Task<DeleteQueueResponse> DeleteQueueAsync(DeleteQueueRequest request, CancellationToken cancellationToken = default);
         Task<GetQueueAttributesResponse> GetQueueAttributesAsync(GetQueueAttributesRequest request, CancellationToken cancellationToken = default);
