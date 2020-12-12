@@ -4,7 +4,7 @@ using System.Text;
 
 namespace YaCloudKit.MQ.Model.Responses
 {
-    public class DeleteMessageResponse
+    public class DeleteMessageResponse : YandexMessageQueueResponse
     {
     }
 }
