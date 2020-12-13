@@ -18,5 +18,16 @@ namespace YaCloudKit.MQ.Model
         /// Строка в кодировке UTF-8.
         /// </summary>
         public string StringValue { get; set; }
+
+        internal bool IsSetValue()
+        {
+            switch (DataType)
+            {
+                case AttributeValueType.Binary:
+                    return BinaryValue != null && BinaryValue.Length > 0;
+                default:
+                    return !string.IsNullOrWhiteSpace(StringValue);
+            }
+        }
     }
 }
