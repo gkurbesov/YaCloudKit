@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using YaCloudKit.MQ.Model;
 
 namespace YaCloudKit.MQ.Utils
 {
@@ -13,6 +14,29 @@ namespace YaCloudKit.MQ.Utils
             {
                 context.AddParametr($"Attribute.{number}.Name", item.Key);
                 context.AddParametr($"Attribute.{number}.Value", item.Value);
+                number++;
+            }
+        }
+
+        public static void MessageAttributes(IRequestContext context, Dictionary<string, MessageAttributeValue> values)
+        {
+            var number = 1;
+            foreach (var item in values)
+            {
+                if (item.Value.IsSetValue())
+                {
+                    context.AddParametr($"MessageAttribute.{number}.Name", item.Key);
+                    context.AddParametr($"MessageAttribute.{number}.Value.DataType", item.Value.DataType.ToString());
+                    switch (item.Value.DataType)
+                    {
+                        case AttributeValueType.Binary:
+                            context.AddParametr($"MessageAttribute.{number}.Value.BinaryValue", Convert.ToBase64String(item.Value.BinaryValue));
+                            break;
+                        default:
+                            context.AddParametr($"MessageAttribute.{number}.Value.StringValue", item.Value.StringValue);
+                            break;
+                    }
+                }
                 number++;
             }
         }
