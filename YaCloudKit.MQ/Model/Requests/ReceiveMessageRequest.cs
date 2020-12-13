@@ -14,7 +14,12 @@ namespace YaCloudKit.MQ.Model.Requests
         /// Максимальное количество сообщений, которое будет принято. 
         /// Возможные значения: от 1 до 10. Значение по умолчанию: 1.
         /// </summary>
-        public string MaxNumberOfMessages { get; set; }
+        public int? MaxNumberOfMessages { get; set; }
+        /// <summary>
+        /// Массив имен системныъх атрибутов сообщения, которые требуется вернуть в ответе на запрос. 
+        /// Можно получить все атрибуты сразу, указав слово <code>All</code>.
+        /// </summary>
+        public List<string> AttributeNames { get; set; } = new List<string>();
         /// <summary>
         /// Массив имен атрибутов сообщения, которые требуется вернуть в ответе на запрос. 
         /// Имя может содержать буквы и цифры, а также дефисы, нижние подчеркивания и точки. 
@@ -37,15 +42,21 @@ namespace YaCloudKit.MQ.Model.Requests
         /// <summary>
         /// Таймаут видимости получаемого сообщения.
         /// </summary>
-        public string VisibilityTimeout { get; set; }
+        public int? VisibilityTimeout { get; set; }
         /// <summary>
         /// Время ожидания доставки сообщения в очередь в секундах. 
         /// Если в очереди появятся сообщения, вызов будет сделан раньше, чем указано в <code>WaitTimeSeconds</code>. 
         /// Если сообщения не появились после истечения <code>WaitTimeSeconds</code> будет возвращен пустой список.
         /// </summary>
-        public string WaitTimeSeconds { get; set; }
+        public int? WaitTimeSeconds { get; set; }
 
         public ReceiveMessageRequest()
             : base("ReceiveMessage") { }
+
+        internal bool IsSetAttributeNames() =>
+            AttributeNames != null && AttributeNames.Count > 0;
+
+        internal bool IsSetMessageAttributeName() =>
+            MessageAttributeName != null && MessageAttributeName.Count > 0;
     }
 }
