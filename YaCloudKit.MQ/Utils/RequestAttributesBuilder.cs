@@ -50,5 +50,15 @@ namespace YaCloudKit.MQ.Utils
                 number++;
             }
         }
+
+        public static void ListMessageAttributes(IRequestContext context, List<string> values)
+        {
+            var number = 1;
+            foreach (var item in values)
+            {
+                context.AddParametr($"MessageAttributeName.{number}", item);
+                number++;
+            }
+        }
     }
 }
