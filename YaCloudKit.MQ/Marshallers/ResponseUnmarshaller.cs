@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Xml;
+using YaCloudKit.MQ.Model;
 using YaCloudKit.MQ.Model.Responses;
 
 namespace YaCloudKit.MQ.Marshallers
@@ -29,7 +30,7 @@ namespace YaCloudKit.MQ.Marshallers
             response.HttpStatusCode = context.StatusCode;
         }
 
-        public static void AttributeUnmarshaller(XmlNodeList attributeList, Dictionary<string, string> values)
+        public static void AttributeUnmarshall(XmlNodeList attributeList, Dictionary<string, string> values)
         {
             foreach (XmlNode attrNode in attributeList)
             {
@@ -37,6 +38,42 @@ namespace YaCloudKit.MQ.Marshallers
                 var value = attrNode.SelectSingleNode("Value")?.InnerText;
                 if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(value))
                     values.Add(name, value);
+            }
+        }
+
+        public static void MessageAttributeUnmarshall(XmlNodeList attributeList, Dictionary<string, MessageAttributeValue> values)
+        {
+            foreach (XmlNode attrNode in attributeList)
+            {
+                var attrName = attrNode.SelectSingleNode("Name")?.InnerText;
+                var binaryValue = attrNode.SelectSingleNode("BinaryValue")?.InnerText;
+                var dataType = attrNode.SelectSingleNode("DataType")?.InnerText;
+                var stringValue = attrNode.SelectSingleNode("StringValue")?.InnerText;
+
+                if (!string.IsNullOrWhiteSpace(attrName) && !string.IsNullOrWhiteSpace(dataType))
+                {
+                    var messgaeAttr = new MessageAttributeValue()
+                    {
+                        DataType = (AttributeValueType)Enum.Parse(typeof(AttributeValueType), dataType, true)
+                    };
+                    switch (messgaeAttr.DataType)
+                    {
+                        case AttributeValueType.Binary:
+                            if (!string.IsNullOrWhiteSpace(binaryValue))
+                            {
+                                messgaeAttr.BinaryValue = Convert.FromBase64String(binaryValue);
+                                values.Add(attrName, messgaeAttr);
+                            }
+                            break;
+                        default:
+                            if (!string.IsNullOrWhiteSpace(stringValue))
+                            {
+                                messgaeAttr.StringValue = stringValue;
+                                values.Add(attrName, messgaeAttr);
+                            }
+                            break;
+                    }
+                }
             }
         }
 
