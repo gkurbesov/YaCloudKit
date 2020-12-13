@@ -17,18 +17,8 @@ namespace YaCloudKit.MQ.Marshallers
 
                 var xmlRootNode = GetXmlElement(context.ContentStream);
 
-                var paramNodes = xmlRootNode.SelectNodes("GetQueueAttributesResult/Attribute");
-
-                if(paramNodes != null && paramNodes.Count > 0)
-                {
-                    foreach(XmlNode node in paramNodes)
-                    {
-                        var name = node.SelectSingleNode("Name")?.InnerText;
-                        var value = node.SelectSingleNode("Value")?.InnerText;
-                        if(!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(value))
-                            response.Attributes.Add(name, value);
-                    }
-                }
+                if (TryGetXmlElements(xmlRootNode, "GetQueueAttributesResult/Attribute", out var paramNodes))
+                    AttributeUnmarshaller(paramNodes, response.Attributes);
 
                 response.ResponseMetadata.RequestId = xmlRootNode.SelectSingleNode("ResponseMetadata/RequestId")?.InnerText;
 
