@@ -19,7 +19,7 @@ namespace YaCloudKit.MQ.Model.Requests
         /// <summary>
         /// Массив имен и соответствующих им значений пользовательских атрибутов сообщения. См. тип данных Message.
         /// </summary>
-        public List<MessageAttributeValue> MessageAttribute { get; set; } = new List<MessageAttributeValue>();
+        public Dictionary<string, MessageAttributeValue> MessageAttribute { get; set; } = new Dictionary<string, MessageAttributeValue>();
         /// <summary>
         /// URL очереди, в которой находится сообщение
         /// </summary>
