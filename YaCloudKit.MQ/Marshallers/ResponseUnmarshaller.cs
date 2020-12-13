@@ -17,10 +17,27 @@ namespace YaCloudKit.MQ.Marshallers
             return doc.DocumentElement;
         }
 
+        public static bool TryGetXmlElements(XmlNode mainElement, string xPath, out XmlNodeList list)
+        {
+            list = mainElement.SelectNodes(xPath);
+            return list != null && list.Count > 0;
+        }
+
         public static void ResultUnmarshall(IResponseContext context, YandexMessageQueueResponse response)
         {
             response.ContentLength = context.ContentStream.Length;
             response.HttpStatusCode = context.StatusCode;
+        }
+
+        public static void AttributeUnmarshaller(XmlNodeList attributeList, Dictionary<string, string> values)
+        {
+            foreach (XmlNode attrNode in attributeList)
+            {
+                var name = attrNode.SelectSingleNode("Name")?.InnerText;
+                var value = attrNode.SelectSingleNode("Value")?.InnerText;
+                if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(value))
+                    values.Add(name, value);
+            }
         }
 
         public static YandexMqServiceException ErrorUnmarshall(IResponseContext context)
@@ -40,7 +57,7 @@ namespace YaCloudKit.MQ.Marshallers
             }
             catch (Exception ex)
             {
-                var message = new StreamReader(context.ContentStream).ReadToEnd(); 
+                var message = new StreamReader(context.ContentStream).ReadToEnd();
                 YandexMqServiceException exception = new YandexMqServiceException(message, ex)
                 {
                     StatusCode = context.StatusCode
