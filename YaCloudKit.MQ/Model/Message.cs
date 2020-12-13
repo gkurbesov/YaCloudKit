@@ -9,7 +9,7 @@ namespace YaCloudKit.MQ.Model
         /// <summary>
         /// Набор атрибутов, указанных в запросе ReceiveMessage. Поддерживаемые атрибуты: ApproximateReceiveCount, ApproximateFirstReceiveTimestamp, MessageDeduplicationId, MessageGroupId, SenderId, SentTimestamp, SequenceNumber.
         /// </summary>
-        public IDictionary<string, string> Attribute;
+        public Dictionary<string, string> Attribute { get; set; } = new Dictionary<string, string>();
         /// <summary>
         /// Тело сообщения.
         /// </summary>
@@ -25,7 +25,7 @@ namespace YaCloudKit.MQ.Model
         /// <summary>
         /// Массив MessageAttributeValue, содержащий пользовательские атрибуты сообщения: имя, тип и значение.
         /// </summary>
-        public IDictionary<string, MessageAttributeValue> MessageAttribute { get; set; }
+        public Dictionary<string, MessageAttributeValue> MessageAttribute { get; set; } = new Dictionary<string, MessageAttributeValue>();
         /// <summary>
         /// Уникальный идентификатор сообщения.
         /// </summary>
