@@ -46,9 +46,9 @@ namespace YaCloudKit.MQ.Marshallers
             foreach (XmlNode attrNode in attributeList)
             {
                 var attrName = attrNode.SelectSingleNode("Name")?.InnerText;
-                var binaryValue = attrNode.SelectSingleNode("BinaryValue")?.InnerText;
-                var dataType = attrNode.SelectSingleNode("DataType")?.InnerText;
-                var stringValue = attrNode.SelectSingleNode("StringValue")?.InnerText;
+                var binaryValue = attrNode.SelectSingleNode("Value/BinaryValue")?.InnerText;
+                var dataType = attrNode.SelectSingleNode("Value/DataType")?.InnerText;
+                var stringValue = attrNode.SelectSingleNode("Value/StringValue")?.InnerText;
 
                 if (!string.IsNullOrWhiteSpace(attrName) && !string.IsNullOrWhiteSpace(dataType))
                 {
