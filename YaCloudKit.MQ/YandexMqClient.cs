@@ -176,7 +176,17 @@ namespace YaCloudKit.MQ
 
         public Task<ReceiveMessageResponse> ReceiveMessageAsync(ReceiveMessageRequest request, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var option = new InvokeOptions()
+            {
+                OriginalRequest = request,
+                RequestMarshaller = new ReceiveMessageRequestMarshaller(),
+                ResponseUnmarshaller = new ReceiveMessageResponseUnmarshaller()
+            };
+
+            return InvokeAsync<ReceiveMessageResponse>(option, cancellationToken);
         }
 
         public Task<SendMessageResponse> SendMessageAsync(SendMessageRequest request, CancellationToken cancellationToken = default)
