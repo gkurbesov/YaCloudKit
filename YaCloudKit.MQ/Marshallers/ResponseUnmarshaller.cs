@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -38,6 +39,35 @@ namespace YaCloudKit.MQ.Marshallers
                 var value = attrNode.SelectSingleNode("Value")?.InnerText;
                 if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(value))
                     values.Add(name, value);
+            }
+        }
+
+        public static void BatchResultErrorEntryUnmarshaller(XmlNodeList batchList, List<BatchResultErrorEntry> values)
+        {
+            foreach (XmlNode item in batchList)
+            {
+                var senderFaultText = item.SelectSingleNode("SenderFault")?.InnerText;
+                var senderFault = !string.IsNullOrWhiteSpace(senderFaultText) ?
+                    (bool)Convert.ChangeType(senderFaultText, typeof(bool), CultureInfo.InvariantCulture) : false;
+
+                BatchResultErrorEntry errorEntry = new BatchResultErrorEntry()
+                {
+                    Code = item.SelectSingleNode("Code")?.InnerText,
+                    Id = item.SelectSingleNode("Id")?.InnerText,
+                    Message = item.SelectSingleNode("Message")?.InnerText,
+                    SenderFault = senderFault
+                };
+                values.Add(errorEntry);
+            }
+        }
+
+        public static void DeleteMessageBatchResultEntryUnmarshaller(XmlNodeList batchList, List<DeleteMessageBatchResultEntry> values)
+        {
+            foreach (XmlNode item in batchList)
+            {
+                var id = item.SelectSingleNode("Id")?.InnerText;
+                if (!string.IsNullOrWhiteSpace(id))
+                    values.Add(new DeleteMessageBatchResultEntry() { Id = id });
             }
         }
 

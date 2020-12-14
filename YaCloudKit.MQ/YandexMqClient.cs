@@ -171,7 +171,17 @@ namespace YaCloudKit.MQ
 
         public Task<DeleteMessageBatchResponse> DeleteMessageBatchAsync(DeleteMessageBatchRequest request, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var option = new InvokeOptions()
+            {
+                OriginalRequest = request,
+                RequestMarshaller = new DeleteMessageBatchRequestMarshaller(),
+                ResponseUnmarshaller = new DeleteMessageBatchResponseUnmarshaller()
+            };
+
+            return InvokeAsync<DeleteMessageBatchResponse>(option, cancellationToken);
         }
 
         public Task<ReceiveMessageResponse> ReceiveMessageAsync(ReceiveMessageRequest request, CancellationToken cancellationToken = default)

@@ -21,5 +21,8 @@ namespace YaCloudKit.MQ.Model.Requests
 
         public DeleteMessageBatchRequest()
             : base("DeleteMessageBatch") { }
+
+        internal bool IsSetBatchEntry() =>
+            DeleteMessageBatchRequestEntry != null && DeleteMessageBatchRequestEntry.Count > 0;
     }
 }
