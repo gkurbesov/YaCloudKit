@@ -17,6 +17,6 @@ namespace YaCloudKit.MQ.Model
         /// <summary>
         /// Новое значение таймаута сообщения в секундах.
         /// </summary>
-        public bool? VisibilityTimeout { get; set; }
+        public int? VisibilityTimeout { get; set; }
     }
 }

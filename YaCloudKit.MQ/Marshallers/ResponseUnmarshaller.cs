@@ -71,6 +71,16 @@ namespace YaCloudKit.MQ.Marshallers
             }
         }
 
+        public static void ChangeMessageVisibilityBatchResultEntryUnmarshaller(XmlNodeList batchList, List<ChangeMessageVisibilityBatchResultEntry> values)
+        {
+            foreach (XmlNode item in batchList)
+            {
+                var id = item.SelectSingleNode("Id")?.InnerText;
+                if (!string.IsNullOrWhiteSpace(id))
+                    values.Add(new ChangeMessageVisibilityBatchResultEntry() { Id = id });
+            }
+        }
+
         public static void MessageAttributeUnmarshall(XmlNodeList attributeList, Dictionary<string, MessageAttributeValue> values)
         {
             foreach (XmlNode attrNode in attributeList)

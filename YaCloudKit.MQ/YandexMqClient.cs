@@ -151,7 +151,17 @@ namespace YaCloudKit.MQ
 
         public Task<ChangeMessageVisibilityBatchResponse> ChangeMessageVisibilityBatchAsync(ChangeMessageVisibilityBatchRequest request, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            if (request == null)
+                throw new ArgumentNullException(nameof(request));
+
+            var option = new InvokeOptions()
+            {
+                OriginalRequest = request,
+                RequestMarshaller = new ChangeMessageVisibilityBatchRequestMarshaller(),
+                ResponseUnmarshaller = new ChangeMessageVisibilityBatchResponseUnmarshaller()
+            };
+
+            return InvokeAsync<ChangeMessageVisibilityBatchResponse>(option, cancellationToken);
         }
 
         public Task<DeleteMessageResponse> DeleteMessageAsync(DeleteMessageRequest request, CancellationToken cancellationToken = default)

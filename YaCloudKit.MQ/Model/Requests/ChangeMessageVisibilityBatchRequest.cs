@@ -22,5 +22,8 @@ namespace YaCloudKit.MQ.Model.Requests
 
         public ChangeMessageVisibilityBatchRequest()
             : base("ChangeMessageVisibilityBatch") { }
+
+        internal bool IsSetBatchEntry() =>
+            ChangeMessageVisibilityBatchRequestEntry != null && ChangeMessageVisibilityBatchRequestEntry.Count > 0;
     }
 }
