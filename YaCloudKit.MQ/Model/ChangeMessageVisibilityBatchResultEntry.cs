@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YaCloudKit.MQ.Model
+﻿namespace YaCloudKit.MQ.Model
 {
+    /// <summary>
+    /// Результат изменения видимости сообщения из группы
+    /// </summary>
     public class ChangeMessageVisibilityBatchResultEntry
     {
         /// <summary>

@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using YaCloudKit.MQ.Utils;
-using YaCloudKit.MQ.Marshallers;
-using System.Diagnostics;
-using System.Globalization;
-using YaCloudKit.MQ.Model.Responses;
 using YaCloudKit.Http;
+using YaCloudKit.MQ.Model.Responses;
+using YaCloudKit.MQ.Utils;
 
 namespace YaCloudKit.MQ
 {
@@ -60,7 +55,7 @@ namespace YaCloudKit.MQ
             request.Content = content;
 
 
-            return await ServiceCaller.CallService<TResponse>(GetHttpOptions(), async(client) =>
+            return await ServiceCaller.CallService<TResponse>(GetHttpOptions(), async (client) =>
             {
                 var httpResponse = await client.SendAsync(request, cancellationToken);
 

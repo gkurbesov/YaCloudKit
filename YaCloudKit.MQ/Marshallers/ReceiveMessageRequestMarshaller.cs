@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using YaCloudKit.MQ.Model.Requests;
+﻿using YaCloudKit.MQ.Model.Requests;
 using YaCloudKit.MQ.Utils;
 
 namespace YaCloudKit.MQ.Marshallers
@@ -24,7 +21,7 @@ namespace YaCloudKit.MQ.Marshallers
             if (!string.IsNullOrWhiteSpace(input.ReceiveRequestAttemptId))
                 context.AddParametr("ReceiveRequestAttemptId", input.ReceiveRequestAttemptId);
             if (input.VisibilityTimeout.HasValue)
-                context.AddParametr("VisibilityTimeout", input.VisibilityTimeout.ToString()); 
+                context.AddParametr("VisibilityTimeout", input.VisibilityTimeout.ToString());
             if (input.WaitTimeSeconds.HasValue)
                 context.AddParametr("WaitTimeSeconds", input.WaitTimeSeconds.ToString());
 

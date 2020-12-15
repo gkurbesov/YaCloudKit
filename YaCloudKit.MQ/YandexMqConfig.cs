@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace YaCloudKit.MQ
 {
+    /// <summary>
+    /// Параметры и настройки для подключения к Yandex Message Queue
+    /// </summary>
     public class YandexMqConfig
     {
         public const string DEFAULT_SERVICE_NAME = "sqs";
@@ -56,8 +57,8 @@ namespace YaCloudKit.MQ
 
             if (string.IsNullOrWhiteSpace(secretAccessKey))
                 throw new ArgumentNullException(nameof(secretAccessKey));
-            SecretAccessKey = secretAccessKey; 
-            
+            SecretAccessKey = secretAccessKey;
+
             ServiceName = DEFAULT_SERVICE_NAME;
             Region = DEFAULT_REGION;
             EndPoint = new Uri(DEFAULT_ENDPOINT);

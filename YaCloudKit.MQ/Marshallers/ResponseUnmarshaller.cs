@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Text;
 using System.Xml;
 using YaCloudKit.MQ.Model;
 using YaCloudKit.MQ.Model.Responses;
 
 namespace YaCloudKit.MQ.Marshallers
 {
+    /// <summary>
+    /// Базовый класс для демаршализации содержищий вспомогательные методы
+    /// </summary>
     public class ResponseUnmarshaller : IUnmarshaller
     {
+        /// <summary>
+        /// Получить XML из стрима
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
         public static XmlElement GetXmlElement(Stream stream)
         {
             XmlDocument doc = new XmlDocument();
@@ -19,18 +26,35 @@ namespace YaCloudKit.MQ.Marshallers
             return doc.DocumentElement;
         }
 
+        /// <summary>
+        /// Поиск списка xml элементов
+        /// </summary>
+        /// <param name="mainElement">корнейвой XML элемент</param>
+        /// <param name="xPath">Параметр для поиска запросов</param>
+        /// <param name="list">коллекция найденых объектов</param>
+        /// <returns>true - если найден хотя бы один элемент</returns>
         public static bool TryGetXmlElements(XmlNode mainElement, string xPath, out XmlNodeList list)
         {
             list = mainElement.SelectNodes(xPath);
             return list != null && list.Count > 0;
         }
 
+        /// <summary>
+        /// Демаршалинг основных параметров ответа
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="response"></param>
         public static void ResultUnmarshall(IResponseContext context, YandexMessageQueueResponse response)
         {
             response.ContentLength = context.ContentStream.Length;
             response.HttpStatusCode = context.StatusCode;
         }
 
+        /// <summary>
+        /// Демаршалинг атрибутов
+        /// </summary>
+        /// <param name="attributeList">коллекция содержащия XML объекты с атрибутами</param>
+        /// <param name="values">Словарь, в который будут помещаться атрибуты</param>
         public static void AttributeUnmarshall(XmlNodeList attributeList, Dictionary<string, string> values)
         {
             foreach (XmlNode attrNode in attributeList)
@@ -42,6 +66,11 @@ namespace YaCloudKit.MQ.Marshallers
             }
         }
 
+        /// <summary>
+        /// Демаршалинг масива с ошибками Batch-запросов
+        /// </summary>
+        /// <param name="batchList">коллекция содержащия XML объекты с ошибками</param>
+        /// <param name="values">Лист, в который будут помещаться результаты ошибок</param>
         public static void BatchResultErrorEntryUnmarshaller(XmlNodeList batchList, List<BatchResultErrorEntry> values)
         {
             foreach (XmlNode item in batchList)
@@ -61,6 +90,11 @@ namespace YaCloudKit.MQ.Marshallers
             }
         }
 
+        /// <summary>
+        /// Демаршалинг результата удаления пачки сообщений
+        /// </summary>
+        /// <param name="batchList">Коллекция содержащия XML объекты с результатами</param>
+        /// <param name="values">Лист, в который будут помещаться результаты</param>
         public static void DeleteMessageBatchResultEntryUnmarshaller(XmlNodeList batchList, List<DeleteMessageBatchResultEntry> values)
         {
             foreach (XmlNode item in batchList)
@@ -70,7 +104,11 @@ namespace YaCloudKit.MQ.Marshallers
                     values.Add(new DeleteMessageBatchResultEntry() { Id = id });
             }
         }
-
+        /// <summary>
+        /// Демаршалинг результата изменения видимости пачки сообщений
+        /// </summary>
+        /// <param name="batchList">Коллекция содержащия XML объекты с результатами</param>
+        /// <param name="values">Лист, в который будут помещаться результаты</param>
         public static void ChangeMessageVisibilityBatchResultEntryUnmarshaller(XmlNodeList batchList, List<ChangeMessageVisibilityBatchResultEntry> values)
         {
             foreach (XmlNode item in batchList)
@@ -81,6 +119,11 @@ namespace YaCloudKit.MQ.Marshallers
             }
         }
 
+        /// <summary>
+        /// Демаршалинг пользовательских атрибутов сообщения
+        /// </summary>
+        /// <param name="attributeList">Коллекция содержащия XML объекты с атрибутами</param>
+        /// <param name="values">Словарь, в который будут помещаться объекты атрибутов</param>
         public static void MessageAttributeUnmarshall(XmlNodeList attributeList, Dictionary<string, MessageAttributeValue> values)
         {
             foreach (XmlNode attrNode in attributeList)
@@ -117,6 +160,11 @@ namespace YaCloudKit.MQ.Marshallers
             }
         }
 
+        /// <summary>
+        /// Демаршалинг ошибки
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static YandexMqServiceException ErrorUnmarshall(IResponseContext context)
         {
             try
@@ -143,6 +191,13 @@ namespace YaCloudKit.MQ.Marshallers
             }
         }
 
+        /// <summary>
+        /// Демаршалинг ошибки
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        /// <param name="httpStatusCode"></param>
+        /// <returns></returns>
         public static YandexMqServiceException ErrorUnmarshall(string message, Exception innerException, HttpStatusCode httpStatusCode)
         {
             YandexMqServiceException exception = new YandexMqServiceException(message, innerException)

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using YaCloudKit.MQ.Model.Requests;
+﻿using YaCloudKit.MQ.Model.Requests;
 using YaCloudKit.MQ.Utils;
 
 namespace YaCloudKit.MQ.Marshallers
@@ -26,7 +23,7 @@ namespace YaCloudKit.MQ.Marshallers
             if (input.DelaySeconds.HasValue)
                 context.AddParametr("DelaySeconds", input.DelaySeconds.ToString());
 
-            if(!string.IsNullOrWhiteSpace(input.MessageDeduplicationId))
+            if (!string.IsNullOrWhiteSpace(input.MessageDeduplicationId))
                 context.AddParametr("MessageDeduplicationId", input.MessageDeduplicationId);
             if (!string.IsNullOrWhiteSpace(input.MessageDeduplicationId))
                 context.AddParametr("MessageGroupId", input.MessageGroupId);

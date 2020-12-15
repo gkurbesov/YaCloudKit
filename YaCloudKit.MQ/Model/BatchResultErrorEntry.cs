@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YaCloudKit.MQ.Model
+﻿namespace YaCloudKit.MQ.Model
 {
+    /// <summary>
+    /// Описание ошибки выполнения действия из группы
+    /// </summary>
     public class BatchResultErrorEntry
     {
         /// <summary>

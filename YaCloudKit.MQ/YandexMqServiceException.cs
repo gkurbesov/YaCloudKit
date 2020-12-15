@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 
 namespace YaCloudKit.MQ
 {
@@ -39,7 +37,7 @@ namespace YaCloudKit.MQ
         }
 
         public YandexMqServiceException(string message, string errorType, string errorCode, string requestId, HttpStatusCode statusCode)
-            :base(message)
+            : base(message)
         {
             ErrorType = errorType;
             ErrorCode = errorCode;

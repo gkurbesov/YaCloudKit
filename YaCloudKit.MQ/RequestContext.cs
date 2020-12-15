@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using YaCloudKit.MQ.Utils;
 
 namespace YaCloudKit.MQ
 {
-    internal class RequestContext : IRequestContext
+    public class RequestContext : IRequestContext
     {
         public IDictionary<string, string> RequestParameters { get; set; } = new Dictionary<string, string>();
         public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();

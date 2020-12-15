@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YaCloudKit.MQ.Model.Requests
+﻿namespace YaCloudKit.MQ.Model.Requests
 {
     /// <summary>
     /// Метод для получения списка очередей в каталоге. 

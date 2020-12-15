@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace YaCloudKit.MQ
 {
+    /// <summary>
+    /// Контекста запроса к Yandex Message Queue
+    /// </summary>
     public interface IRequestContext
     {
         /// <summary>

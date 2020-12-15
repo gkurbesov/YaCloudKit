@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using YaCloudKit.MQ.Marshallers;
-using YaCloudKit.MQ.Model;
+﻿using YaCloudKit.MQ.Marshallers;
 using YaCloudKit.MQ.Model.Requests;
 
 namespace YaCloudKit.MQ
 {
+    /// <summary>
+    /// Опции выполнения запроса
+    /// </summary>
     public class InvokeOptions
     {
         /// <summary>

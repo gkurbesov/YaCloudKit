@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using YaCloudKit.MQ.Model.Requests;
+﻿using YaCloudKit.MQ.Model.Requests;
 using YaCloudKit.MQ.Utils;
 
 namespace YaCloudKit.MQ.Marshallers
@@ -19,7 +16,7 @@ namespace YaCloudKit.MQ.Marshallers
 
             context.AddParametr("QueueUrl", input.QueueUrl);
 
-            if(input.IsSetBatchEntry())
+            if (input.IsSetBatchEntry())
             {
                 var number = 1;
                 foreach (var item in input.SendMessageBatchRequestEntry)

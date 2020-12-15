@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using YaCloudKit.MQ.Model.Requests;
+﻿using YaCloudKit.MQ.Model.Requests;
 
 namespace YaCloudKit.MQ.Marshallers
 {
@@ -16,7 +13,7 @@ namespace YaCloudKit.MQ.Marshallers
             context.AddParametr("Action", input.ActionName);
             context.AddParametr("Version", YandexMqConfig.DEFAULT_SERVICE_VERSION);
 
-                context.AddParametr("QueueName", input.QueueName);
+            context.AddParametr("QueueName", input.QueueName);
 
             return context;
         }
