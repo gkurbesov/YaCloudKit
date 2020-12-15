@@ -9,15 +9,15 @@ namespace YaCloudKit.MQ.Model
         /// <summary>
         /// Время в секундах, на которое будет отложена отправка сообщения.
         /// </summary>
-        public string DelaySeconds { get; set; }
+        public int? DelaySeconds { get; set; }
         /// <summary>
         /// Идентификатор сообщения в списке.
         /// </summary>
         public string Id { get; set; }
         /// <summary>
-        /// Атрибуты сообщения: имя, тип и значение.
+        /// Массив имен и соответствующих им значений пользовательских атрибутов сообщения. См. тип данных Message.
         /// </summary>
-        public string MessageAttribute { get; set; }
+        public Dictionary<string, MessageAttributeValue> MessageAttribute { get; set; } = new Dictionary<string, MessageAttributeValue>();
         /// <summary>
         /// Тело сообщения.
         /// </summary>
@@ -30,5 +30,9 @@ namespace YaCloudKit.MQ.Model
         /// Идентификатор группы сообщений, используется только в очередях FIFO.
         /// </summary>
         public string MessageGroupId { get; set; }
+
+
+        internal bool IsSetMessageAttribute() =>
+            MessageAttribute != null && MessageAttribute.Count > 0;
     }
 }

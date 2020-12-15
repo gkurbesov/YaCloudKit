@@ -13,7 +13,7 @@ namespace YaCloudKit.MQ.Model.Requests
         /// <summary>
         /// Массив сообщений представленный сущностью <code>SendMessageBatchRequestEntry</code>.
         /// </summary>
-        public List<SendMessageBatchRequestEntry> SendMessageBatchRequestEntry = new List<SendMessageBatchRequestEntry>();
+        public List<SendMessageBatchRequestEntry> SendMessageBatchRequestEntry { get; set; } = new List<SendMessageBatchRequestEntry>();
         /// <summary>
         /// URL очереди, в которую посылаются сообщения
         /// </summary>
@@ -21,5 +21,8 @@ namespace YaCloudKit.MQ.Model.Requests
 
         public SendMessageBatchRequest()
             : base("SendMessageBatch") { }
+
+        internal bool IsSetBatchEntry() =>
+            SendMessageBatchRequestEntry != null && SendMessageBatchRequestEntry.Count > 0;
     }
 }

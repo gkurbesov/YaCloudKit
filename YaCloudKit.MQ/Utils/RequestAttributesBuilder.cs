@@ -41,6 +41,30 @@ namespace YaCloudKit.MQ.Utils
             }
         }
 
+
+        public static void MessageAttributesBatchEntry(int entryNumber, IRequestContext context, Dictionary<string, MessageAttributeValue> values)
+        {
+            var number = 1;
+            foreach (var item in values)
+            {
+                if (item.Value.IsSetValue())
+                {
+                    context.AddParametr($"SendMessageBatchRequestEntry.{entryNumber}.MessageAttribute.{number}.Name", item.Key);
+                    context.AddParametr($"SendMessageBatchRequestEntry.{entryNumber}.MessageAttribute.{number}.Value.DataType", item.Value.DataType.ToString());
+                    switch (item.Value.DataType)
+                    {
+                        case AttributeValueType.Binary:
+                            context.AddParametr($"SendMessageBatchRequestEntry.{entryNumber}.MessageAttribute.{number}.Value.BinaryValue", Convert.ToBase64String(item.Value.BinaryValue));
+                            break;
+                        default:
+                            context.AddParametr($"SendMessageBatchRequestEntry.{entryNumber}.MessageAttribute.{number}.Value.StringValue", item.Value.StringValue);
+                            break;
+                    }
+                }
+                number++;
+            }
+        }
+
         public static void ListAttributes(IRequestContext context, List<string> values)
         {
             var number = 1;
