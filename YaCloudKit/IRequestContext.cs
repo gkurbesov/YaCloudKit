@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace YaCloudKit.MQ
+namespace YaCloudKit
 {
     /// <summary>
     /// Контекста запроса к Yandex Message Queue
@@ -17,7 +17,7 @@ namespace YaCloudKit.MQ
         /// </summary>
         IDictionary<string, string> Headers { get; set; }
         /// <summary>
-        /// Utc время ремявыполнения запроса, так же используется для создания подписи
+        /// Utc время ремявыполнения запроса
         /// </summary>
         DateTime RequestDateTime { get; set; }
 

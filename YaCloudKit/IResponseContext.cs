@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Http.Headers;
 
-namespace YaCloudKit.MQ
+namespace YaCloudKit
 {
     /// <summary>
     /// Контекст с данными ответа от Yandex Message Queue

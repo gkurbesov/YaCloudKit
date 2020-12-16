@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace YaCloudKit.MQ.Utils
+namespace YaCloudKit.Utils
 {
-    internal static class UrlEncodedContentBuilder
+    public static class UrlEncodedContentBuilder
     {
         /// <summary>
         /// Создает содержимое формата Url Encoded для выполнения запроса
