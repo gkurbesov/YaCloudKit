@@ -11,7 +11,7 @@ namespace YaCloudKit.MQ
     public abstract class YandexMqService : IDisposable
     {
         public YandexMqConfig Config { get; set; }
-        private IHttpServiceCaller ServiceCaller { get; }
+        private IHttpServiceCaller ServiceCaller { get; set; }
 
         protected YandexMqService(YandexMqConfig config, IHttpServiceCaller httpServiceCaller)
         {
@@ -97,9 +97,10 @@ namespace YaCloudKit.MQ
             {
                 if (disposing)
                 {
-                    // TODO: освободить управляемое состояние (управляемые объекты).
+                    ServiceCaller.Dispose();
                 }
                 Config = null;
+                ServiceCaller = null;
                 disposedValue = true;
             }
         }
