@@ -9,12 +9,21 @@ namespace YaCloudKit.TTS
     /// </summary>
     public class YandexTtsConfig
     {
-        public const string DEFAULT_ENDPOINT = "https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize";
+        public static readonly Uri DEFAULT_ENDPOINT = new Uri("https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize");
 
         /// <summary>
         /// Конечная точка для выполнения запросов
         /// </summary>
         public Uri EndPoint { get; set; }
+        /// <summary>
+        /// IAM-токен для авторизации запросов на Yandex.Cloud
+        /// </summary>
+        public string TokenIAM { get; set; }
+        /// <summary>
+        /// Идентификатор каталога, к которому у вас есть доступ. Требуется для авторизации с пользовательским аккаунтом (см. ресурс UserAccount ). 
+        /// Не используйте это поле, если вы делаете запрос от имени сервисного аккаунта.
+        /// </summary>
+        public string FolderID { get; set; }
         /// <summary>
         ///  API-ключ сервиснрнр аккаунта для выполнения запросов.
         ///  Сервис использует каталог, в котором был создан сервисный аккаунт.
@@ -27,36 +36,49 @@ namespace YaCloudKit.TTS
 
         public YandexTtsConfig()
         {
-            EndPoint = new Uri(DEFAULT_ENDPOINT);
+            EndPoint = DEFAULT_ENDPOINT;
         }
 
         /// <summary>
         /// Создаст экземпляр настроек с указанными параметрами
         /// </summary>
         /// <param name="apiKey">API-ключ сервиснрнр аккаунта</param>
-        public YandexTtsConfig(string apiKey)
-        {
-            if (string.IsNullOrWhiteSpace(apiKey))
-                throw new ArgumentNullException(nameof(apiKey));
-            ApiKey = apiKey;
-
-            EndPoint = new Uri(DEFAULT_ENDPOINT);
-        }
+        public YandexTtsConfig(string apiKey) 
+            : this(apiKey, DEFAULT_ENDPOINT) { }
 
         /// <summary>
         /// Создаст экземпляр настроек с указанными параметрами
         /// </summary>
         /// <param name="apiKey">API-ключ сервиснрнр аккаунта</param>
         /// <param name="endpoint">Конечная точка для выполнения запросов</param>
-        public YandexTtsConfig(string apiKey, string endpoint)
+        public YandexTtsConfig(string apiKey, Uri endpoint)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
                 throw new ArgumentNullException(nameof(apiKey));
             ApiKey = apiKey;
 
-            if (string.IsNullOrWhiteSpace(endpoint))
+            if (endpoint == null)
                 throw new ArgumentNullException(nameof(endpoint));
-            EndPoint = new Uri(endpoint);
+            EndPoint = endpoint;
+        }
+
+        public YandexTtsConfig(string iam, string folderId)
+            : this(iam, folderId, DEFAULT_ENDPOINT) { }
+
+
+        public YandexTtsConfig(string iam, string folderId, Uri endpoint)
+        {
+            if (string.IsNullOrWhiteSpace(iam))
+                throw new ArgumentNullException(nameof(iam));
+            ApiKey = iam;
+
+            if (string.IsNullOrWhiteSpace(folderId))
+                throw new ArgumentNullException(nameof(folderId));
+            FolderID = folderId;
+
+            if (endpoint == null)
+                throw new ArgumentNullException(nameof(endpoint));
+            EndPoint = endpoint;
         }
     }
 }
