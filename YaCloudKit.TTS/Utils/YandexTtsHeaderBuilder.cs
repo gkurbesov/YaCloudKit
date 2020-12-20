@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace YaCloudKit.TTS.Utils
@@ -29,6 +30,17 @@ namespace YaCloudKit.TTS.Utils
                 context.AddHeader(HEAD_AUTH, HEAD_AUTH_APIKEY + " " + config.ApiKey);
             else
                 throw new YandexTtsServiceException("Параметры авторизации не заданы");
+        }
+
+        /// <summary>
+        /// Добавляет недостающие заголовки из контекста в класс HttpHeaders запроса или http-контента
+        /// </summary>
+        /// <param name="headers"></param>
+        /// <param name="values"></param>
+        public static void AddHttpHeaders(IRequestContext context, HttpHeaders headers)
+        {
+            foreach (var headItem in context.Headers)
+                headers.TryAddWithoutValidation(headItem.Key, headItem.Value);
         }
     }
 }
