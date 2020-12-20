@@ -5,7 +5,7 @@ using YaCloudKit.TTS.Model;
 
 namespace YaCloudKit.TTS.Utils
 {
-    public class RequestParametersBuilder
+    public class RequestParametersHelper
     {
         public static void AddTextParam(IRequestContext context, string text, bool ssml)
         {
