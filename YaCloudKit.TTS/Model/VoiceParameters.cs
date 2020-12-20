@@ -67,7 +67,7 @@ namespace YaCloudKit.TTS.Model
         /// Скорость (темп) синтезированной речи. Для премиум-голосов временно не поддерживается.
         /// Скорость речи задается дробным числом в диапазоне от 0.1 до 3.0
         /// </summary>
-        public string Speed { get; set; } = "1.0";
+        public string Speed { get; set; }
         /// <summary>
         /// Эмоциональная окраска голоса. Поддерживается только при выборе русского языка (ru-RU) и голосов jane или omazh.
         /// Допустимые значения: good, evil, neutral
@@ -88,5 +88,8 @@ namespace YaCloudKit.TTS.Model
                 throw new ArgumentNullException(nameof(language));
             Language = language;
         }
+
+        internal bool IsSetParam() => 
+            !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Language);
     }
 }
