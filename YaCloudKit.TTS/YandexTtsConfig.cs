@@ -30,6 +30,10 @@ namespace YaCloudKit.TTS
         /// </summary>
         public string ApiKey { get; set; }
         /// <summary>
+        /// Включает в запросы заголовки для включения логирования со стороны сервиса Yandex SpeechKit
+        /// </summary>
+        public bool LoggingEnabled { get; set; } = false;
+        /// <summary>
         /// Максимальный таймаут выполнения HTTP запроса
         /// </summary>
         public TimeSpan HttpClientTimeout { get; set; } = TimeSpan.FromMinutes(1);
