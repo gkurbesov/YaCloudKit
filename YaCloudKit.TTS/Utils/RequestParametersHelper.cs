@@ -32,7 +32,7 @@ namespace YaCloudKit.TTS.Utils
 
         public static void AddFormatParam(IRequestContext context, FormatParameters format)
         {
-            if (format == null || !string.IsNullOrWhiteSpace(format.Format))
+            if (format == null || string.IsNullOrWhiteSpace(format.Format))
                 throw new ArgumentNullException(nameof(format));
 
             context.AddParametr("format", format.Format);

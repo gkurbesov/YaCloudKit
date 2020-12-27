@@ -84,7 +84,7 @@ namespace YaCloudKit.TTS
         {
             if (string.IsNullOrWhiteSpace(iam))
                 throw new ArgumentNullException(nameof(iam));
-            ApiKey = iam;
+            TokenIAM = iam;
 
             if (string.IsNullOrWhiteSpace(folderId))
                 throw new ArgumentNullException(nameof(folderId));
