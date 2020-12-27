@@ -20,7 +20,7 @@ namespace YaCloudKit.TTS.Utils
         public static void AddVoiceParam(IRequestContext context, VoiceParameters voice)
         {
             if (voice == null || !voice.IsSetParam())
-                throw new ArgumentNullException(nameof(voice));
+                throw new ArgumentException(nameof(voice));
 
             context.AddParametr("lang", voice.Language);
             context.AddParametr("voice", voice.Name);
