@@ -66,10 +66,20 @@ namespace YaCloudKit.TTS
             EndPoint = endpoint;
         }
 
+        /// <summary>
+        /// Создаст экземпляр настроек с указанными параметрами
+        /// </summary>
+        /// <param name="iam">IAM-токен для авторизации</param>
+        /// <param name="folderId">ID каталога ресурса</param>
         public YandexTtsConfig(string iam, string folderId)
             : this(iam, folderId, DEFAULT_ENDPOINT) { }
 
-
+        /// <summary>
+        /// Создаст экземпляр настроек с указанными параметрами
+        /// </summary>
+        /// <param name="iam">IAM-токен для авторизации</param>
+        /// <param name="folderId">ID каталога ресурса</param>
+        /// <param name="endpoint">Конечная точка для выполнения запросов</param>
         public YandexTtsConfig(string iam, string folderId, Uri endpoint)
         {
             if (string.IsNullOrWhiteSpace(iam))
