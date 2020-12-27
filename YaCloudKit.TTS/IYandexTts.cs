@@ -8,7 +8,7 @@ namespace YaCloudKit.TTS
 {
     public interface IYandexTts
     {
-        Task<YandexTtsResponse> TextToSpeech(string text, VoiceParameters voice, FormatParameters format);
-        Task<YandexTtsResponse> MarkupToSpeech(string text, VoiceParameters voice, FormatParameters format);
+        Task<YandexTtsResponse> TextToSpeechAsync(string text, VoiceParameters voice, FormatParameters format);
+        Task<YandexTtsResponse> MarkupToSpeechAsync(string text, VoiceParameters voice, FormatParameters format);
     }
 }
