@@ -29,11 +29,10 @@ namespace YaCloudKit.TTS
         /// <summary>
         /// Асинхронно выполняет запрос к сервису 
         /// </summary>
-        /// <typeparam name="TResponse">Тип ожидаемого ответа</typeparam>
         /// <param name="options">опчии для выполнения запроса</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        protected async Task<YandexTtsResponse> InvokeAsync<TResponse>(InvokeOptions options, CancellationToken cancellationToken)
+        protected async Task<YandexTtsResponse> InvokeAsync(InvokeOptions options, CancellationToken cancellationToken)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
