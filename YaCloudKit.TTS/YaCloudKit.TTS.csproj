@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Инструмент для работы с сервисом Yandex SpeechKit для синтеза речи</Description>
+    <Authors>Gennady Kurbesov</Authors>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

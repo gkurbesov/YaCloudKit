@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.1.0</Version>
+    <Authors>Gennady Kurbesov</Authors>
+    <Description>Базовая библиотека для работы с сервисами Yandex.Cloud</Description>
   </PropertyGroup>
 
 </Project>
