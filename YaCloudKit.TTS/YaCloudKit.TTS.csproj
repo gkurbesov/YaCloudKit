@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Инструмент для работы с сервисом Yandex SpeechKit для синтеза речи</Description>
+    <Description>Инструмент YaCloudKit для работы с сервисом Yandex SpeechKit для синтеза речи</Description>
     <Authors>Gennady Kurbesov</Authors>
     <Version>0.1.0</Version>
+    <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
+    <PackageLicenseExpression>https://raw.githubusercontent.com/gkurbesov/YaCloudKit/master/LICENSE</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit/tree/master/YaCloudKit.TTS</RepositoryUrl>
+    <PackageTags>Яндекс, Yandex, Cloud, TTS, AI, Voice, Speech</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

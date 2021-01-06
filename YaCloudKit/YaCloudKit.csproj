@@ -4,7 +4,19 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>0.1.0</Version>
     <Authors>Gennady Kurbesov</Authors>
-    <Description>Базовая библиотека для работы с сервисами Yandex.Cloud</Description>
+    <Description>Базовая библиотека инструмента YaCloudKit для работы с сервисами Yandex.Cloud</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Copyright>Gennady Kurbesov</Copyright>
+    <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
+    <PackageTags>Yandex, cloud, aws, message queue, http, client, rest</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
