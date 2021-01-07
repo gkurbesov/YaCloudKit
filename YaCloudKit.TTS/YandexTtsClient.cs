@@ -16,7 +16,7 @@ namespace YaCloudKit.TTS
         /// <param name="iam">IAM-токен для авторизации</param>
         /// <param name="folderId">ID каталога ресурса</param>
         public YandexTtsClient(string iam, string folderId)
-            : base(new YandexTtsConfig(iam, folderId), new HttpServiceCaller())
+            : this(new YandexTtsConfig(iam, folderId), new HttpServiceCaller())
         { }
         /// <summary>
         /// 
