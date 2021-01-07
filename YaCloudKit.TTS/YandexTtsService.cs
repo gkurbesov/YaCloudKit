@@ -89,7 +89,9 @@ namespace YaCloudKit.TTS
         protected HttpClientOptions GetHttpOptions() => new HttpClientOptions()
         {
             HttpClientTimeout = Config.HttpClientTimeout,
+#if !NETCOREAPP
             EndPoint = Config.EndPoint
+#endif
         };
 
         /// <summary>
