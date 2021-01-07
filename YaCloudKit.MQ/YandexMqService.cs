@@ -97,7 +97,7 @@ namespace YaCloudKit.MQ
             {
                 if (disposing)
                 {
-                    ServiceCaller.Dispose();
+                    ServiceCaller?.Dispose();
                 }
                 Config = null;
                 ServiceCaller = null;

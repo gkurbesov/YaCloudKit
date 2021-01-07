@@ -110,7 +110,7 @@ namespace YaCloudKit.TTS
             {
                 if (disposing)
                 {
-                    ServiceCaller.Dispose();
+                    ServiceCaller?.Dispose();
                 }
                 Config = null;
                 ServiceCaller = null;
