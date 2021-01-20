@@ -10,6 +10,7 @@
     <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit</RepositoryUrl>
     <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
     <PackageTags>Yandex, cloud, aws, message queue, http, client, rest</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

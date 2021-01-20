@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.Core", "YaCloudKit\YaCloudKit.Core.csproj", "{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.Core", "YaCloudKit.Core\YaCloudKit.Core.csproj", "{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.MQ", "YaCloudKit.MQ\YaCloudKit.MQ.csproj", "{EC003CF3-2892-46FA-BF19-2629E12CCBA9}"
 EndProject
