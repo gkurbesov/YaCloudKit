@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using YaCloudKit.Core;
 using YaCloudKit.TTS.Model;
 
 namespace YaCloudKit.TTS.Utils

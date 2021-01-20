@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using YaCloudKit.Http;
+using YaCloudKit.Core.Http;
 
 namespace YaCloudKit.IAM
 {
@@ -26,6 +26,7 @@ namespace YaCloudKit.IAM
 
         protected async Task<string> InvokeAsync(TokenRecipientOptions options, CancellationToken cancellationToken)
         {
+            throw new NotImplementedException();
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
@@ -33,44 +34,43 @@ namespace YaCloudKit.IAM
             cancellationToken.ThrowIfCancellationRequested();
 
             IRequestContext requestContext = new RequestContext();
+            //YandexTtsHeaderBuilder.AddMainHeaders(requestContext, Config);
+            //YandexTtsHeaderBuilder.AddLoggingHeaders(requestContext, requestId);
 
-            YandexTtsHeaderBuilder.AddMainHeaders(requestContext, Config);
-            YandexTtsHeaderBuilder.AddLoggingHeaders(requestContext, requestId);
-
-            RequestParametersHelper.AddTextParam(requestContext, options.Text, options.SSML);
-            RequestParametersHelper.AddVoiceParam(requestContext, options.Voice);
-            RequestParametersHelper.AddFormatParam(requestContext, options.AudioFormat);
-            RequestParametersHelper.AddFolderParam(requestContext, Config);
-
-
-            var content = new FormUrlEncodedContent(requestContext.RequestParameters);
-            YandexTtsHeaderBuilder.AddHttpHeaders(requestContext, content.Headers);
-
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Config.EndPoint);
-            YandexTtsHeaderBuilder.AddHttpHeaders(requestContext, request.Headers);
-            request.Content = content;
+            //RequestParametersHelper.AddTextParam(requestContext, options.Text, options.SSML);
+            //RequestParametersHelper.AddVoiceParam(requestContext, options.Voice);
+            //RequestParametersHelper.AddFormatParam(requestContext, options.AudioFormat);
+            //RequestParametersHelper.AddFolderParam(requestContext, Config);
 
 
-            return await ServiceCaller.CallService<YandexTtsResponse>(GetHttpOptions(), async (client) =>
-            {
-                var httpResponse = await client.SendAsync(request, cancellationToken);
+            //var content = new FormUrlEncodedContent(requestContext.RequestParameters);
+            //YandexTtsHeaderBuilder.AddHttpHeaders(requestContext, content.Headers);
 
-                var stream = await httpResponse.Content.ReadAsStreamAsync();
-                if (httpResponse.IsSuccessStatusCode)
-                {
-                    return new YandexTtsResponse()
-                    {
-                        RequestId = requestId,
-                        StatusCode = httpResponse.StatusCode,
-                        Content = stream
-                    };
-                }
-                else
-                {
-                    var message = new StreamReader(stream).ReadToEnd();
-                    throw new YandexTtsServiceException(message, requestId, httpResponse.StatusCode);
-                }
-            });
+            //HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Config.EndPoint);
+            //YandexTtsHeaderBuilder.AddHttpHeaders(requestContext, request.Headers);
+            //request.Content = content;
+
+
+            //return await ServiceCaller.CallService<YandexTtsResponse>(GetHttpOptions(), async (client) =>
+            //{
+            //    var httpResponse = await client.SendAsync(request, cancellationToken);
+
+            //    var stream = await httpResponse.Content.ReadAsStreamAsync();
+            //    if (httpResponse.IsSuccessStatusCode)
+            //    {
+            //        return new YandexTtsResponse()
+            //        {
+            //            RequestId = requestId,
+            //            StatusCode = httpResponse.StatusCode,
+            //            Content = stream
+            //        };
+            //    }
+            //    else
+            //    {
+            //        var message = new StreamReader(stream).ReadToEnd();
+            //        throw new YandexTtsServiceException(message, requestId, httpResponse.StatusCode);
+            //    }
+            //});
         }
 
         /// <summary>

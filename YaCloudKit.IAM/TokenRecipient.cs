@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using YaCloudKit.Http;
+using YaCloudKit.Core.Http;
 using Jose;
 using System.Security.Cryptography;
 
@@ -31,37 +31,38 @@ namespace YaCloudKit.IAM
 
         public Task<string> GetIamToken(TokenRecipientOptions options, CancellationToken cancellationToken = default)
         {
-            if (options == null)
-                throw new ArgumentNullException(nameof(options));
+            throw new NotImplementedException();
+            //if (options == null)
+            //    throw new ArgumentNullException(nameof(options));
 
-            ThrowIfDisposed();
-            cancellationToken.ThrowIfCancellationRequested();
+            //ThrowIfDisposed();
+            //cancellationToken.ThrowIfCancellationRequested();
 
-            IRequestContext requestContext = new RequestContext();
+            //IRequestContext requestContext = new RequestContext();
 
-            var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            var headers = new Dictionary<string, object>()
-            {
-                { "kid", options.KeyId }
-            };
-            var payload = new Dictionary<string, object>()
-            {
-                { "aud", options.RequestPath },
-                { "iss", options.ServiceAccountId },
-                { "iat", now },
-                { "exp", now + 3600 }
-            };
-            RsaPrivateCrtKeyParameters privateKeyParams;
-            using (var pemStream = File.OpenText("private.pem"))
-            {
-                privateKeyParams = new PemReader(pemStream).ReadObject() as RsaPrivateCrtKeyParameters;
-            }
+            //var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            //var headers = new Dictionary<string, object>()
+            //{
+            //    { "kid", options.KeyId }
+            //};
+            //var payload = new Dictionary<string, object>()
+            //{
+            //    { "aud", options.RequestPath },
+            //    { "iss", options.ServiceAccountId },
+            //    { "iat", now },
+            //    { "exp", now + 3600 }
+            //};
+            //RsaPrivateCrtKeyParameters privateKeyParams;
+            //using (var pemStream = File.OpenText("private.pem"))
+            //{
+            //    privateKeyParams = new PemReader(pemStream).ReadObject() as RsaPrivateCrtKeyParameters;
+            //}
 
-            using (var rsa = new RSACryptoServiceProvider())
-            {
-                rsa.ImportParameters()
-                string encodedToken = Jose.JWT.Encode(payload, rsa, JwsAlgorithm.PS256, headers);
-            }
+            //using (var rsa = new RSACryptoServiceProvider())
+            //{
+            //    rsa.ImportParameters()
+            //    string encodedToken = Jose.JWT.Encode(payload, rsa, JwsAlgorithm.PS256, headers);
+            //}
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using YaCloudKit.MQ.Model.Responses;
+using YaCloudKit.Core;
 
 namespace YaCloudKit.MQ.Marshallers
 {

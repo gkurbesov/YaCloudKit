@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using YaCloudKit.Utils;
+using YaCloudKit.Core.Utils;
 
-namespace YaCloudKit
+namespace YaCloudKit.Core
 {
     public class RequestContext : IRequestContext
     {

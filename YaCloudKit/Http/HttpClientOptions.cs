@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YaCloudKit.Http
+namespace YaCloudKit.Core.Http
 {
     public class HttpClientOptions
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace YaCloudKit
+namespace YaCloudKit.Core
 {
     /// <summary>
     /// Контекста запроса к Yandex Message Queue

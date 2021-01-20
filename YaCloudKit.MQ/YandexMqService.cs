@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using YaCloudKit.Http;
+using YaCloudKit.Core.Http;
 using YaCloudKit.MQ.Model.Responses;
 using YaCloudKit.MQ.Utils;
 

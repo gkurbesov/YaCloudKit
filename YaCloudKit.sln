@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit", "YaCloudKit\YaCloudKit.csproj", "{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.Core", "YaCloudKit\YaCloudKit.Core.csproj", "{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.MQ", "YaCloudKit.MQ\YaCloudKit.MQ.csproj", "{EC003CF3-2892-46FA-BF19-2629E12CCBA9}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.MainTest", "YaCl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.TTS", "YaCloudKit.TTS\YaCloudKit.TTS.csproj", "{E403257A-AAC5-4A94-AD73-6F4D06A70D75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.IAM", "YaCloudKit.IAM\YaCloudKit.IAM.csproj", "{1BDD4216-326F-4781-AAA2-B08423671472}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.IAM", "YaCloudKit.IAM\YaCloudKit.IAM.csproj", "{1BDD4216-326F-4781-AAA2-B08423671472}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

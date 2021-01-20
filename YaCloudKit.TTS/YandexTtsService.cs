@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using YaCloudKit.Http;
+using YaCloudKit.Core.Http;
 using YaCloudKit.TTS.Utils;
 
 namespace YaCloudKit.TTS

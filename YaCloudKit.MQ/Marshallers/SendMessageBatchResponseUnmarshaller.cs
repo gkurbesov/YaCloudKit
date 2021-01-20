@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using YaCloudKit.Core;
 using YaCloudKit.MQ.Model;
 using YaCloudKit.MQ.Model.Responses;
 

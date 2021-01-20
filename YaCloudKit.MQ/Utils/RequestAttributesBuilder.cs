@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using YaCloudKit.Core;
 using YaCloudKit.MQ.Model;
 
 namespace YaCloudKit.MQ.Utils

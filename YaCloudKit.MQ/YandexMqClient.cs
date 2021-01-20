@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using YaCloudKit.Http;
+using YaCloudKit.Core.Http;
 using YaCloudKit.MQ.Marshallers;
 using YaCloudKit.MQ.Model.Requests;
 using YaCloudKit.MQ.Model.Responses;
