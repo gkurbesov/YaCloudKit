@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.MQ", "YaCloudKit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.MainTest", "YaCloudKit.MainTest\YaCloudKit.MainTest.csproj", "{1007701A-CFA0-46FE-99F2-B480D01F9563}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.TTS", "YaCloudKit.TTS\YaCloudKit.TTS.csproj", "{E403257A-AAC5-4A94-AD73-6F4D06A70D75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.TTS", "YaCloudKit.TTS\YaCloudKit.TTS.csproj", "{E403257A-AAC5-4A94-AD73-6F4D06A70D75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.IAM", "YaCloudKit.IAM\YaCloudKit.IAM.csproj", "{1BDD4216-326F-4781-AAA2-B08423671472}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E403257A-AAC5-4A94-AD73-6F4D06A70D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E403257A-AAC5-4A94-AD73-6F4D06A70D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E403257A-AAC5-4A94-AD73-6F4D06A70D75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BDD4216-326F-4781-AAA2-B08423671472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BDD4216-326F-4781-AAA2-B08423671472}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BDD4216-326F-4781-AAA2-B08423671472}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BDD4216-326F-4781-AAA2-B08423671472}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
