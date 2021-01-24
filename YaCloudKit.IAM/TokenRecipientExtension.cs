@@ -15,6 +15,6 @@ namespace YaCloudKit.IAM
         public static async Task<IamTokenCreateResult> GetIamTokenWithOAuth(this ITokenRecipient client, string token, CancellationToken cancellationToken = default)
         {
             return await client.GetIamToken(TokenRecipientOptions.WithOAuthToken(token), cancellationToken);
-        }Ht
+        }
     }
 }

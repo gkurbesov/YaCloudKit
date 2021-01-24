@@ -2,22 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit</RepositoryUrl>
+    <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit/tree/master/YaCloudKit.IAM</RepositoryUrl>
     <PackageTags>Яндекс, Облако, Yandex, Clound, IAM, Identity, Access, Management</PackageTags>
     <Company>Gennady Kurbesov</Company>
     <Authors>Gennady Kurbesov</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageIcon>icon-main.png</PackageIcon>
+    <PackageIcon>logo-main.png</PackageIcon>
     <Description>Инструмент YaCloudKit для работы с сервисом Yandex Identity and Access Management. 
 Данный инструмент позволит запрашивать новые IAM токены для сервисных аккаунтов</Description>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="YaCloudKit.Core" Version="0.1.0" />
+    <PackageReference Include="YaCloudKit.Core" Version="0.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +25,11 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="..\Assets\icon-main.png">
+    <None Include="..\Assets\logo-main.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\Assets\logo-main.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

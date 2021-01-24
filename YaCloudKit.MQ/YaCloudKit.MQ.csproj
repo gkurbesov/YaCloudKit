@@ -4,20 +4,20 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Инструмент YaCloudKit для работы с очередью сообщений Yandex Cloud</Description>
     <Authors>Gennady Kurbesov</Authors>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
-    <FileVersion>0.1.0.0</FileVersion>
-    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.1.0</AssemblyVersion>
+    <FileVersion>0.1.1.0</FileVersion>
+    <Version>0.1.1</Version>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit/tree/master/YaCloudKit.MQ</RepositoryUrl>
     <PackageTags>Яндекс, Облако, Yandex, Cloud, Message, Queue, kit, aws</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageIcon>icon-main.png</PackageIcon>
+    <PackageIcon>logo-main.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\Assets\icon-main.png">
+    <None Include="..\Assets\logo-main.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="YaCloudKit.Core" Version="0.1.0" />
+    <PackageReference Include="YaCloudKit.Core" Version="0.1.1" />
   </ItemGroup>
 
 </Project>

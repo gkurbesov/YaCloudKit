@@ -11,7 +11,7 @@
     <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
     <PackageTags>Яндекс, Облако, Yandex, cloud, aws, message queue, http, client, rest</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageIcon>icon-main.png</PackageIcon>
+    <PackageIcon>logo-main.png</PackageIcon>
     <AssemblyVersion>0.1.1.0</AssemblyVersion>
     <FileVersion>0.1.1.0</FileVersion>
   </PropertyGroup>
@@ -21,7 +21,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-    <None Include="..\Assets\icon-main.png">
+    <None Include="..\Assets\logo-main.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
