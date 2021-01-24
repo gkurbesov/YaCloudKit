@@ -11,43 +11,69 @@ namespace YaCloudKit.IAM
         /// <summary>
         /// Cсылка, по которой будет запрашиваться IAM-токен
         /// </summary>
-        public string RequestPath { get; }
+        public string RequestPath { get; internal set; }
         /// <summary>
-        /// Идентификатор сервисного аккаунта, чьим ключом подписывается JWT для получения IAM-токена.
+        /// OAuth-токен для аккаунта в Яндекса.Паспорте. Подробнее см. в разделе OAuth-токен.
         /// </summary>
-        public string ServiceAccountId { get; }
+        public string OauthToken { get; internal set; }
         /// <summary>
-        /// Идентификатор открытого ключа, полученный при создании авторизованных ключей. 
-        /// Ключ должен принадлежать сервисному аккаунту, для которого запрашивается IAM-токен.
+        /// JSON Web Token (JWT) для сервисного аккаунта. Подробнее см. в разделе Получить IAM-токен для сервисного аккаунта.
         /// </summary>
-        public string KeyId { get; }
+        public string JwtToken { get; internal set; }
+
+        private TokenRecipientOptions() { }
 
         /// <summary>
-        /// 
+        /// Создание экземпляра натсроек с использованием OAuth токена 
         /// </summary>
-        /// <param name="accountId">Идентификатор сервисного аккаунта</param>
-        /// <param name="keyId">Идентификатор открытого ключа</param>
-        public TokenRecipientOptions(string accountId, string keyId)
-            : this(accountId, keyId, DEFAULT_REQUEST_PATH) { }
-
+        /// <param name="oauthToken">OAuth-токен для аккаунта в Яндекса.Паспорте</param>
+        /// <returns></returns>
+        public static TokenRecipientOptions WithOAuthToken(string oauthToken) =>
+            WithOAuthToken(oauthToken, DEFAULT_REQUEST_PATH);
         /// <summary>
-        /// 
+        /// Создание экземпляра натсроек с использованием OAuth токена 
         /// </summary>
-        /// <param name="accountId">Идентификатор сервисного аккаунта</param>
-        /// <param name="keyId">Идентификатор открытого ключа</param>
+        /// <param name="oauthToken">OAuth-токен для аккаунта в Яндекса.Паспорте</param>
         /// <param name="path">Cсылка, по которой будет запрашиваться IAM-токен</param>
-        public TokenRecipientOptions(string accountId, string keyId, string path)
+        /// <returns></returns>
+        public static TokenRecipientOptions WithOAuthToken(string oauthToken, string path)
         {
-            if (string.IsNullOrWhiteSpace(accountId))
-                throw new ArgumentNullException(nameof(accountId));
-            if (string.IsNullOrWhiteSpace(keyId))
-                throw new ArgumentNullException(nameof(keyId));
+            if (string.IsNullOrWhiteSpace(oauthToken))
+                throw new ArgumentNullException(nameof(oauthToken));
             if (string.IsNullOrWhiteSpace(path))
                 throw new ArgumentNullException(nameof(path));
 
-            ServiceAccountId = accountId;
-            KeyId = keyId;
-            RequestPath = path;
+            return new TokenRecipientOptions()
+            {
+                RequestPath = path,
+                OauthToken = oauthToken,
+            };
+        }
+        /// <summary>
+        /// Создание экземпляра натсроек с использованием JWT токена 
+        /// </summary>
+        /// <param name="jwt">JSON Web Token (JWT) для сервисного аккаунта</param>
+        /// <returns></returns>
+        public static TokenRecipientOptions WithJwtToken(string jwt) =>
+            WithJwtToken(jwt, DEFAULT_REQUEST_PATH);
+        /// <summary>
+        /// Создание экземпляра натсроек с использованием JWT токена 
+        /// </summary>
+        /// <param name="jwt">JSON Web Token (JWT) для сервисного аккаунта</param>
+        /// <param name="path">Cсылка, по которой будет запрашиваться IAM-токен</param>
+        /// <returns></returns>
+        public static TokenRecipientOptions WithJwtToken(string jwt, string path)
+        {
+            if (string.IsNullOrWhiteSpace(jwt))
+                throw new ArgumentNullException(nameof(jwt));
+            if (string.IsNullOrWhiteSpace(path))
+                throw new ArgumentNullException(nameof(path));
+
+            return new TokenRecipientOptions()
+            {
+                RequestPath = path,
+                JwtToken = jwt
+            };
         }
     }
 }
