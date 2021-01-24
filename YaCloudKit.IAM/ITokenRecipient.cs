@@ -8,6 +8,6 @@ namespace YaCloudKit.IAM
 {
     public interface ITokenRecipient
     {
-        Task<string> GetIamToken(TokenRecipientOptions options, CancellationToken cancellationToken = default);
+        Task<IamTokenCreateResult> GetIamToken(TokenRecipientOptions options, CancellationToken cancellationToken = default);
     }
 }
