@@ -10,12 +10,17 @@
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit/tree/master/YaCloudKit.MQ</RepositoryUrl>
-    <PackageTags>Яндекс, Yandex, Cloud, Message, Queue, kit, aws</PackageTags>
+    <PackageTags>Яндекс, Облако, Yandex, Cloud, Message, Queue, kit, aws</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>icon-main.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\Assets\icon-main.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>

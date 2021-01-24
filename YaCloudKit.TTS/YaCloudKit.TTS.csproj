@@ -8,11 +8,20 @@
     <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
     <PackageLicenseExpression>https://raw.githubusercontent.com/gkurbesov/YaCloudKit/master/LICENSE</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit/tree/master/YaCloudKit.TTS</RepositoryUrl>
-    <PackageTags>Яндекс, Yandex, Cloud, TTS, AI, Voice, Speech</PackageTags>
+    <PackageTags>Яндекс, Облако, Yandex, Cloud, TTS, AI, Voice, Speech</PackageTags>
+    <PackageIcon>icon-main.png</PackageIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\YaCloudKit.Core\YaCloudKit.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Assets\icon-main.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

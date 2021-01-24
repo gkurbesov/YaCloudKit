@@ -10,6 +10,9 @@
     <Company>Gennady Kurbesov</Company>
     <Authors>Gennady Kurbesov</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIcon>icon-main.png</PackageIcon>
+    <Description>Инструмент YaCloudKit для работы с сервисом Yandex Identity and Access Management. 
+Данный инструмент позволит запрашивать новые IAM токены для сервисных аккаунтов</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +22,10 @@
 
   <ItemGroup>
     <None Include="../LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\Assets\icon-main.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
