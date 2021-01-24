@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /YaCloudKit.MainTest
+/YaCloudKit.TestApp

@@ -4,65 +4,78 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using YaCloudKit.Core.Http;
-using Jose;
-using System.Security.Cryptography;
+using YaCloudKit.Core;
+using System.Net.Http;
+using YaCloudKit.IAM.Utils;
+using System.IO;
 
 namespace YaCloudKit.IAM
 {
     public class TokenRecipient : ITokenRecipient, IDisposable
     {
-        public HttpClientOptions HttpOptions { get; set; }
         private IHttpServiceCaller ServiceCaller { get; set; }
 
         public TokenRecipient()
-            : this(new HttpClientOptions(), new HttpServiceCaller())
+             : this(new HttpServiceCaller())
         { }
 
-        public TokenRecipient(HttpClientOptions httpClientOptions, IHttpServiceCaller httpServiceCaller)
+        public TokenRecipient(IHttpServiceCaller httpServiceCaller)
         {
-            if (httpClientOptions == null)
-                throw new ArgumentNullException(nameof(httpClientOptions));
             if (httpServiceCaller == null)
                 throw new ArgumentNullException(nameof(httpServiceCaller));
 
-            HttpOptions = httpClientOptions;
             ServiceCaller = httpServiceCaller;
         }
 
-        public Task<string> GetIamToken(TokenRecipientOptions options, CancellationToken cancellationToken = default)
+
+        public async Task<IamTokenCreateResult> GetIamToken(TokenRecipientOptions options, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
-            //if (options == null)
-            //    throw new ArgumentNullException(nameof(options));
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
 
-            //ThrowIfDisposed();
-            //cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            cancellationToken.ThrowIfCancellationRequested();
 
-            //IRequestContext requestContext = new RequestContext();
+            var jsonContent = !string.IsNullOrWhiteSpace(options.JwtToken) ?
+                JsonBodyHelper.JwtBody(options.JwtToken) : JsonBodyHelper.OauthBody(options.OauthToken);
 
-            //var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            //var headers = new Dictionary<string, object>()
-            //{
-            //    { "kid", options.KeyId }
-            //};
-            //var payload = new Dictionary<string, object>()
-            //{
-            //    { "aud", options.RequestPath },
-            //    { "iss", options.ServiceAccountId },
-            //    { "iat", now },
-            //    { "exp", now + 3600 }
-            //};
-            //RsaPrivateCrtKeyParameters privateKeyParams;
-            //using (var pemStream = File.OpenText("private.pem"))
-            //{
-            //    privateKeyParams = new PemReader(pemStream).ReadObject() as RsaPrivateCrtKeyParameters;
-            //}
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, options.EndPoint);
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            //using (var rsa = new RSACryptoServiceProvider())
-            //{
-            //    rsa.ImportParameters()
-            //    string encodedToken = Jose.JWT.Encode(payload, rsa, JwsAlgorithm.PS256, headers);
-            //}
+            request.Content = content;
+
+
+            var httpOptions = new HttpClientOptions()
+            {
+                HttpClientTimeout = options.HttpClientTimeout,
+#if !NETCOREAPP
+                EndPoint = options.EndPoint
+#endif
+            };
+
+
+            return await ServiceCaller.CallService<IamTokenCreateResult>(httpOptions, async (client) =>
+            {
+                var httpResponse = await client.SendAsync(request, cancellationToken);
+
+                var stream = await httpResponse.Content.ReadAsStreamAsync();
+                var resultContent = await new StreamReader(stream).ReadToEndAsync();
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    try
+                    {
+                        return JsonBodyHelper.DeserializeResult(resultContent);
+                    }
+                    catch(Exception ex)
+                    {
+                        throw new YandexIamServiceException(resultContent, ex, httpResponse.StatusCode);
+                    }
+                }
+                else
+                {
+                    throw new YandexIamServiceException(resultContent, httpResponse.StatusCode);
+                }
+            });
         }
 
         /// <summary>
@@ -85,7 +98,6 @@ namespace YaCloudKit.IAM
                 {
                     ServiceCaller?.Dispose();
                 }
-                HttpOptions = null;
                 ServiceCaller = null;
                 disposedValue = true;
             }

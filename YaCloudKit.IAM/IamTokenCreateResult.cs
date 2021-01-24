@@ -12,10 +12,10 @@ namespace YaCloudKit.IAM
         /// <summary>
         /// IAM-токен
         /// </summary>
-        public string iamToken { get; set; }
+        public string IamToken { get; set; }
         /// <summary>
         /// Время окончания действия IAM-токена. Строка в формате RFC3339.
         /// </summary>
-        public string expiresAt { get; set; }
+        public string ExpiresAt { get; set; }
     }
 }
