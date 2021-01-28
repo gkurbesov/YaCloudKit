@@ -12,7 +12,7 @@ namespace YaCloudKit.IAM
     public interface ITokenRecipient
     {
         /// <summary>
-        /// Заперосить новый IAM-токен для сервисного аккаунта
+        /// Запросить новый IAM-токен для сервисного аккаунта
         /// </summary>
         /// <param name="options">параметры запроса IAM-токена</param>
         /// <param name="cancellationToken"></param>
