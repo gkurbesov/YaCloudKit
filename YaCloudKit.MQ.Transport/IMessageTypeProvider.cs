@@ -6,7 +6,8 @@ namespace YaCloudKit.MQ.Transport
 {
     public interface IMessageTypeProvider
     {
-        void Registration(string tag, Type type);
+        void Register<T>(string tag);
+        void Register(string tag, Type type);
         Type GetMessageType(string tag);
     }
 }
