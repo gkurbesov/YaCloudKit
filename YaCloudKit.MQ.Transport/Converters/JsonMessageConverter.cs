@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace YaCloudKit.MQ.Transport
+namespace YaCloudKit.MQ.Transport.Converters
 {
     public class JsonMessageConverter : IMessageConverter
     {
