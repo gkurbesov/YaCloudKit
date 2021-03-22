@@ -12,7 +12,7 @@ namespace YaCloudKit.MQ.Transport
         /// <typeparam name="T"></typeparam>
         /// <param name="messageBody"></param>
         /// <returns></returns>
-        T Deserialize<T>(string messageBody);
+        T Deserialize<T>(string messageBody) where T : class;
         /// <summary>
         /// Десериализация сообщения в объект
         /// </summary>

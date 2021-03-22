@@ -7,7 +7,7 @@ namespace YaCloudKit.MQ.Transport.Converters
 {
     public class JsonMessageConverter : IMessageConverter
     {
-        public T Deserialize<T>(string messageBody)
+        public T Deserialize<T>(string messageBody) where T : class
         {
             return JsonConvert.DeserializeObject<T>(messageBody);
         }
