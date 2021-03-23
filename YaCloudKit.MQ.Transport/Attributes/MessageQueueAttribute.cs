@@ -11,6 +11,8 @@ namespace YaCloudKit.MQ.Transport.Attributes
 
         public MessageQueueAttribute(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
             Name = name;
         }
     }
