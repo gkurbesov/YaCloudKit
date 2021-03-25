@@ -16,17 +16,20 @@ namespace YaCloudKit.MQ.Transport
             return types.ContainsKey(tag) ? types[tag] : null;
         }
 
-        public void Register<T>(string tag)
+        public IMessageTypeProvider Register<T>(string tag)
         {
             Register(tag, typeof(T));
+            return this;
         }
 
-        public void Register(string tag, Type type)
+        public IMessageTypeProvider Register(string tag, Type type)
         {
             if (types.ContainsKey(tag))
                 types[tag] = type;
             else
                 types.TryAdd(tag, type);
+
+            return this;
         }
     }
 }

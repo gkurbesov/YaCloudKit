@@ -11,13 +11,13 @@ namespace YaCloudKit.MQ.Transport
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="tag"></param>
-        void Register<T>(string tag);
+        IMessageTypeProvider Register<T>(string tag);
         /// <summary>
         /// Зарегистрировать провайдер типов сообщений
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="type"></param>
-        void Register(string tag, Type type);
+        IMessageTypeProvider Register(string tag, Type type);
         /// <summary>
         /// Получить тип сообщения
         /// </summary>
