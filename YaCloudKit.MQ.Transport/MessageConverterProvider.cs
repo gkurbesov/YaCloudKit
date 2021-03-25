@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
@@ -11,17 +12,20 @@ namespace YaCloudKit.MQ.Transport
 
         public MessageConverterProvider() { }
 
-        public IMessageConverter GetConverter(string tag)
-        {
-            return converters.ContainsKey(tag) ? converters[tag] : null;
-        }
+        public IMessageConverter FirstOrDefault() =>
+            converters.Count > 0 ? converters.Values.FirstOrDefault() : null;
 
-        public void Register(string tag, IMessageConverter converter)
+        public IMessageConverter GetConverter(string tag) =>
+            converters.ContainsKey(tag) ? converters[tag] : null;
+
+        public IMessageConverterProvider Register(string tag, IMessageConverter converter)
         {
             if (converters.ContainsKey(tag))
                 converters[tag] = converter;
             else
                 converters.TryAdd(tag, converter);
+
+            return this;
         }
     }
 }

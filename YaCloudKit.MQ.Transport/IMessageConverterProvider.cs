@@ -11,12 +11,17 @@ namespace YaCloudKit.MQ.Transport
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="converter"></param>
-        void Register(string tag, IMessageConverter converter);
+        IMessageConverterProvider Register(string tag, IMessageConverter converter);
         /// <summary>
         /// Получить конвертер
         /// </summary>
         /// <param name="tag"></param>
         /// <returns></returns>
         IMessageConverter GetConverter(string tag);
+        /// <summary>
+        /// Получить конвертер по умолчанию или Null
+        /// </summary>
+        /// <returns></returns>
+        IMessageConverter FirstOrDefault();
     }
 }
