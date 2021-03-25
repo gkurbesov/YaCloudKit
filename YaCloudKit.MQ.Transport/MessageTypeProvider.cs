@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,7 @@ namespace YaCloudKit.MQ.Transport
 {
     public class MessageTypeProvider : IMessageTypeProvider
     {
-        private readonly Dictionary<string, Type> types = new Dictionary<string, Type>();
+        private readonly ConcurrentDictionary<string, Type> types = new ConcurrentDictionary<string, Type>();
 
         public MessageTypeProvider() { }
 
@@ -25,7 +26,7 @@ namespace YaCloudKit.MQ.Transport
             if (types.ContainsKey(tag))
                 types[tag] = type;
             else
-                types.Add(tag, type);
+                types.TryAdd(tag, type);
         }
     }
 }

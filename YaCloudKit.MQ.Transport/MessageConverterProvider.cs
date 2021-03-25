@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,7 @@ namespace YaCloudKit.MQ.Transport
 {
     public class MessageConverterProvider : IMessageConverterProvider
     {
-        private readonly Dictionary<string, IMessageConverter> converters = new Dictionary<string, IMessageConverter>();
+        private readonly ConcurrentDictionary<string, IMessageConverter> converters = new ConcurrentDictionary<string, IMessageConverter>();
 
         public MessageConverterProvider() { }
 
@@ -20,7 +21,7 @@ namespace YaCloudKit.MQ.Transport
             if (converters.ContainsKey(tag))
                 converters[tag] = converter;
             else
-                converters.Add(tag, converter);
+                converters.TryAdd(tag, converter);
         }
     }
 }
