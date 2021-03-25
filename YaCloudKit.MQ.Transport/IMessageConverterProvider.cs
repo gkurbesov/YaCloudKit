@@ -6,6 +6,7 @@ namespace YaCloudKit.MQ.Transport
 {
     public interface IMessageConverterProvider
     {
+        IEnumerable<IMessageConverter> Values { get; }
         /// <summary>
         /// Зарегистрировать конмертер сообщений
         /// </summary>

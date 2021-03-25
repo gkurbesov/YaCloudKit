@@ -12,6 +12,8 @@ namespace YaCloudKit.MQ.Transport
 
         public MessageConverterProvider() { }
 
+        public IEnumerable<IMessageConverter> Values { get => converters.Values; }
+
         public IMessageConverter FirstOrDefault() =>
             converters.Count > 0 ? converters.Values.FirstOrDefault() : null;
 
@@ -27,5 +29,7 @@ namespace YaCloudKit.MQ.Transport
 
             return this;
         }
+
+
     }
 }
