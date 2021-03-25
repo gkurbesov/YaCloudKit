@@ -5,7 +5,7 @@ using System.Text;
 namespace YaCloudKit.MQ.Transport.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class MessageQueueAttribute : Attribute
+    public class MessageQueueAttribute : Attribute, IMessagePropertyAttribute
     {
         public string Name { get; set; }
 

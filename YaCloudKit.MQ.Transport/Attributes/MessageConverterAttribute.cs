@@ -5,7 +5,7 @@ using System.Text;
 namespace YaCloudKit.MQ.Transport.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class MessageConverterAttribute : Attribute
+    public class MessageConverterAttribute : Attribute, IMessagePropertyAttribute
     {
         public string Name { get; set; }
 

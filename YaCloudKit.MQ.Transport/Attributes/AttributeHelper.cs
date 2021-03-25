@@ -6,12 +6,12 @@ namespace YaCloudKit.MQ.Transport.Attributes
 {
     public class AttributeHelper
     {
-        public static string GetMessageName(Type value)
+        public static string GetPropertyName<T>(Type value) where T: IMessagePropertyAttribute
         {
             var attributes = value.GetCustomAttributes(true);
             foreach (var attr in attributes)
             {
-                if (attr is MessageQueueAttribute messageAttribute)
+                if (attr is T messageAttribute)
                 {
                     return messageAttribute.Name;
                 }
@@ -19,7 +19,7 @@ namespace YaCloudKit.MQ.Transport.Attributes
             return value.GetType().Name;
         }
 
-        public static string GetMessageName(object value) =>
-            GetMessageName(value.GetType());
+        public static string GetPropertyName<T>(object value) where T : IMessagePropertyAttribute =>
+            GetPropertyName<T>(value.GetType());
     }
 }
