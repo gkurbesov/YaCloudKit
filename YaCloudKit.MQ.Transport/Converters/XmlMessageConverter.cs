@@ -8,6 +8,7 @@ namespace YaCloudKit.MQ.Transport.Converters
 {
     public class XmlMessageConverter : IMessageConverter
     {
+        public const string TAG = "xml";
         public T Deserialize<T>(string messageBody) where T : class
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
