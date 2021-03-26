@@ -8,6 +8,9 @@ namespace YaCloudKit.MQ.Transport
 {
     public static class YandexMqTrasport
     {
+        internal const string ATTR_MESSAGE = "ya-cloud-kit-mq-message";
+        internal const string ATTR_CONVERTER = "ya-cloud-kit-mq-converter";
+
         public static readonly IMessageConverterProvider ConverterProvider = new MessageConverterProvider();
         public static readonly IMessageTypeProvider TypeProvider = new MessageTypeProvider();
 
