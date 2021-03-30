@@ -13,33 +13,28 @@ namespace YaCloudKit.MQ.Transport
     public static class YandexMqExtension
     {
 
-        public static bool TryGetMessage(this Message responseMessage, out object message)
+        public static object GetMessage(this Message responseMessage)
         {
             YandexMqTrasport.ThrowIfNotInitialized();
-            message = null;
 
             if (string.IsNullOrWhiteSpace(responseMessage.Body))
                 return false;
 
-            if (responseMessage.MessageAttribute.TryGetValue(YandexMqTrasport.ATTR_MESSAGE, out var attr) && !string.IsNullOrWhiteSpace(attr.StringValue))
-            {
-                var messageType = YandexMqTrasport.TypeProvider.GetMessageType(attr.StringValue);
-                if (messageType == null)
-                    throw new YandexMqTrasportException($"Message type ({attr.StringValue}) not registered ");
+            if (!responseMessage.MessageAttribute.TryGetValue(YandexMqTrasport.ATTR_MESSAGE, out var attr) || string.IsNullOrWhiteSpace(attr.StringValue))
+                throw new YandexMqTrasportException($"The message does not contain an attribute with an object type");
+            if (!responseMessage.MessageAttribute.TryGetValue(YandexMqTrasport.ATTR_CONVERTER, out var attr2) || string.IsNullOrWhiteSpace(attr2.StringValue))
+                throw new YandexMqTrasportException($"The message does not contain an attribute with an converter type");
 
-                var convertAttribute = responseMessage.MessageAttribute.TryGetValue(YandexMqTrasport.ATTR_CONVERTER, out var attr2) ?
-                    attr2.StringValue : null;
+            var messageType = YandexMqTrasport.TypeProvider.GetMessageType(attr.StringValue);
+            if (messageType == null)
+                throw new YandexMqTrasportException($"Message type ({attr.StringValue}) not registered ");
 
-                var converter = !string.IsNullOrWhiteSpace(convertAttribute) ?
-                    YandexMqTrasport.ConverterProvider.GetConverter(convertAttribute) : YandexMqTrasport.ConverterProvider.FirstOrDefault();
+            var converter = YandexMqTrasport.ConverterProvider.GetConverter(attr2.StringValue);
 
-                if (converter == null)
-                    throw new YandexMqTrasportException("The required converter was not found" + (!string.IsNullOrWhiteSpace(convertAttribute) ? $": {convertAttribute}" : string.Empty));
+            if (converter == null)
+                throw new YandexMqTrasportException($"The required converter was not found {attr2.StringValue}");
 
-                message = converter.Deserialize(responseMessage.Body, messageType);
-                return true;
-            }
-            return false;
+            return converter.Deserialize(responseMessage.Body, messageType);
         }
 
         public static SendMessageRequest AddMessage<T>(this SendMessageRequest request, T message)
@@ -50,7 +45,8 @@ namespace YaCloudKit.MQ.Transport
             var converterTypeName = AttributeHelper.GetPropertyName<MessageConverterAttribute>(message);
 
             var converter = !string.IsNullOrWhiteSpace(converterTypeName) ?
-                YandexMqTrasport.ConverterProvider.GetConverter(converterTypeName) : YandexMqTrasport.ConverterProvider.FirstOrDefault();
+                YandexMqTrasport.ConverterProvider.GetConverter(converterTypeName) :
+                YandexMqTrasport.ConverterProvider.GetDefault();
 
             if (converter == null)
                 throw new YandexMqTrasportException($"The required converter ({converterTypeName}) was not found");
@@ -62,12 +58,12 @@ namespace YaCloudKit.MQ.Transport
                     DataType = AttributeValueType.String,
                     StringValue = messageTypeName
                 });
-            if (!string.IsNullOrWhiteSpace(converterTypeName))
-                request.MessageAttribute.Add(YandexMqTrasport.ATTR_CONVERTER,
+            request.MessageAttribute.Add(YandexMqTrasport.ATTR_CONVERTER,
                 new MessageAttributeValue()
                 {
                     DataType = AttributeValueType.String,
-                    StringValue = converterTypeName
+                    StringValue = !string.IsNullOrWhiteSpace(converterTypeName) ?
+                        converterTypeName : YandexMqTrasport.ConverterProvider.GetTag(converter)
                 });
 
             return request;
