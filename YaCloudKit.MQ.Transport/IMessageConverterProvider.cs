@@ -20,9 +20,15 @@ namespace YaCloudKit.MQ.Transport
         /// <returns></returns>
         IMessageConverter GetConverter(string tag);
         /// <summary>
+        /// Получить тэг конвертера
+        /// </summary>
+        /// <param name="converter"></param>
+        /// <returns></returns>
+        string GetTag(IMessageConverter converter);
+        /// <summary>
         /// Получить конвертер по умолчанию или Null
         /// </summary>
         /// <returns></returns>
-        IMessageConverter FirstOrDefault();
+        IMessageConverter TryGetDefault();
     }
 }
