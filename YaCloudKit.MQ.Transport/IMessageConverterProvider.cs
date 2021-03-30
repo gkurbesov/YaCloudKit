@@ -29,6 +29,6 @@ namespace YaCloudKit.MQ.Transport
         /// Получить конвертер по умолчанию или Null
         /// </summary>
         /// <returns></returns>
-        IMessageConverter TryGetDefault();
+        IMessageConverter GetDefault();
     }
 }

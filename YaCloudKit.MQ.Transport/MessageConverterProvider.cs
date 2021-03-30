@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using YaCloudKit.MQ.Transport.Converters;
 
 namespace YaCloudKit.MQ.Transport
 {
@@ -20,6 +21,14 @@ namespace YaCloudKit.MQ.Transport
         public IMessageConverter GetConverter(string tag) =>
             converters.ContainsKey(tag) ? converters[tag] : null;
 
+        public string GetTag(IMessageConverter converter)
+        {
+            foreach (var item in converters)
+                if (item.Value.Equals(converter))
+                    return item.Key;
+            return null;
+        }
+
         public IMessageConverterProvider Register(string tag, IMessageConverter converter)
         {
             if (converters.ContainsKey(tag))
@@ -30,6 +39,7 @@ namespace YaCloudKit.MQ.Transport
             return this;
         }
 
-
+        public IMessageConverter GetDefault() => 
+            GetConverter(JsonMessageConverter.TAG) ?? GetConverter(XmlMessageConverter.TAG);
     }
 }
