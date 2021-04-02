@@ -9,14 +9,14 @@ namespace YaCloudKit.MQ.Transport
     {
         public static IMessageTypeProvider Register(this IMessageTypeProvider provider, Type type)
         {
-            var tag = AttributeHelper.GetPropertyName<MessageQueueAttribute>(type);
+            var tag = AttributeHelper.GetPropertyName<MessageQueueAttribute>(type, true);
             return provider.Register(tag, type);            
         }
 
         public static IMessageTypeProvider Register<T>(this IMessageTypeProvider provider)
         {
             var type = typeof(T);
-            var tag = AttributeHelper.GetPropertyName<MessageQueueAttribute>(type);
+            var tag = AttributeHelper.GetPropertyName<MessageQueueAttribute>(type, true);
             return provider.Register(tag, type);
         }
 
