@@ -20,6 +20,7 @@ YaCloudKit - это набор инструментов, который позв
 **Реализованно:**
 - [YaCloudKit.Core](./YaCloudKit.Core) - основная библиотека с базовыми классами и типами
 - [YaCloudKit.MQ](./YaCloudKit.MQ) - клиент для работы с очередью сообщений Яндекс.Облака
+- [YaCloudKit.MQ.Transport](./YaCloudKit.MQ.Transport) - Расширение для клиента очереди сообщений для отправки объектов-сообщений
 - [YaCloudKit.TTS](./YaCloudKit.TTS) - клиент SpeechKit для синтеза речи из текста
 - [YaCloudKit.IAM](./YaCloudKit.IAM) - клиент сервиса идентификации и контроля доступа к ресурсам в Yandex.Cloud
 
