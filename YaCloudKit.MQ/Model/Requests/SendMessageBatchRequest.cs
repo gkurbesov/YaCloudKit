@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace YaCloudKit.MQ.Model.Requests
 {
@@ -22,5 +23,33 @@ namespace YaCloudKit.MQ.Model.Requests
 
         internal bool IsSetBatchEntry() =>
             SendMessageBatchRequestEntry != null && SendMessageBatchRequestEntry.Count > 0;
+
+
+        /// <summary>
+        /// url очереди в которую будет отправлено сообщение
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public SendMessageBatchRequest SetQueueUrl(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(nameof(value), "Queue url cannot was null or empty");
+            QueueUrl = value;
+            return this;
+        }
+
+        /// <summary>
+        /// добавить сообщение в запрос на отправку
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <returns></returns>
+        public SendMessageBatchRequest SetSendMessageBatchRequestEntry(SendMessageBatchRequestEntry entry)
+        {
+            if (entry == null)
+                throw new ArgumentNullException(nameof(entry), "Entry cannot was null");
+            SendMessageBatchRequestEntry.Add(entry);
+            return this;
+        }
+
     }
 }

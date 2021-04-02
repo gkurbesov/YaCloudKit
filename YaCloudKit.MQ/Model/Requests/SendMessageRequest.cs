@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace YaCloudKit.MQ.Model.Requests
 {
@@ -45,5 +46,79 @@ namespace YaCloudKit.MQ.Model.Requests
 
         public SendMessageRequest()
             : base("SendMessage") { }
+
+        /// <summary>
+        /// url очереди в которую будет отправлено сообщение
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public SendMessageRequest SetQueueUrl(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(nameof(value), "Queue url cannot was null or empty");
+            QueueUrl = value;
+            return this;
+        }
+
+        /// <summary>
+        /// Текст сообещния
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public SendMessageRequest SetMessageBody(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(nameof(value), "Message cannot was null or empty");
+            MessageBody = value;
+            return this;
+        }
+
+        /// <summary>
+        /// добавляет пользовательский атрибут с ссответствующим типом
+        /// </summary>
+        /// <param name="attributeName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public SendMessageRequest SetMessageAttribute(string attributeName, string value)
+        {
+            var attr = new MessageAttributeValue() { DataType = AttributeValueType.String, StringValue = value };
+            if (MessageAttribute.ContainsKey(attributeName))
+                MessageAttribute[attributeName] = attr;
+            else
+                MessageAttribute.Add(attributeName, attr);
+            return this;
+        }
+
+        /// <summary>
+        /// добавляет пользовательский атрибут с ссответствующим типом
+        /// </summary>
+        /// <param name="attributeName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public SendMessageRequest SetMessageAttribute(string attributeName, int value)
+        {
+            var attr = new MessageAttributeValue() { DataType = AttributeValueType.Number, StringValue = value.ToString() };
+            if (MessageAttribute.ContainsKey(attributeName))
+                MessageAttribute[attributeName] = attr;
+            else
+                MessageAttribute.Add(attributeName, attr);
+            return this;
+        }
+
+        /// <summary>
+        /// добавляет пользовательский атрибут с ссответствующим типом
+        /// </summary>
+        /// <param name="attributeName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public SendMessageRequest SetMessageAttribute(string attributeName, byte[] value)
+        {
+            var attr = new MessageAttributeValue() { DataType = AttributeValueType.Binary, BinaryValue = value };
+            if (MessageAttribute.ContainsKey(attributeName))
+                MessageAttribute[attributeName] = attr;
+            else
+                MessageAttribute.Add(attributeName, attr);
+            return this;
+        }
     }
 }

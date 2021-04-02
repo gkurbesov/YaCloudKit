@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using YaCloudKit.MQ.Model.Constants;
 
 namespace YaCloudKit.MQ.Model.Requests
 {
@@ -16,6 +18,7 @@ namespace YaCloudKit.MQ.Model.Requests
         /// <summary>
         /// Массив имен системныъх атрибутов сообщения, которые требуется вернуть в ответе на запрос. 
         /// Можно получить все атрибуты сразу, указав слово <code>All</code>.
+        /// В классе <code>MessageSystemAttributeName</code> определены константы с именами атрибутов
         /// </summary>
         public List<string> AttributeNames { get; set; } = new List<string>();
         /// <summary>
@@ -56,5 +59,69 @@ namespace YaCloudKit.MQ.Model.Requests
 
         internal bool IsSetMessageAttributeName() =>
             MessageAttributeName != null && MessageAttributeName.Count > 0;
+
+        /// <summary>
+        /// Установить макисимальное число получаемых сообщений
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public ReceiveMessageRequest SetMaxNumberOfMessage(int? count)
+        {
+            if (count.HasValue && count >= 1 && count <= 10)
+                MaxNumberOfMessages = count;
+            else
+                MaxNumberOfMessages = null;
+            return this;
+        }
+
+        /// <summary>
+        /// запросить все пользовательские атрибуты сообщений
+        /// </summary>
+        /// <returns></returns>
+        public ReceiveMessageRequest SetAllMessageAttribute()
+        {
+            MessageAttributeName.Clear();
+            MessageAttributeName.Add(MessageSystemAttributeName.All);
+            return this;
+        }
+
+        /// <summary>
+        /// Добавить запрашиваемый атрибут
+        /// </summary>
+        /// <param name="attr"></param>
+        /// <returns></returns>
+        public ReceiveMessageRequest SetMessageAttribute(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(nameof(value), "Name of attribute cannot was null or empty");
+            MessageAttributeName.Add(value);
+            return this;
+        }
+        /// <summary>
+        /// устанавливает url очереди, из которой будут получены сообщения
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public ReceiveMessageRequest SetQueueUrl(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentNullException(nameof(value), "Queue url cannot was null or empty");
+            QueueUrl = value;
+            return this;
+        }
+
+        /// <summary>
+        /// Время ожидания для получения сообщений из очереди
+        /// </summary>
+        /// <param name="seconds">количество секунд, но не более 20</param>
+        /// <returns></returns>
+        public ReceiveMessageRequest SetWaitTimeSeconds(int? seconds)
+        {
+            if (seconds.HasValue && seconds.Value >= 1 && seconds.Value <= 20)
+                WaitTimeSeconds = seconds;
+            else
+                WaitTimeSeconds = null;
+            return this;
+        }
     }
 }
