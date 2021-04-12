@@ -68,5 +68,23 @@ namespace YaCloudKit.MQ.Transport
 
             return request;
         }
+
+        public static Task<SendMessageResponse> SendMessageAsync<T>(this IYandexMq mq, string queueUrl, T message, CancellationToken cancellationToken = default)
+        {
+            var request = new SendMessageRequest()
+                .SetQueueUrl(queueUrl)
+                .AddMessage(message);
+
+            return mq.SendMessageAsync(request, cancellationToken);
+        }
+
+        public static Task<SendMessageResponse> SendMessageAsync<T>(this IYandexMq mq, string queueUrl, T message, Dictionary<string, MessageAttributeValue> attributes, CancellationToken cancellationToken = default)
+        {
+            var request = new SendMessageRequest()
+                .SetQueueUrl(queueUrl)                
+                .AddMessage(message);
+            request.MessageAttribute = attributes;
+            return mq.SendMessageAsync(request, cancellationToken);
+        }
     }
 }
