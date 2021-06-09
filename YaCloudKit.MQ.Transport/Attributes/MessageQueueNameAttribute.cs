@@ -5,11 +5,11 @@ using System.Text;
 namespace YaCloudKit.MQ.Transport.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class MessageQueueAttribute : Attribute, IMessagePropertyAttribute
+    public class MessageQueueNameAttribute : Attribute, IMessagePropertyAttribute
     {
         public string Name { get; set; }
 
-        public MessageQueueAttribute(string name)
+        public MessageQueueNameAttribute(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException(nameof(name));
