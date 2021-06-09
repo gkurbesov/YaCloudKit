@@ -5,8 +5,14 @@ using Newtonsoft.Json;
 
 namespace YaCloudKit.MQ.Transport.Converters
 {
+    /// <summary>
+    /// Стандартный JSON конвертер
+    /// </summary>
     public class JsonMessageConverter : IMessageConverter
     {
+        /// <summary>
+        /// Название конвертера
+        /// </summary>
         public const string TAG = "json";
 
         public T Deserialize<T>(string messageBody) where T : class

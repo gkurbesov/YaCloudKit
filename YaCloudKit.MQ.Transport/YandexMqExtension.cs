@@ -12,6 +12,12 @@ namespace YaCloudKit.MQ.Transport
 {
     public static class YandexMqExtension
     {
+        /// <summary>
+        /// Пытается получить объект из сообщения очереди
+        /// </summary>
+        /// <param name="responseMessage">Сообщение полученное из очереди</param>
+        /// <param name="value">десериализованный объект сообщения</param>
+        /// <returns>true - если удалось десериализовать данные в объект, иначе false</returns>
         public static bool TryGetMessage(this Message responseMessage, out object value)
         {
             YandexMqTrasport.ThrowIfNotInitialized();
@@ -36,7 +42,11 @@ namespace YaCloudKit.MQ.Transport
             value = converter.Deserialize(responseMessage.Body, messageType);
             return true;
         }
-
+        /// <summary>
+        /// Получает объект из сообщения
+        /// </summary>
+        /// <param name="responseMessage">Сообщение полученное из очереди</param>
+        /// <returns></returns>
         public static object GetMessage(this Message responseMessage)
         {
             YandexMqTrasport.ThrowIfNotInitialized();
@@ -60,7 +70,13 @@ namespace YaCloudKit.MQ.Transport
 
             return converter.Deserialize(responseMessage.Body, messageType);
         }
-
+        /// <summary>
+        /// Сериализует объект и помещает данные в сообщение, а так же дополнительные атрибуты для распознания
+        /// </summary>
+        /// <typeparam name="T">Тип объекта</typeparam>
+        /// <param name="request"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public static SendMessageRequest AddMessage<T>(this SendMessageRequest request, T message)
         {
             YandexMqTrasport.ThrowIfNotInitialized();
@@ -92,7 +108,15 @@ namespace YaCloudKit.MQ.Transport
 
             return request;
         }
-
+        /// <summary>
+        /// Отправляет сообщение в очередь с сериализованным объектом
+        /// </summary>
+        /// <typeparam name="T">Тип объекта сообщения</typeparam>
+        /// <param name="mq">клиент очереди</param>
+        /// <param name="queueUrl">URL очереди</param>
+        /// <param name="message">Экземпляр объекта для сообщения</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static Task<SendMessageResponse> SendMessageAsync<T>(this IYandexMq mq, string queueUrl, T message, CancellationToken cancellationToken = default)
         {
             var request = new SendMessageRequest()
@@ -101,7 +125,16 @@ namespace YaCloudKit.MQ.Transport
 
             return mq.SendMessageAsync(request, cancellationToken);
         }
-
+        /// <summary>
+        /// Отправляет сообщение в очередь с сериализованным объектом
+        /// </summary>
+        /// <typeparam name="T">Тип объекта сообщения</typeparam>
+        /// <param name="mq">клиент очереди</param>
+        /// <param name="queueUrl">URL очереди</param>
+        /// <param name="message">Экземпляр объекта для сообщения</param>
+        /// <param name="attributes">Дополнительные атрибуты, которые необходимо поместить в сообщение</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static Task<SendMessageResponse> SendMessageAsync<T>(this IYandexMq mq, string queueUrl, T message, Dictionary<string, MessageAttributeValue> attributes, CancellationToken cancellationToken = default)
         {
             var request = new SendMessageRequest()

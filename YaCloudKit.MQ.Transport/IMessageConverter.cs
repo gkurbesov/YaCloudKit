@@ -4,6 +4,9 @@ using System.Text;
 
 namespace YaCloudKit.MQ.Transport
 {
+    /// <summary>
+    /// Интерфейс для конвертера сообщений
+    /// </summary>
     public interface IMessageConverter
     {
         /// <summary>

@@ -6,9 +6,16 @@ using System.Xml.Serialization;
 
 namespace YaCloudKit.MQ.Transport.Converters
 {
+    /// <summary>
+    /// Стандартный XML конвертер
+    /// </summary>
     public class XmlMessageConverter : IMessageConverter
     {
+        /// <summary>
+        /// Название для конвертера
+        /// </summary>
         public const string TAG = "xml";
+
         public T Deserialize<T>(string messageBody) where T : class
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));

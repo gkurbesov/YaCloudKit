@@ -5,6 +5,9 @@ using System.Text;
 
 namespace YaCloudKit.MQ.Transport
 {
+    /// <summary>
+    /// Стандартный провайдер типов сообщений
+    /// </summary>
     public class MessageTypeProvider : IMessageTypeProvider
     {
         private readonly ConcurrentDictionary<string, Type> types = new ConcurrentDictionary<string, Type>();

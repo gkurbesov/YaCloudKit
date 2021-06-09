@@ -13,7 +13,10 @@ namespace YaCloudKit.MQ.Transport
 
         public static readonly IMessageConverterProvider ConverterProvider = new MessageConverterProvider();
         public static readonly IMessageTypeProvider TypeProvider = new MessageTypeProvider();
-
+        /// <summary>
+        /// Инициализация расширения функционала клиента очереди сообщений
+        /// </summary>
+        /// <param name="configure">Действие для регистрации используемых типов сообщений</param>
         public static void Initialize(Action<IMessageTypeProvider> configure)
         {
             ConverterProvider.Register(JsonMessageConverter.TAG, new JsonMessageConverter());
@@ -21,7 +24,10 @@ namespace YaCloudKit.MQ.Transport
 
             configure(TypeProvider);
         }
-
+        /// <summary>
+        /// Инициализация расширения функционала клиента очереди сообщений
+        /// </summary>
+        /// <param name="configure">Действие для регистрации используемых конвертеров и типов сообщений</param>
         public static void Initialize(Action<IMessageConverterProvider, IMessageTypeProvider> configure)
         {
             configure(ConverterProvider, TypeProvider);

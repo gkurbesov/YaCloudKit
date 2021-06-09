@@ -7,6 +7,9 @@ using YaCloudKit.MQ.Transport.Converters;
 
 namespace YaCloudKit.MQ.Transport
 {
+    /// <summary>
+    /// Стандартный провайдер конвертеров сообщений
+    /// </summary>
     public class MessageConverterProvider : IMessageConverterProvider
     {
         private readonly ConcurrentDictionary<string, IMessageConverter> converters = new ConcurrentDictionary<string, IMessageConverter>();
