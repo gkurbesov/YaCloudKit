@@ -12,13 +12,37 @@ namespace YaCloudKit.MQ.Transport
 {
     public static class YandexMqExtension
     {
+        public static bool TryGetMessage(this Message responseMessage, out object value)
+        {
+            YandexMqTrasport.ThrowIfNotInitialized();
+
+            value = null;
+            if (string.IsNullOrWhiteSpace(responseMessage.Body))
+                return false;
+            if (!responseMessage.MessageAttribute.TryGetValue(YandexMqTrasport.ATTR_MESSAGE, out var attr) || string.IsNullOrWhiteSpace(attr.StringValue))
+                return false;
+            if (!responseMessage.MessageAttribute.TryGetValue(YandexMqTrasport.ATTR_CONVERTER, out var attr2) || string.IsNullOrWhiteSpace(attr2.StringValue))
+                return false;
+
+            var messageType = YandexMqTrasport.TypeProvider.GetMessageType(attr.StringValue);
+            if (messageType == null)
+                return false; 
+            
+            var converter = YandexMqTrasport.ConverterProvider.GetConverter(attr2.StringValue);
+
+            if (converter == null)
+                return false;
+
+            value = converter.Deserialize(responseMessage.Body, messageType);
+            return true;
+        }
 
         public static object GetMessage(this Message responseMessage)
         {
             YandexMqTrasport.ThrowIfNotInitialized();
 
             if (string.IsNullOrWhiteSpace(responseMessage.Body))
-                return false;
+                throw new YandexMqTrasportException($"The message body does not by null or empty");
 
             if (!responseMessage.MessageAttribute.TryGetValue(YandexMqTrasport.ATTR_MESSAGE, out var attr) || string.IsNullOrWhiteSpace(attr.StringValue))
                 throw new YandexMqTrasportException($"The message does not contain an attribute with an object type");
@@ -41,7 +65,7 @@ namespace YaCloudKit.MQ.Transport
         {
             YandexMqTrasport.ThrowIfNotInitialized();
 
-            var messageTypeName = AttributeHelper.GetPropertyName<MessageQueueAttribute>(message, true);
+            var messageTypeName = AttributeHelper.GetPropertyName<MessageQueueNameAttribute>(message, true);
             var converterTypeName = AttributeHelper.GetPropertyName<MessageConverterAttribute>(message);
 
             var converter = !string.IsNullOrWhiteSpace(converterTypeName) ?
