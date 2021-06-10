@@ -81,7 +81,7 @@ namespace YaCloudKit.MQ.Transport
         {
             YandexMqTrasport.ThrowIfNotInitialized();
 
-            var messageTypeName = AttributeHelper.GetPropertyName<MessageQueueNameAttribute>(message, true);
+            var messageTypeName = AttributeHelper.GetPropertyName<MessageQueueNameAttribute>(message) ?? YandexMqTrasport.TypeProvider.GetMessageTag<T>();
             var converterTypeName = AttributeHelper.GetPropertyName<MessageConverterAttribute>(message);
 
             var converter = !string.IsNullOrWhiteSpace(converterTypeName) ?

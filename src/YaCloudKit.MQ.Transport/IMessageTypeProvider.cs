@@ -26,6 +26,18 @@ namespace YaCloudKit.MQ.Transport
         /// </summary>
         /// <param name="tag"></param>
         /// <returns></returns>
-        Type GetMessageType(string tag);       
+        Type GetMessageType(string tag);
+        /// <summary>
+        /// Ищит тег для зарегистрированного типа сообщения
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        string GetMessageTag<T>();
+        /// <summary>
+        /// Ищит тег для зарегистрированного типа сообщения
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        string GetMessageTag(Type type);
     }
 }

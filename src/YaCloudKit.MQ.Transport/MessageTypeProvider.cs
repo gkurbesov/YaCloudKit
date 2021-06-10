@@ -34,5 +34,17 @@ namespace YaCloudKit.MQ.Transport
 
             return this;
         }
+        public string GetMessageTag<T>() =>
+            this.GetMessageTag(typeof(T));
+
+        public string GetMessageTag(Type type)
+        {
+            foreach(var item in types.ToArray())
+            {
+                if (item.Value.Equals(type))
+                    return item.Key;
+            }
+            throw new YandexMqTrasportException($"Message type ({type.Name}) not registered");
+        }
     }
 }
