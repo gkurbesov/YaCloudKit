@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Инструмент YaCloudKit для работы с сервисом Yandex SpeechKit для синтеза речи</Description>
     <Authors>Gennady Kurbesov</Authors>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
     <PackageLicenseExpression></PackageLicenseExpression>
     <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit/tree/master/YaCloudKit.TTS</RepositoryUrl>
@@ -16,6 +16,17 @@
 
   <ItemGroup>
     <PackageReference Include="YaCloudKit.Core" Version="0.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Assets\logo-main.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
