@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <Authors>Gennady Kurbesov</Authors>
     <Description>Базовая библиотека инструмента YaCloudKit для работы с сервисами Yandex.Cloud</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -12,16 +12,12 @@
     <PackageTags>Яндекс, Облако, Yandex, cloud, aws, message queue, http, client, rest</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>logo-main.png</PackageIcon>
-    <AssemblyVersion>0.1.1.0</AssemblyVersion>
-    <FileVersion>0.1.1.0</FileVersion>
+    <AssemblyVersion>0.1.2.0</AssemblyVersion>
+    <FileVersion>0.1.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="../LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\Assets\logo-main.png">
+    <None Include="..\..\Assets\logo-main.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
