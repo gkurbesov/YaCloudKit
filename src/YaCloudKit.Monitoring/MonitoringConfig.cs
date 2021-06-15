@@ -9,7 +9,7 @@ namespace YaCloudKit.Monitoring
     /// </summary>
     public class MonitoringConfig
     {
-        public static readonly Uri DEFAULT_ENDPOINT = new Uri("POST https://monitoring.api.cloud.yandex.net/monitoring/v2/data/write");
+        public static readonly Uri DEFAULT_ENDPOINT = new Uri("https://monitoring.api.cloud.yandex.net/monitoring/v2/data/write");
 
         /// <summary>
         /// IAM-токен для авторизации запросов на Yandex.Cloud
