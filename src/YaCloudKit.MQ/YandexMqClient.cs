@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using YaCloudKit.Core.Http;
 using YaCloudKit.MQ.Marshallers;
 using YaCloudKit.MQ.Model.Requests;
 using YaCloudKit.MQ.Model.Responses;
@@ -16,15 +17,30 @@ namespace YaCloudKit.MQ
         /// <param name="accessKeyID">Идентификатор ключа сервисного аккаунта</param>
         /// <param name="secretAccessKey">Секретный ключ сервисного аккаунта</param>
         public YandexMqClient(string accessKeyID, string secretAccessKey) :
-            this(new YandexMqConfig(accessKeyID, secretAccessKey), new HttpServiceCaller())
+            this(new YandexMqConfig(accessKeyID, secretAccessKey))
+        { }
+
+        public YandexMqClient(YandexMqConfig config) :
+           base(config, () => {
+               var client = new HttpClient();
+#if !NETCOREAPP
+               ServicePointManager.DefaultConnectionLimit = 5;
+               var servicePoint = ServicePointManager.FindServicePoint(config.EndPoint);
+               if (servicePoint != null)
+                   servicePoint.ConnectionLeaseTimeout = 60000;
+#endif
+               client = new HttpClient();
+               client.Timeout = config.HttpClientTimeout;
+               return client;
+           })
         { }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="config">Настройки для выполнения запросов к api Yandex Message Queue</param>
-        public YandexMqClient(YandexMqConfig config, IHttpServiceCaller httpCaller) :
-            base(config, httpCaller)
+        public YandexMqClient(YandexMqConfig config, Func<HttpClient> httpClientFactory) :
+            base(config, httpClientFactory)
         { }
 
         public Task<CreateQueueResponse> CreateQueueAsync(CreateQueueRequest request, CancellationToken cancellationToken = default)
