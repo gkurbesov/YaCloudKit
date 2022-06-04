@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace YaCloudKit.MQ.Transport.Attributes
 {
@@ -9,7 +7,7 @@ namespace YaCloudKit.MQ.Transport.Attributes
     /// </summary>
     public class AttributeHelper
     {
-        public static string GetPropertyName<T>(Type value, bool defaultValue = false) where T: IMessagePropertyAttribute
+        public static string GetPropertyName<T>(Type value, bool defaultValue = false) where T : IMessagePropertyAttribute
         {
             var attributes = value.GetCustomAttributes(true);
             foreach (var attr in attributes)

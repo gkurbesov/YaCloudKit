@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using YaCloudKit.Core;
 
 namespace YaCloudKit.MQ.Utils
 {
@@ -18,7 +17,6 @@ namespace YaCloudKit.MQ.Utils
         public const string CanonicalQuery = "";
         public const string HttpMethod = "POST";
 
-        protected static HashAlgorithm payloadHash = HashAlgorithm.Create("SHA-256");
         protected static readonly Regex CompressWhitespaceRegex = new Regex("\\s+");
 
         private readonly YandexMqConfig config;
@@ -32,6 +30,8 @@ namespace YaCloudKit.MQ.Utils
 
         public string Create(IRequestContext context)
         {
+            HashAlgorithm payloadHash = HashAlgorithm.Create("SHA-256");
+
             var requestDateTime = context.RequestDateTime;
             var dateTimeStamp = requestDateTime.ToString(ISO8601BasicFormat, CultureInfo.InvariantCulture);
             var dateStamp = requestDateTime.ToString(DateStringFormat, CultureInfo.InvariantCulture);

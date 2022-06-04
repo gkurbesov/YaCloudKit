@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Text;
 
 namespace YaCloudKit.MQ.Transport
 {
@@ -39,7 +37,7 @@ namespace YaCloudKit.MQ.Transport
 
         public string GetMessageTag(Type type)
         {
-            foreach(var item in types.ToArray())
+            foreach (var item in types.ToArray())
             {
                 if (item.Value.Equals(type))
                     return item.Key;

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using YaCloudKit.MQ.Transport.Attributes;
 
 namespace YaCloudKit.MQ.Transport
@@ -16,7 +14,7 @@ namespace YaCloudKit.MQ.Transport
         public static IMessageTypeProvider Register(this IMessageTypeProvider provider, Type type)
         {
             var tag = AttributeHelper.GetPropertyName<MessageQueueNameAttribute>(type, true);
-            return provider.Register(tag, type);            
+            return provider.Register(tag, type);
         }
         /// <summary>
         /// Регистрирует тип сообщения

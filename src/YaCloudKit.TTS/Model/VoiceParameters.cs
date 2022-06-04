@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace YaCloudKit.TTS.Model
 {
@@ -103,7 +101,7 @@ namespace YaCloudKit.TTS.Model
             Language = language;
         }
 
-        internal bool IsSetParam() => 
+        internal bool IsSetParam() =>
             !string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Language);
     }
 }

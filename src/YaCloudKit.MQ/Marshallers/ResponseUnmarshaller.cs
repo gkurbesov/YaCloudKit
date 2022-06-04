@@ -4,7 +4,6 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Xml;
-using YaCloudKit.Core;
 using YaCloudKit.MQ.Model;
 using YaCloudKit.MQ.Model.Responses;
 
