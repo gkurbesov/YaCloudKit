@@ -2,8 +2,6 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using YaCloudKit.Core;
-using YaCloudKit.Core.Http;
 using YaCloudKit.MQ.Model.Responses;
 using YaCloudKit.MQ.Utils;
 
@@ -12,17 +10,13 @@ namespace YaCloudKit.MQ
     public abstract class YandexMqService : IDisposable
     {
         public YandexMqConfig Config { get; set; }
-        private IHttpServiceCaller ServiceCaller { get; set; }
+        private Lazy<HttpClient> httpClientLazy { get; set; }
+        private HttpClient Client => httpClientLazy.Value;
 
-        protected YandexMqService(YandexMqConfig config, IHttpServiceCaller httpServiceCaller)
+        protected YandexMqService(YandexMqConfig config, Func<HttpClient> httpClientFactory)
         {
-            if (config == null)
-                throw new ArgumentNullException(nameof(config));
-            if (httpServiceCaller == null)
-                throw new ArgumentNullException(nameof(httpServiceCaller));
-
-            Config = config;
-            ServiceCaller = httpServiceCaller;
+            Config = config ?? throw new ArgumentNullException(nameof(config));
+            httpClientLazy = new Lazy<HttpClient>(httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory)));
         }
 
         /// <summary>
@@ -56,31 +50,16 @@ namespace YaCloudKit.MQ
             request.Content = content;
 
 
-            return await ServiceCaller.CallService<TResponse>(GetHttpOptions(), async (client) =>
-            {
-                var httpResponse = await client.SendAsync(request, cancellationToken);
+            var httpResponse = await Client.SendAsync(request, cancellationToken);
 
-                var stream = await httpResponse.Content.ReadAsStreamAsync();
-                IResponseContext responseContext = new ResponseContext(httpResponse.StatusCode, httpResponse.Headers, stream);
+            using var stream = await httpResponse.Content.ReadAsStreamAsync();
+            IResponseContext responseContext = new ResponseContext(httpResponse.StatusCode, httpResponse.Headers, stream);
 
-                if (httpResponse.IsSuccessStatusCode)
-                    return options.ResponseUnmarshaller.Unmarshall<TResponse>(responseContext);
-                else
-                    throw options.ResponseUnmarshaller.UnmarshallException(responseContext);
-            });
+            if (httpResponse.IsSuccessStatusCode)
+                return options.ResponseUnmarshaller.Unmarshall<TResponse>(responseContext);
+            else
+                throw options.ResponseUnmarshaller.UnmarshallException(responseContext);
         }
-
-        /// <summary>
-        /// Получить новый экземпляр http-клиента
-        /// </summary>
-        /// <returns></returns>
-        protected HttpClientOptions GetHttpOptions() => new HttpClientOptions()
-        {
-            HttpClientTimeout = Config.HttpClientTimeout,
-#if !NETCOREAPP
-            EndPoint = Config.EndPoint
-#endif
-        };
 
         /// <summary>
         /// Проверяет не проведена ли очистка ресурсов
@@ -98,24 +77,16 @@ namespace YaCloudKit.MQ
         {
             if (!disposedValue)
             {
-                if (disposing)
+                if (disposing && httpClientLazy.IsValueCreated)
                 {
-                    ServiceCaller?.Dispose();
+                    Client?.Dispose();
                 }
+                httpClientLazy = null;
                 Config = null;
-                ServiceCaller = null;
                 disposedValue = true;
             }
         }
 
-        // TODO: переопределить метод завершения, только если Dispose(bool disposing) выше включает код для освобождения неуправляемых ресурсов.
-        // ~YandexMqService()
-        // {
-        //   // Не изменяйте этот код. Разместите код очистки выше, в методе Dispose(bool disposing).
-        //   Dispose(false);
-        // }
-
-        // Этот код добавлен для правильной реализации шаблона высвобождаемого класса.
         public void Dispose()
         {
             Dispose(true);
