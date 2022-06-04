@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace YaCloudKit.Core
+namespace YaCloudKit.MQ
 {
     /// <summary>
     /// Контекста запроса к Yandex Message Queue
@@ -12,10 +12,12 @@ namespace YaCloudKit.Core
         /// Параметры для выполнения POST запроса
         /// </summary>
         IDictionary<string, string> RequestParameters { get; set; }
+
         /// <summary>
         /// Заголовки для HTTP запроса
         /// </summary>
         IDictionary<string, string> Headers { get; set; }
+
         /// <summary>
         /// Utc время ремявыполнения запроса
         /// </summary>
@@ -28,6 +30,7 @@ namespace YaCloudKit.Core
         /// <param name="value">значение параметра</param>
         /// <returns></returns>
         IRequestContext AddParametr(string key, string value);
+
         /// <summary>
         /// Добавить заголовок в словарь
         /// </summary>
@@ -35,6 +38,7 @@ namespace YaCloudKit.Core
         /// <param name="value">значение заголовка</param>
         /// <returns></returns>
         IRequestContext AddHeader(string key, string value);
+
         /// <summary>
         /// Создает содержимое контента для http запроса
         /// </summary>

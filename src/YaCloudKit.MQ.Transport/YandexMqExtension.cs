@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using YaCloudKit.MQ.Model;
@@ -32,8 +30,8 @@ namespace YaCloudKit.MQ.Transport
 
             var messageType = YandexMqTrasport.TypeProvider.GetMessageType(attr.StringValue);
             if (messageType == null)
-                return false; 
-            
+                return false;
+
             var converter = YandexMqTrasport.ConverterProvider.GetConverter(attr2.StringValue);
 
             if (converter == null)
@@ -138,7 +136,7 @@ namespace YaCloudKit.MQ.Transport
         public static Task<SendMessageResponse> SendMessageAsync<T>(this IYandexMq mq, string queueUrl, T message, Dictionary<string, MessageAttributeValue> attributes, CancellationToken cancellationToken = default)
         {
             var request = new SendMessageRequest()
-                .SetQueueUrl(queueUrl)                
+                .SetQueueUrl(queueUrl)
                 .AddMessage(message);
             request.MessageAttribute = attributes;
             return mq.SendMessageAsync(request, cancellationToken);

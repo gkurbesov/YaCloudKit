@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YaCloudKit.MQ.Model.Constants
+﻿namespace YaCloudKit.MQ.Model.Constants
 {
     /// <summary>
     /// Класс содержащий константы имен атрибутов для сообщений

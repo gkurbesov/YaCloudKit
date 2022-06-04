@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using YaCloudKit.TTS.Model;
+﻿using YaCloudKit.TTS.Model;
 
 namespace YaCloudKit.TTS
 {

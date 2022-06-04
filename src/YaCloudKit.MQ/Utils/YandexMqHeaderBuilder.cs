@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Net.Http.Headers;
-using YaCloudKit.Core;
 
 namespace YaCloudKit.MQ.Utils
 {
@@ -52,12 +51,12 @@ namespace YaCloudKit.MQ.Utils
         /// <summary>
         /// Добавляет недостающие заголовки из контекста в класс HttpHeaders запроса или http-контента
         /// </summary>
-        /// <param name="headers"></param>
+        /// <param name="outheutHeaders"></param>
         /// <param name="values"></param>
-        public static void AddHttpHeaders(IRequestContext context, HttpHeaders headers)
+        public static void AddHttpHeaders(IRequestContext context, HttpHeaders outheutHeaders)
         {
             foreach (var headItem in context.Headers)
-                headers.TryAddWithoutValidation(headItem.Key, headItem.Value);
+                outheutHeaders.TryAddWithoutValidation(headItem.Key, headItem.Value);
         }
 
     }

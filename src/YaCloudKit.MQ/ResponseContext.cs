@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Http.Headers;
 
-namespace YaCloudKit.Core
+namespace YaCloudKit.MQ
 {
     public class ResponseContext : IResponseContext
     {

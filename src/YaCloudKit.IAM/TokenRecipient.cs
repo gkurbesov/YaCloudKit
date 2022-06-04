@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using YaCloudKit.Core.Http;
-using YaCloudKit.Core;
-using System.Net.Http;
 using YaCloudKit.IAM.Utils;
-using System.IO;
 
 namespace YaCloudKit.IAM
 {
@@ -66,7 +64,7 @@ namespace YaCloudKit.IAM
                     {
                         return JsonBodyHelper.DeserializeResult(resultContent);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         throw new YandexIamServiceException(resultContent, ex, httpResponse.StatusCode);
                     }

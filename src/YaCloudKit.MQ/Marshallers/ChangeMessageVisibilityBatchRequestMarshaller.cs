@@ -1,5 +1,4 @@
-﻿using YaCloudKit.Core;
-using YaCloudKit.MQ.Model.Requests;
+﻿using YaCloudKit.MQ.Model.Requests;
 
 namespace YaCloudKit.MQ.Marshallers
 {
