@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YaCloudKit.IAM
+﻿namespace YaCloudKit.IAM
 {
     /// <summary>
     /// Результат запроса на создание нового IAM-токена

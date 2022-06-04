@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace YaCloudKit.Core.Utils
+namespace YaCloudKit.MQ.Utils
 {
     public static class UrlEncodedContentBuilder
     {

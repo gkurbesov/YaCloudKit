@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using YaCloudKit.MQ.Transport.Converters;
 
 namespace YaCloudKit.MQ.Transport
@@ -42,7 +40,7 @@ namespace YaCloudKit.MQ.Transport
             return this;
         }
 
-        public IMessageConverter GetDefault() => 
+        public IMessageConverter GetDefault() =>
             GetConverter(JsonMessageConverter.TAG) ?? GetConverter(XmlMessageConverter.TAG);
     }
 }

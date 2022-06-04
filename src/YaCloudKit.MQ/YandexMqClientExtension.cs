@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using YaCloudKit.MQ.Model;
@@ -48,7 +46,7 @@ namespace YaCloudKit.MQ
             };
             return mq.SendMessageAsync(request, cancellationToken);
         }
-        
+
         /// <summary>
         /// Метод для удаления сообщения из очереди. Чтобы указать, какое сообщение следует удалить, используйте параметр ReceiptHandle
         /// </summary>

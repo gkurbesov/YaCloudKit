@@ -1,6 +1,4 @@
-﻿using YaCloudKit.Core;
-
-namespace YaCloudKit.MQ.Marshallers
+﻿namespace YaCloudKit.MQ.Marshallers
 {
     /// <summary>
     /// Интерфейс для маршаллеров, которые преобразуют объекты запросов в данные для отправки по HTTP

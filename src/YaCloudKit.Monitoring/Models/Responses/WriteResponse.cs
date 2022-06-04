@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YaCloudKit.Monitoring.Models.Responses
+﻿namespace YaCloudKit.Monitoring.Models.Responses
 {
     /// <summary>
     /// Результат записи метрик

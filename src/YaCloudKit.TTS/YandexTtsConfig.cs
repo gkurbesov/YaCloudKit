@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace YaCloudKit.TTS
 {
@@ -47,7 +45,7 @@ namespace YaCloudKit.TTS
         /// Создаст экземпляр настроек с указанными параметрами
         /// </summary>
         /// <param name="apiKey">API-ключ сервиснрнр аккаунта</param>
-        public YandexTtsConfig(string apiKey) 
+        public YandexTtsConfig(string apiKey)
             : this(apiKey, DEFAULT_ENDPOINT) { }
 
         /// <summary>

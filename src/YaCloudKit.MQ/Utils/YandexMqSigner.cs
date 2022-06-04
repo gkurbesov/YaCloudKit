@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using YaCloudKit.Core;
 
 namespace YaCloudKit.MQ.Utils
 {
