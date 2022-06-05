@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace YaCloudKit.MQ.Utils
@@ -33,6 +34,8 @@ namespace YaCloudKit.MQ.Utils
         {
             if (string.IsNullOrEmpty(data))
                 return string.Empty;
+            // Escape spaces as '+'.
+            // https://source.dot.net/#System.Net.Http/System/Net/Http/FormUrlEncodedContent.cs,53
             return Uri.EscapeDataString(data).Replace("%20", "+");
         }
     }
