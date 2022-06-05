@@ -21,6 +21,7 @@ namespace YaCloudKit.MQ.Tests
             Assert.Equal(expectedValue, actualValue);
         }
 
+        [Fact]
         public void GetContentByteArray_Test()
         {
             var values = new Dictionary<string, string>()
