@@ -26,7 +26,7 @@ namespace YaCloudKit.MQ.Marshallers
                     context.AddParametr($"SendMessageBatchRequestEntry.{number}.MessageBody", item.MessageBody);
 
                     if (item.IsSetMessageAttribute())
-                        RequestAttributesBuilder.MessageAttributesBatchEntry(number, context, item.MessageAttribute);
+                        RequestAttributesBuilder.MessageAttributesBatchEntry(context, item.MessageAttribute, number);
 
                     if (item.DelaySeconds.HasValue)
                         context.AddParametr($"SendMessageBatchRequestEntry.{number}.DelaySeconds", item.DelaySeconds.ToString());

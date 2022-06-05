@@ -40,7 +40,7 @@ namespace YaCloudKit.MQ.Utils
             }
         }
 
-        public static void MessageAttributesBatchEntry(int entryNumber, IRequestContext context, Dictionary<string, MessageAttributeValue> values)
+        public static void MessageAttributesBatchEntry(IRequestContext context, Dictionary<string, MessageAttributeValue> values, int entryNumber)
         {
             var number = 1;
             foreach (var item in values)

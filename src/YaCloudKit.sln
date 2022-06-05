@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.Monitoring", "Ya
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageQueue", "MessageQueue", "{9C193C93-C9A9-4921-8BE1-3F52A2395232}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ.Tests", "MessageQueue\YaCloudKit.MQ.Tests\YaCloudKit.MQ.Tests.csproj", "{3F849A41-F8DA-430A-BE18-52A8C12FE012}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{80C1CCEC-E54E-485F-8B32-99AEC8625AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80C1CCEC-E54E-485F-8B32-99AEC8625AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80C1CCEC-E54E-485F-8B32-99AEC8625AF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F849A41-F8DA-430A-BE18-52A8C12FE012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F849A41-F8DA-430A-BE18-52A8C12FE012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F849A41-F8DA-430A-BE18-52A8C12FE012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F849A41-F8DA-430A-BE18-52A8C12FE012}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EC003CF3-2892-46FA-BF19-2629E12CCBA9} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 		{B8916BF5-47FC-4E1B-815B-093DF6A1E2B4} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
+		{3F849A41-F8DA-430A-BE18-52A8C12FE012} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB60A6CA-F76D-40F9-BFDD-ACA1F097B83D}
