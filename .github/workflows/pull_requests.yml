@@ -1,0 +1,18 @@
+name: Pull Request
+
+on: pull_request
+
+jobs:
+  run_unit_tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    name: Run unit tests
+    env:
+      DOCKER_BUILDKIT: 1
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run Message queue unit tests
+        run: dotnet test ./src/MessageQueue/YaCloudKit.MQ.Tests/YaCloudKit.MQ.Tests.csproj --configuration Release
