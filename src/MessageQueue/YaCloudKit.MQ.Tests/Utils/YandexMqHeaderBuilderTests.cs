@@ -7,58 +7,57 @@ using System.Threading.Tasks;
 using Xunit;
 using YaCloudKit.MQ.Utils;
 
-namespace YaCloudKit.MQ.Tests
+namespace YaCloudKit.MQ.Tests;
+
+public class YandexMqHeaderBuilderTests
 {
-    public class YandexMqHeaderBuilderTests
+    [Fact]
+    public void AddMainHeaders_Test()
     {
-        [Fact]
-        public void AddMainHeaders_Test()
-        {
-            var context = new RequestContext();
-            context.AddParametr("key", "value");
-            var endpoint = new Uri("http://localhost:8080");
+        var context = new RequestContext();
+        context.AddParametr("key", "value");
+        var endpoint = new Uri("http://localhost:8080");
 
-            var contentLength = context.GetContent().Length;
+        var contentLength = context.GetContent().Length;
 
-            YandexMqHeaderBuilder.AddMainHeaders(context, endpoint);
+        YandexMqHeaderBuilder.AddMainHeaders(context, endpoint);
 
-            Assert.Equal(contentLength, int.Parse(context.Headers["Content-Length"]));
-            Assert.Equal("application/x-www-form-urlencoded", context.Headers["Content-Type"]);
-            Assert.Equal("localhost:8080", context.Headers["Host"]);
-        }
+        Assert.Equal(contentLength, int.Parse(context.Headers["Content-Length"]));
+        Assert.Equal("application/x-www-form-urlencoded", context.Headers["Content-Type"]);
+        Assert.Equal("localhost:8080", context.Headers["Host"]);
+    }
 
-        [Fact]
-        public void AddAWSDateHeaders_Test()
-        {
-            var dt = new DateTime(2022,1,1,0,0,0); 
-            var context = new RequestContext() { RequestDateTime = dt };
+    [Fact]
+    public void AddAWSDateHeaders_Test()
+    {
+        var dt = new DateTime(2022, 1, 1, 0, 0, 0);
+        var context = new RequestContext() {RequestDateTime = dt};
 
-            YandexMqHeaderBuilder.AddAWSDateHeaders(context);
+        YandexMqHeaderBuilder.AddAWSDateHeaders(context);
 
-            Assert.Equal("20220101T000000Z", context.Headers["X-Amz-Date"]);
-        }
+        Assert.Equal("20220101T000000Z", context.Headers["X-Amz-Date"]);
+    }
 
-        [Fact]
-        public void AddHeaderAuthorization_Test()
-        {
-            var value = "TestValue";
-            var context = new RequestContext();
+    [Fact]
+    public void AddHeaderAuthorization_Test()
+    {
+        var value = "TestValue";
+        var context = new RequestContext();
 
-            YandexMqHeaderBuilder.AddHeaderAuthorization(context, value);
+        YandexMqHeaderBuilder.AddHeaderAuthorization(context, value);
 
-            Assert.Equal(value, context.Headers["Authorization"]);
-        }
+        Assert.Equal(value, context.Headers["Authorization"]);
+    }
 
-        [Fact]
-        public void AddHttpHeaders_Test()
-        {
-            var headers = new HttpRequestMessage().Headers;
-            var context = new RequestContext();
-            context.AddHeader("key", "value");
+    [Fact]
+    public void AddHttpHeaders_Test()
+    {
+        var headers = new HttpRequestMessage().Headers;
+        var context = new RequestContext();
+        context.AddHeader("key", "value");
 
-            YandexMqHeaderBuilder.AddHttpHeaders(context, headers);
+        YandexMqHeaderBuilder.AddHttpHeaders(context, headers);
 
-            Assert.Equal("value", context.Headers["key"]);
-        }
+        Assert.Equal("value", context.Headers["key"]);
     }
 }

@@ -9,14 +9,14 @@ namespace YaCloudKit.MQ
 {
     public abstract class YandexMqService : IDisposable
     {
-        public YandexMqConfig Config { get; set; }
-        private Lazy<HttpClient> httpClientLazy { get; set; }
-        private HttpClient Client => httpClientLazy.Value;
+        private YandexMqConfig _config;
+        private Lazy<HttpClient> _httpClientLazy;
+        private HttpClient Client => _httpClientLazy.Value;
 
         protected YandexMqService(YandexMqConfig config, Func<HttpClient> httpClientFactory)
         {
-            Config = config ?? throw new ArgumentNullException(nameof(config));
-            httpClientLazy = new Lazy<HttpClient>(httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory)));
+            _config = config ?? throw new ArgumentNullException(nameof(config));
+            _httpClientLazy = new Lazy<HttpClient>(httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory)));
         }
 
         /// <summary>
@@ -26,7 +26,8 @@ namespace YaCloudKit.MQ
         /// <param name="options">опчии для выполнения запроса</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        protected async Task<TResponse> InvokeAsync<TResponse>(InvokeOptions options, CancellationToken cancellationToken) where TResponse : YandexMessageQueueResponse, new()
+        protected async Task<TResponse> InvokeAsync<TResponse>(InvokeOptions options,
+            CancellationToken cancellationToken) where TResponse : YandexMessageQueueResponse, new()
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
@@ -35,17 +36,17 @@ namespace YaCloudKit.MQ
             cancellationToken.ThrowIfCancellationRequested();
 
             IRequestContext requestContext = options.RequestMarshaller.Marshall(options.OriginalRequest);
-            YandexMqHeaderBuilder.AddMainHeaders(requestContext, Config.EndPoint);
+            YandexMqHeaderBuilder.AddMainHeaders(requestContext, _config.EndPoint);
 
             var content = new ByteArrayContent(requestContext.GetContent());
             YandexMqHeaderBuilder.AddHttpHeaders(requestContext, content.Headers);
 
             YandexMqHeaderBuilder.AddAWSDateHeaders(requestContext);
 
-            var signature = new YandexMqSigner(Config).Create(requestContext);
+            var signature = new YandexMqSigner(_config).Create(requestContext);
             YandexMqHeaderBuilder.AddHeaderAuthorization(requestContext, signature);
 
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Config.EndPoint);
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, _config.EndPoint);
             YandexMqHeaderBuilder.AddHttpHeaders(requestContext, request.Headers);
             request.Content = content;
 
@@ -53,7 +54,8 @@ namespace YaCloudKit.MQ
             var httpResponse = await Client.SendAsync(request, cancellationToken);
 
             using var stream = await httpResponse.Content.ReadAsStreamAsync();
-            IResponseContext responseContext = new ResponseContext(httpResponse.StatusCode, httpResponse.Headers, stream);
+            IResponseContext responseContext =
+                new ResponseContext(httpResponse.StatusCode, httpResponse.Headers, stream);
 
             if (httpResponse.IsSuccessStatusCode)
                 return options.ResponseUnmarshaller.Unmarshall<TResponse>(responseContext);
@@ -71,18 +73,20 @@ namespace YaCloudKit.MQ
         }
 
         #region IDisposable Support
+
         private bool disposedValue = false; // Для определения избыточных вызовов
 
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
-                if (disposing && httpClientLazy.IsValueCreated)
+                if (disposing && _httpClientLazy.IsValueCreated)
                 {
                     Client?.Dispose();
                 }
-                httpClientLazy = null;
-                Config = null;
+
+                _httpClientLazy = null;
+                _config = null;
                 disposedValue = true;
             }
         }
@@ -92,6 +96,7 @@ namespace YaCloudKit.MQ
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         #endregion
     }
 }

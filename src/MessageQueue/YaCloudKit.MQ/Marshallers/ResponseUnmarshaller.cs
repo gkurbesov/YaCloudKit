@@ -76,8 +76,9 @@ namespace YaCloudKit.MQ.Marshallers
             foreach (XmlNode item in batchList)
             {
                 var senderFaultText = item.SelectSingleNode("SenderFault")?.InnerText;
-                var senderFault = !string.IsNullOrWhiteSpace(senderFaultText) ?
-                    (bool)Convert.ChangeType(senderFaultText, typeof(bool), CultureInfo.InvariantCulture) : false;
+                var senderFault = !string.IsNullOrWhiteSpace(senderFaultText)
+                    ? (bool) Convert.ChangeType(senderFaultText, typeof(bool), CultureInfo.InvariantCulture)
+                    : false;
 
                 BatchResultErrorEntry errorEntry = new BatchResultErrorEntry()
                 {
@@ -95,27 +96,30 @@ namespace YaCloudKit.MQ.Marshallers
         /// </summary>
         /// <param name="batchList">Коллекция содержащия XML объекты с результатами</param>
         /// <param name="values">Лист, в который будут помещаться результаты</param>
-        public static void DeleteMessageBatchResultEntryUnmarshaller(XmlNodeList batchList, List<DeleteMessageBatchResultEntry> values)
+        public static void DeleteMessageBatchResultEntryUnmarshaller(XmlNodeList batchList,
+            List<DeleteMessageBatchResultEntry> values)
         {
             foreach (XmlNode item in batchList)
             {
                 var id = item.SelectSingleNode("Id")?.InnerText;
                 if (!string.IsNullOrWhiteSpace(id))
-                    values.Add(new DeleteMessageBatchResultEntry() { Id = id });
+                    values.Add(new DeleteMessageBatchResultEntry() {Id = id});
             }
         }
+
         /// <summary>
         /// Демаршалинг результата изменения видимости пачки сообщений
         /// </summary>
         /// <param name="batchList">Коллекция содержащия XML объекты с результатами</param>
         /// <param name="values">Лист, в который будут помещаться результаты</param>
-        public static void ChangeMessageVisibilityBatchResultEntryUnmarshaller(XmlNodeList batchList, List<ChangeMessageVisibilityBatchResultEntry> values)
+        public static void ChangeMessageVisibilityBatchResultEntryUnmarshaller(XmlNodeList batchList,
+            List<ChangeMessageVisibilityBatchResultEntry> values)
         {
             foreach (XmlNode item in batchList)
             {
                 var id = item.SelectSingleNode("Id")?.InnerText;
                 if (!string.IsNullOrWhiteSpace(id))
-                    values.Add(new ChangeMessageVisibilityBatchResultEntry() { Id = id });
+                    values.Add(new ChangeMessageVisibilityBatchResultEntry() {Id = id});
             }
         }
 
@@ -124,7 +128,8 @@ namespace YaCloudKit.MQ.Marshallers
         /// </summary>
         /// <param name="attributeList">Коллекция содержащия XML объекты с атрибутами</param>
         /// <param name="values">Словарь, в который будут помещаться объекты атрибутов</param>
-        public static void MessageAttributeUnmarshall(XmlNodeList attributeList, Dictionary<string, MessageAttributeValue> values)
+        public static void MessageAttributeUnmarshall(XmlNodeList attributeList,
+            Dictionary<string, MessageAttributeValue> values)
         {
             foreach (XmlNode attrNode in attributeList)
             {
@@ -137,7 +142,7 @@ namespace YaCloudKit.MQ.Marshallers
                 {
                     var messgaeAttr = new MessageAttributeValue()
                     {
-                        DataType = (AttributeValueType)Enum.Parse(typeof(AttributeValueType), dataType, true)
+                        DataType = (AttributeValueType) Enum.Parse(typeof(AttributeValueType), dataType, true)
                     };
                     switch (messgaeAttr.DataType)
                     {
@@ -147,6 +152,7 @@ namespace YaCloudKit.MQ.Marshallers
                                 messgaeAttr.BinaryValue = Convert.FromBase64String(binaryValue);
                                 values.Add(attrName, messgaeAttr);
                             }
+
                             break;
                         default:
                             if (!string.IsNullOrWhiteSpace(stringValue))
@@ -154,6 +160,7 @@ namespace YaCloudKit.MQ.Marshallers
                                 messgaeAttr.StringValue = stringValue;
                                 values.Add(attrName, messgaeAttr);
                             }
+
                             break;
                     }
                 }
@@ -198,7 +205,8 @@ namespace YaCloudKit.MQ.Marshallers
         /// <param name="innerException"></param>
         /// <param name="httpStatusCode"></param>
         /// <returns></returns>
-        public static YandexMqServiceException ErrorUnmarshall(string message, Exception innerException, HttpStatusCode httpStatusCode)
+        public static YandexMqServiceException ErrorUnmarshall(string message, Exception innerException,
+            HttpStatusCode httpStatusCode)
         {
             YandexMqServiceException exception = new YandexMqServiceException(message, innerException)
             {

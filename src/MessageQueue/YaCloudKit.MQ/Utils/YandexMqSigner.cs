@@ -19,17 +19,18 @@ namespace YaCloudKit.MQ.Utils
 
         protected static readonly Regex CompressWhitespaceRegex = new Regex("\\s+");
 
-        private readonly YandexMqConfig config;
+        private readonly YandexMqConfig _config;
 
-        public YandexMqSigner(YandexMqConfig configuration)
+        public YandexMqSigner(YandexMqConfig config)
         {
-            if (configuration == null)
-                throw new ArgumentNullException(nameof(configuration));
-            config = configuration;
-        } 
+            _config = config ?? throw new ArgumentNullException(nameof(config));
+        }
 
         public string Create(IRequestContext context)
         {
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));
+            
             HashAlgorithm payloadHash = HashAlgorithm.Create("SHA-256");
 
             var requestDateTime = context.RequestDateTime;
@@ -43,23 +44,24 @@ namespace YaCloudKit.MQ.Utils
             var canonicalRequest = CanonicalizeRequest(HttpMethod, canonicalHeaders, signedHeaders, bodyHash);
 
 
-            var scope = $"{dateStamp}/{config.Region}/{config.ServiceName}/{TERMINATOR}";
+            var scope = $"{dateStamp}/{_config.Region}/{_config.ServiceName}/{TERMINATOR}";
             var canonicalRequestHash = ToHexString(payloadHash.ComputeHash(Encoding.UTF8.GetBytes(canonicalRequest)));
             var stringToSign = $"{ALGORITHM}\n{dateTimeStamp}\n{scope}\n{canonicalRequestHash}";
-            var signingKey = GetSignatureKey(config.SecretAccessKey, dateStamp, config.Region, config.ServiceName);
+            var signingKey = GetSignatureKey(_config.SecretAccessKey, dateStamp, _config.Region, _config.ServiceName);
             var signature = ToHexString(HmacSHA256(stringToSign, signingKey));
 
 
             var authString = new StringBuilder();
             authString.Append(ALGORITHM);
-            authString.AppendFormat(" Credential={0}/{1}, ", config.AccessKeyID, scope);
+            authString.AppendFormat(" Credential={0}/{1}, ", _config.AccessKeyID, scope);
             authString.AppendFormat("SignedHeaders={0}, ", signedHeaders);
             authString.AppendFormat("Signature={0}", signature);
 
             return authString.ToString();
         }
 
-        protected string CanonicalizeRequest(string httpMethod, string canonicalizedHeaders, string signedHeaders, string bodyHash)
+        private string CanonicalizeRequest(string httpMethod, string canonicalizedHeaders, string signedHeaders,
+            string bodyHash)
         {
             var canonicalRequest = new StringBuilder();
 
@@ -74,24 +76,28 @@ namespace YaCloudKit.MQ.Utils
 
             return canonicalRequest.ToString();
         }
-        
-        protected virtual string CanonicalizeHeaders(IDictionary<string, string> headers)
+
+        private string CanonicalizeHeaders(IDictionary<string, string> headers)
         {
             if (headers == null || headers.Count == 0)
                 return string.Empty;
+            
             var sortedHeaderMap = new SortedDictionary<string, string>();
+            
             foreach (var header in headers.Keys)
                 sortedHeaderMap.Add(header.ToLower(), headers[header]);
+            
             var sb = new StringBuilder();
             foreach (var header in sortedHeaderMap.Keys)
             {
                 var headerValue = CompressWhitespaceRegex.Replace(sortedHeaderMap[header], " ");
                 sb.AppendFormat("{0}:{1}\n", header, headerValue.Trim());
             }
+
             return sb.ToString();
         }
-        
-        protected string CanonicalizeHeaderNames(IDictionary<string, string> headers)
+
+        private string CanonicalizeHeaderNames(IDictionary<string, string> headers)
         {
             var headersToSign = new List<string>(headers.Keys);
             headersToSign.Sort(StringComparer.OrdinalIgnoreCase);
@@ -103,9 +109,10 @@ namespace YaCloudKit.MQ.Utils
                     sb.Append(";");
                 sb.Append(header.ToLower());
             }
+
             return sb.ToString();
         }
-        
+
         public static byte[] HmacSHA256(string data, byte[] key)
         {
             var algorithm = "HmacSHA256";
@@ -114,7 +121,7 @@ namespace YaCloudKit.MQ.Utils
 
             return kha.ComputeHash(Encoding.UTF8.GetBytes(data));
         }
-        
+
         public static byte[] GetSignatureKey(string key, string dateStamp, string regionName, string serviceName)
         {
             byte[] kSecret = Encoding.UTF8.GetBytes(("AWS4" + key).ToCharArray());
@@ -125,7 +132,7 @@ namespace YaCloudKit.MQ.Utils
 
             return kSigning;
         }
-        
+
         public static string ToHexString(byte[] data, bool lowercase = true)
         {
             var sb = new StringBuilder();
@@ -133,6 +140,7 @@ namespace YaCloudKit.MQ.Utils
             {
                 sb.Append(data[i].ToString(lowercase ? "x2" : "X2"));
             }
+
             return sb.ToString();
         }
     }
