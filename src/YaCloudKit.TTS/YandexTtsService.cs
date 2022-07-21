@@ -3,8 +3,6 @@ using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using YaCloudKit.Core;
-using YaCloudKit.Core.Http;
 using YaCloudKit.TTS.Utils;
 
 namespace YaCloudKit.TTS
@@ -12,17 +10,13 @@ namespace YaCloudKit.TTS
     public abstract class YandexTtsService : IDisposable
     {
         public YandexTtsConfig Config { get; set; }
-        private IHttpServiceCaller ServiceCaller { get; set; }
+        private Lazy<HttpClient> httpClientLazy { get; set; }
+        private HttpClient Client => httpClientLazy.Value;
 
-        protected YandexTtsService(YandexTtsConfig config, IHttpServiceCaller httpServiceCaller)
+        protected YandexTtsService(YandexTtsConfig config, Func<HttpClient> httpClientFactory)
         {
-            if (config == null)
-                throw new ArgumentNullException(nameof(config));
-            if (httpServiceCaller == null)
-                throw new ArgumentNullException(nameof(httpServiceCaller));
-
-            Config = config;
-            ServiceCaller = httpServiceCaller;
+            Config = config ?? throw new ArgumentNullException(nameof(config));
+            httpClientLazy = new Lazy<HttpClient>(httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory)));
         }
 
         /// <summary>
@@ -57,41 +51,24 @@ namespace YaCloudKit.TTS
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Config.EndPoint);
             YandexTtsHeaderBuilder.AddHttpHeaders(requestContext, request.Headers);
             request.Content = content;
-
-
-            return await ServiceCaller.CallService<YandexTtsResponse>(GetHttpOptions(), async (client) =>
+            
+            var httpResponse = await Client.SendAsync(request, cancellationToken);
+            
+            if (httpResponse.IsSuccessStatusCode)
             {
-                var httpResponse = await client.SendAsync(request, cancellationToken);
-
-                var stream = await httpResponse.Content.ReadAsStreamAsync();
-                if (httpResponse.IsSuccessStatusCode)
+                return new YandexTtsResponse()
                 {
-                    return new YandexTtsResponse()
-                    {
-                        RequestId = requestId,
-                        StatusCode = httpResponse.StatusCode,
-                        Content = stream
-                    };
-                }
-                else
-                {
-                    var message = new StreamReader(stream).ReadToEnd();
-                    throw new YandexTtsServiceException(message, requestId, httpResponse.StatusCode);
-                }
-            });
+                    RequestId = requestId,
+                    StatusCode = httpResponse.StatusCode,
+                    Content = await httpResponse.Content.ReadAsByteArrayAsync()
+                };
+            }
+            else
+            {
+	            var message = await httpResponse.Content.ReadAsStringAsync();
+                throw new YandexTtsServiceException(message, requestId, httpResponse.StatusCode);
+            }
         }
-
-        /// <summary>
-        /// Получить новый экземпляр http-клиента
-        /// </summary>
-        /// <returns></returns>
-        protected HttpClientOptions GetHttpOptions() => new HttpClientOptions()
-        {
-            HttpClientTimeout = Config.HttpClientTimeout,
-#if !NETCOREAPP
-            EndPoint = Config.EndPoint
-#endif
-        };
 
         /// <summary>
         /// Проверяет не проведена ли очистка ресурсов
@@ -103,30 +80,22 @@ namespace YaCloudKit.TTS
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // Для определения избыточных вызовов
+        private bool disposedValue = false;
 
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
-                if (disposing)
+                if (disposing && httpClientLazy.IsValueCreated)
                 {
-                    ServiceCaller?.Dispose();
+                    Client?.Dispose();
                 }
+                httpClientLazy = null;
                 Config = null;
-                ServiceCaller = null;
                 disposedValue = true;
             }
         }
 
-        // TODO: переопределить метод завершения, только если Dispose(bool disposing) выше включает код для освобождения неуправляемых ресурсов.
-        // ~YandexMqService()
-        // {
-        //   // Не изменяйте этот код. Разместите код очистки выше, в методе Dispose(bool disposing).
-        //   Dispose(false);
-        // }
-
-        // Этот код добавлен для правильной реализации шаблона высвобождаемого класса.
         public void Dispose()
         {
             Dispose(true);

@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+	  <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+	  <LangVersion>latest</LangVersion>
     <Description>Инструмент YaCloudKit для работы с сервисом Yandex SpeechKit для синтеза речи</Description>
     <Authors>Gennady Kurbesov</Authors>
     <Version>0.1.2</Version>
@@ -13,10 +14,6 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="YaCloudKit.Core" Version="0.1.2" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\Assets\logo-main.png">

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using YaCloudKit.Core.Http;
 using YaCloudKit.TTS.Model;
 
 namespace YaCloudKit.TTS

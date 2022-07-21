@@ -1,5 +1,4 @@
 ﻿using System;
-using YaCloudKit.Core;
 using YaCloudKit.TTS.Model;
 
 namespace YaCloudKit.TTS.Utils

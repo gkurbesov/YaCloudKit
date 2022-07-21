@@ -16,6 +16,6 @@ namespace YaCloudKit.TTS
         /// <summary>
         /// Результат синтеза речи
         /// </summary>
-        public Stream Content { get; set; }
+        public byte[] Content { get; set; }
     }
 }
