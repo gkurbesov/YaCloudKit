@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit/tree/master/YaCloudKit.MQ</RepositoryUrl>
     <PackageTags>Яндекс, Облако, Yandex, Cloud, Message, Queue, kit, aws</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageIcon>logo-main.png</PackageIcon>
     <VersionMajor>0</VersionMajor>
     <VersionMinor>3</VersionMinor>
