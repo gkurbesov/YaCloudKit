@@ -16,6 +16,10 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>logo-main.png</PackageIcon>
   </PropertyGroup>
+	
+  <ItemGroup>
+    <InternalsVisibleTo Include="$(AssemblyName).Tests" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\..\Assets\logo-main.png">
