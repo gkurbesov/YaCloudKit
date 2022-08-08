@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Headers;
 
-namespace YaCloudKit.TTS.Utils
+namespace YaCloudKit.TTS
 {
     public class YandexTtsHeaderBuilder
     {

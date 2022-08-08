@@ -1,7 +1,6 @@
 ﻿using System;
-using YaCloudKit.TTS.Model;
 
-namespace YaCloudKit.TTS.Utils
+namespace YaCloudKit.TTS
 {
     public class RequestParametersHelper
     {

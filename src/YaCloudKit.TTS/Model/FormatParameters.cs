@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YaCloudKit.TTS.Model
+namespace YaCloudKit.TTS
 {
     public class FormatParameters
     {

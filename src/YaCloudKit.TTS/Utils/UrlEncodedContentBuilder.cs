@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace YaCloudKit.TTS.Utils
+namespace YaCloudKit.TTS
 {
     public static class UrlEncodedContentBuilder
     {
