@@ -1,26 +1,12 @@
 ﻿using System;
 
-namespace YaCloudKit.TTS.Model
+namespace YaCloudKit.TTS
 {
     /// <summary>
     /// Параметры голоса для генерации
     /// </summary>
     public class VoiceParameters
     {
-        /// <summary>
-        /// Эмоция голоса - доброжелательный
-        /// </summary>
-        public const string EMOTION_GOOD = "good";
-        /// <summary>
-        /// Эмоция голоса - злой
-        /// </summary>
-        public const string EMOTION_EVIL = "evil";
-        /// <summary>
-        /// Эмоция голоса - нейтральный
-        /// </summary>
-        public const string EMOTION_NEUTRAL = "neutral";
-
-
         /// <summary>
         /// Женский русский голос Oksana
         /// </summary>
