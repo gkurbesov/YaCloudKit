@@ -56,15 +56,15 @@ namespace YaCloudKit.TTS
         }
 
         public async Task<YandexTtsResponse> TextToSpeechAsync(string text, VoiceParameters voice,
-            FormatParameters format, CancellationToken cancellationToken = default) =>
+            AudioFormat format, CancellationToken cancellationToken = default) =>
             await InvokeAsync(text, false, voice, format, cancellationToken);
 
         public async Task<YandexTtsResponse> MarkupToSpeechAsync(string text, VoiceParameters voice,
-            FormatParameters format, CancellationToken cancellationToken = default) =>
+            AudioFormat format, CancellationToken cancellationToken = default) =>
             await InvokeAsync(text, true, voice, format, cancellationToken);
 
         public async Task<YandexTtsResponse> InvokeAsync(string text, bool ssml, VoiceParameters voice,
-            FormatParameters format, CancellationToken cancellationToken = default)
+            AudioFormat format, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(text))
                 throw new ArgumentNullException(nameof(text));

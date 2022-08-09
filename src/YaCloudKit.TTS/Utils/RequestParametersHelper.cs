@@ -16,8 +16,8 @@ namespace YaCloudKit.TTS
 
         public static void AddVoiceParam(IRequestContext context, VoiceParameters voice)
         {
-            if (voice == null || !voice.IsSetParam())
-                throw new ArgumentException(nameof(voice));
+            if (voice == null)
+                throw new ArgumentNullException(nameof(voice));
 
             context.AddParametr("lang", voice.Language);
             context.AddParametr("voice", voice.Name);
@@ -27,7 +27,7 @@ namespace YaCloudKit.TTS
                 context.AddParametr("speed", voice.Speed);
         }
 
-        public static void AddFormatParam(IRequestContext context, FormatParameters format)
+        public static void AddFormatParam(IRequestContext context, AudioFormat format)
         {
             if (format == null || string.IsNullOrWhiteSpace(format.Format))
                 throw new ArgumentNullException(nameof(format));

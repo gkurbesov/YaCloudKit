@@ -22,6 +22,6 @@ namespace YaCloudKit.TTS
         /// <summary>
         /// ПЕараметры выходных данных ауди-файла
         /// </summary>
-        public FormatParameters AudioFormat { get; set; }
+        public AudioFormat AudioFormat { get; set; }
     }
 }
