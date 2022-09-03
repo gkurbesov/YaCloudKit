@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\YaCloudKit.MQ\YaCloudKit.MQ.csproj" />
+        <ProjectReference Include="..\YaCloudKit.TTS\YaCloudKit.TTS.csproj" />
     </ItemGroup>
 
 </Project>

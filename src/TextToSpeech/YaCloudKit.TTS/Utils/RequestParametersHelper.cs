@@ -2,7 +2,7 @@
 
 namespace YaCloudKit.TTS
 {
-    public class RequestParametersHelper
+    public static class RequestParametersHelper
     {
         public static void AddTextParam(IRequestContext context, string text, bool ssml)
         {
@@ -10,7 +10,7 @@ namespace YaCloudKit.TTS
                 throw new ArgumentNullException(nameof(text));
             if (text.Length > 5000)
                 throw new ArgumentOutOfRangeException(nameof(text),
-                    "Максимальная длина текста не должна превышать 5000 символов");
+                    "The maximum text length must not exceed 5000 characters");
 
             context.AddParametr(ssml ? "ssml" : "text", text);
         }
@@ -20,8 +20,10 @@ namespace YaCloudKit.TTS
             if (voice == null)
                 throw new ArgumentNullException(nameof(voice));
 
-            context.AddParametr("lang", voice.Language);
             context.AddParametr("voice", voice.Name);
+
+            if (!string.IsNullOrWhiteSpace(voice.Language))
+                context.AddParametr("lang", voice.Language);
             if (!string.IsNullOrWhiteSpace(voice.Emotion))
                 context.AddParametr("emotion", voice.Emotion);
             if (!string.IsNullOrWhiteSpace(voice.Emotion))
@@ -31,7 +33,7 @@ namespace YaCloudKit.TTS
         public static void AddFormatParam(IRequestContext context, AudioFormat format)
         {
             if (format == null || string.IsNullOrWhiteSpace(format.Format))
-                throw new ArgumentNullException(nameof(format));
+                throw new ArgumentException(nameof(format));
 
             context.AddParametr("format", format.Format);
             if (format.SampleRateHertz.HasValue)

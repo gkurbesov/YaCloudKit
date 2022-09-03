@@ -126,9 +126,9 @@ public class RequestAttributesBuilderTests
 
         Assert.True(context.RequestParameters.TryGetValue("MessageAttribute.1.Value.BinaryValue",
             out var base64Value));
-        Assert.NotEmpty(base64Value);
+        Assert.NotNull(base64Value);
 
-        var bytesValue = Convert.FromBase64String(base64Value);
+        var bytesValue = Convert.FromBase64String(base64Value!);
 
         Assert.True(value.SequenceEqual(bytesValue));
     }
@@ -230,9 +230,9 @@ public class RequestAttributesBuilderTests
         Assert.True(context.RequestParameters.TryGetValue(
             $"SendMessageBatchRequestEntry.{entryNumber}.MessageAttribute.1.Value.BinaryValue",
             out var base64Value));
-        Assert.NotEmpty(base64Value);
+        Assert.NotNull(base64Value);
 
-        var bytesValue = Convert.FromBase64String(base64Value);
+        var bytesValue = Convert.FromBase64String(base64Value!);
 
         Assert.True(value.SequenceEqual(bytesValue));
     }
