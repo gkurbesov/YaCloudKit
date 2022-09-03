@@ -8,12 +8,12 @@ namespace YaCloudKit.TTS
     public class VoiceParameters
     {
         /// <summary>
-        /// Женский русский голос Alena (Премиум)
+        /// Женский русский голос Alena
         /// </summary>
         public static readonly VoiceParameters Alena = new(VoiceName.Alena);
 
         /// <summary>
-        /// Мужской русский голос Filipp (Премиум)
+        /// Мужской русский голос Filipp
         /// </summary>
         public static readonly VoiceParameters Filipp = new(VoiceName.Filipp);
 
@@ -41,24 +41,24 @@ namespace YaCloudKit.TTS
         /// <summary>
         /// Название голоса. Подробнее см. список голосов
         /// </summary>
-        public VoiceName Name { get; set; }
+        public VoiceName Name { get; init; }
 
         /// <summary>
         /// Основной язык, который поддерживает голос.
         /// На этом языке разговаривал диктор при создании этого голоса.
         /// </summary>
-        public VoiceLanguage Language { get; set; }
+        public VoiceLanguage Language { get; init; }
 
         /// <summary>
         /// Скорость (темп) синтезированной речи.
         /// Скорость речи задается дробным числом в диапазоне от 0.1 до 3.0
         /// </summary>
-        public string Speed { get; set; }
+        public string Speed { get; init; }
 
         /// <summary>
         /// Амплуа или эмоциональная окраска голоса. Поддерживается только при выборе русского языка.
         /// </summary>
-        public VoiceEmotion Emotion { get; set; }
+        public VoiceEmotion Emotion { get; init; }
 
         /// <summary>
         /// Инициалзация параметров голоса для генерации речи

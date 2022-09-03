@@ -14,7 +14,9 @@ namespace YaCloudKit.TTS
         /// <param name="format">параметры выходного формата</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<YandexTtsResponse> TextToSpeechAsync(string text, VoiceParameters voice, AudioFormat format, CancellationToken cancellationToken = default);
+        Task<YandexTtsResponse> TextToSpeechAsync(string text, VoiceParameters voice, AudioFormat format,
+            CancellationToken cancellationToken = default);
+
         /// <summary>
         /// Синтезировать речь из текста в формате SSML
         /// </summary>
@@ -23,6 +25,7 @@ namespace YaCloudKit.TTS
         /// <param name="format">параметры выходного формата</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<YandexTtsResponse> MarkupToSpeechAsync(string text, VoiceParameters voice, AudioFormat format, CancellationToken cancellationToken = default);
+        Task<YandexTtsResponse> MarkupToSpeechAsync(string text, VoiceParameters voice, AudioFormat format,
+            CancellationToken cancellationToken = default);
     }
 }
