@@ -9,7 +9,8 @@ namespace YaCloudKit.TTS
             if (string.IsNullOrWhiteSpace(text))
                 throw new ArgumentNullException(nameof(text));
             if (text.Length > 5000)
-                throw new ArgumentOutOfRangeException(nameof(text), "Максимальная длина текста не должна превышать 5000 символов");
+                throw new ArgumentOutOfRangeException(nameof(text),
+                    "Максимальная длина текста не должна превышать 5000 символов");
 
             context.AddParametr(ssml ? "ssml" : "text", text);
         }

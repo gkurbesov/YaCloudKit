@@ -9,7 +9,7 @@ namespace YaCloudKit.TTS
         public IDictionary<string, string> RequestParameters { get; set; } = new Dictionary<string, string>();
         public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
         public DateTime RequestDateTime { get; set; } = DateTime.UtcNow;
-        private byte[] content;
+        private byte[] _content;
 
         public RequestContext() { }
         public RequestContext(IDictionary<string, string> requestParameters)
@@ -60,9 +60,9 @@ namespace YaCloudKit.TTS
 
         public byte[] GetContent()
         {
-            if (content == null)
-                content = UrlEncodedContentBuilder.GetContentByteArray(RequestParameters);
-            return content;
+            if (_content == null)
+                _content = UrlEncodedContentBuilder.GetContentByteArray(RequestParameters);
+            return _content;
         }
     }
 }
