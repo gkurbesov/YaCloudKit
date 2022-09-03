@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.MQ.Tests", "Mess
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TextToSpeech", "TextToSpeech", "{092A9018-57BC-42D7-85FD-3D4EA12EFC9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.TTS.Tests", "TextToSpeech\YaCloudKit.TTS.Tests\YaCloudKit.TTS.Tests.csproj", "{80BFD0AD-E1CD-42E8-BFAA-6687844FA735}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{3F849A41-F8DA-430A-BE18-52A8C12FE012}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F849A41-F8DA-430A-BE18-52A8C12FE012}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F849A41-F8DA-430A-BE18-52A8C12FE012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80BFD0AD-E1CD-42E8-BFAA-6687844FA735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80BFD0AD-E1CD-42E8-BFAA-6687844FA735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80BFD0AD-E1CD-42E8-BFAA-6687844FA735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80BFD0AD-E1CD-42E8-BFAA-6687844FA735}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{E403257A-AAC5-4A94-AD73-6F4D06A70D75} = {092A9018-57BC-42D7-85FD-3D4EA12EFC9D}
 		{B8916BF5-47FC-4E1B-815B-093DF6A1E2B4} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 		{3F849A41-F8DA-430A-BE18-52A8C12FE012} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
+		{80BFD0AD-E1CD-42E8-BFAA-6687844FA735} = {092A9018-57BC-42D7-85FD-3D4EA12EFC9D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB60A6CA-F76D-40F9-BFDD-ACA1F097B83D}
