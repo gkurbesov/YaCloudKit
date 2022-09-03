@@ -41,24 +41,24 @@ namespace YaCloudKit.TTS
         /// <summary>
         /// Название голоса. Подробнее см. список голосов
         /// </summary>
-        public VoiceName Name { get; init; }
+        public VoiceName Name { get; }
 
         /// <summary>
         /// Основной язык, который поддерживает голос.
         /// На этом языке разговаривал диктор при создании этого голоса.
         /// </summary>
-        public VoiceLanguage Language { get; init; }
+        public VoiceLanguage Language { get; }
 
         /// <summary>
         /// Скорость (темп) синтезированной речи.
         /// Скорость речи задается дробным числом в диапазоне от 0.1 до 3.0
         /// </summary>
-        public string Speed { get; init; }
+        public string Speed { get; }
 
         /// <summary>
         /// Амплуа или эмоциональная окраска голоса. Поддерживается только при выборе русского языка.
         /// </summary>
-        public VoiceEmotion Emotion { get; init; }
+        public VoiceEmotion Emotion { get; }
 
         /// <summary>
         /// Инициалзация параметров голоса для генерации речи

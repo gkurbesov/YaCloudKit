@@ -8,11 +8,11 @@ namespace YaCloudKit.TTS
         /// <summary>
         /// UUID запроса, только если включены запросы с отладкой (см. Использование API -> Диагностика ошибок).
         /// </summary>
-        public string RequestId { get; set; }
+        public string RequestId { get; }
         /// <summary>
         /// Статус-код результата выполнения HTTP запроса
         /// </summary>
-        public HttpStatusCode StatusCode { get; set; }
+        public HttpStatusCode StatusCode { get; }
 
         public YandexTtsServiceException() { }
         public YandexTtsServiceException(string message)

@@ -10,13 +10,15 @@ namespace YaCloudKit.TTS
     public abstract class YandexTtsService : IDisposable
     {
         public YandexTtsConfig Config { get; set; }
-        private Lazy<HttpClient> httpClientLazy { get; set; }
-        private HttpClient Client => httpClientLazy.Value;
+
+        private Lazy<HttpClient> _httpClientLazy;
+        private HttpClient Client => _httpClientLazy.Value;
 
         protected YandexTtsService(YandexTtsConfig config, Func<HttpClient> httpClientFactory)
         {
             Config = config ?? throw new ArgumentNullException(nameof(config));
-            httpClientLazy = new Lazy<HttpClient>(httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory)));
+            _httpClientLazy =
+                new Lazy<HttpClient>(httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory)));
         }
 
         /// <summary>
@@ -51,9 +53,9 @@ namespace YaCloudKit.TTS
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Config.EndPoint);
             YandexTtsHeaderBuilder.AddHttpHeaders(requestContext, request.Headers);
             request.Content = content;
-            
+
             var httpResponse = await Client.SendAsync(request, cancellationToken);
-            
+
             if (httpResponse.IsSuccessStatusCode)
             {
                 return new YandexTtsResponse()
@@ -65,7 +67,7 @@ namespace YaCloudKit.TTS
             }
             else
             {
-	            var message = await httpResponse.Content.ReadAsStringAsync();
+                var message = await httpResponse.Content.ReadAsStringAsync();
                 throw new YandexTtsServiceException(message, requestId, httpResponse.StatusCode);
             }
         }
@@ -75,25 +77,23 @@ namespace YaCloudKit.TTS
         /// </summary>
         protected void ThrowIfDisposed()
         {
-            if (disposedValue)
+            if (_disposedValue)
                 throw new ObjectDisposedException(GetType().Name);
         }
 
         #region IDisposable Support
-        private bool disposedValue = false;
+
+        private bool _disposedValue = false;
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
-            {
-                if (disposing && httpClientLazy.IsValueCreated)
-                {
-                    Client?.Dispose();
-                }
-                httpClientLazy = null;
-                Config = null;
-                disposedValue = true;
-            }
+            if (_disposedValue) return;
+            if (disposing && _httpClientLazy.IsValueCreated)
+                Client?.Dispose();
+
+            _httpClientLazy = null;
+            Config = null;
+            _disposedValue = true;
         }
 
         public void Dispose()
@@ -101,6 +101,7 @@ namespace YaCloudKit.TTS
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         #endregion
     }
 }

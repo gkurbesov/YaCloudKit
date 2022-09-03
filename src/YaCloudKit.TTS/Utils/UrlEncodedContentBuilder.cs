@@ -26,6 +26,7 @@ namespace YaCloudKit.TTS
                 builder.Append('=');
                 builder.Append(Encode(pair.Value));
             }
+
             return Encoding.UTF8.GetBytes(builder.ToString());
         }
 

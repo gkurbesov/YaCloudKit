@@ -11,17 +11,17 @@ namespace YaCloudKit.TTS
         /// <summary>
         /// Параметры для выполнения POST запроса
         /// </summary>
-        IDictionary<string, string> RequestParameters { get; set; }
+        IDictionary<string, string> RequestParameters { get; }
 
         /// <summary>
         /// Заголовки для HTTP запроса
         /// </summary>
-        IDictionary<string, string> Headers { get; set; }
+        IDictionary<string, string> Headers { get; }
 
         /// <summary>
-        /// Utc время ремявыполнения запроса
+        /// Utc время выполнения запроса
         /// </summary>
-        DateTime RequestDateTime { get; set; }
+        DateTime RequestDateTime { get; }
 
         /// <summary>
         /// Добавить параметр в словарь

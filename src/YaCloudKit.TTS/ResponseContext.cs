@@ -6,11 +6,11 @@ namespace YaCloudKit.TTS
 {
     public class ResponseContext : IResponseContext
     {
-        public HttpStatusCode StatusCode { get; private set; }
+        public HttpStatusCode StatusCode { get; }
 
-        public HttpResponseHeaders Headers { get; private set; }
+        public HttpResponseHeaders Headers { get; }
 
-        public Stream ContentStream { get; private set; }
+        public Stream ContentStream { get; }
 
         public ResponseContext(HttpStatusCode httpStatusCode, HttpResponseHeaders headers, Stream content)
         {

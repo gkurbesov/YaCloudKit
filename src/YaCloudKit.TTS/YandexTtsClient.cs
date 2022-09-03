@@ -32,14 +32,13 @@ namespace YaCloudKit.TTS
         public YandexTtsClient(YandexTtsConfig config)
             : base(config, () =>
             {
-                var client = new HttpClient();
 #if !NETCOREAPP
                 ServicePointManager.DefaultConnectionLimit = 5;
                 var servicePoint = ServicePointManager.FindServicePoint(config.EndPoint);
                 if (servicePoint != null)
                     servicePoint.ConnectionLeaseTimeout = 60000;
 #endif
-                client = new HttpClient();
+                var client = new HttpClient();
                 client.Timeout = config.HttpClientTimeout;
                 return client;
             })
@@ -50,6 +49,7 @@ namespace YaCloudKit.TTS
         /// 
         /// </summary>
         /// <param name="config">Настройки для выполнения запросов к api Yandex SpeechKit</param>
+        /// <param name="httpClientFactory"></param>
         public YandexTtsClient(YandexTtsConfig config, Func<HttpClient> httpClientFactory)
             : base(config, httpClientFactory)
         {
@@ -63,7 +63,7 @@ namespace YaCloudKit.TTS
             AudioFormat format, CancellationToken cancellationToken = default) =>
             await InvokeAsync(text, true, voice, format, cancellationToken);
 
-        public async Task<YandexTtsResponse> InvokeAsync(string text, bool ssml, VoiceParameters voice,
+        private async Task<YandexTtsResponse> InvokeAsync(string text, bool ssml, VoiceParameters voice,
             AudioFormat format, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(text))

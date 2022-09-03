@@ -6,30 +6,23 @@ namespace YaCloudKit.TTS
 {
     public class RequestContext : IRequestContext
     {
-        public IDictionary<string, string> RequestParameters { get; set; } = new Dictionary<string, string>();
-        public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
-        public DateTime RequestDateTime { get; set; } = DateTime.UtcNow;
+        public IDictionary<string, string> RequestParameters { get; } = new Dictionary<string, string>();
+        public IDictionary<string, string> Headers { get; } = new Dictionary<string, string>();
+        
+        public DateTime RequestDateTime { get; } = DateTime.UtcNow;
+        
         private byte[] _content;
 
         public RequestContext() { }
         public RequestContext(IDictionary<string, string> requestParameters)
         {
-            if (requestParameters == null)
-                throw new ArgumentNullException(nameof(requestParameters));
-
-            RequestParameters = requestParameters;
+            RequestParameters = requestParameters ?? throw new ArgumentNullException(nameof(requestParameters));
         }
 
         public RequestContext(IDictionary<string, string> requestParameters, IDictionary<string, string> headers)
         {
-            if (requestParameters == null)
-                throw new ArgumentNullException(nameof(requestParameters));
-
-            if (headers == null)
-                throw new ArgumentNullException(nameof(headers));
-
-            RequestParameters = requestParameters;
-            Headers = headers;
+            RequestParameters = requestParameters ?? throw new ArgumentNullException(nameof(requestParameters));
+            Headers = headers ?? throw new ArgumentNullException(nameof(headers));
         }
 
         public IRequestContext AddParametr(string key, string value)
@@ -60,9 +53,7 @@ namespace YaCloudKit.TTS
 
         public byte[] GetContent()
         {
-            if (_content == null)
-                _content = UrlEncodedContentBuilder.GetContentByteArray(RequestParameters);
-            return _content;
+            return _content ??= UrlEncodedContentBuilder.GetContentByteArray(RequestParameters);
         }
     }
 }
