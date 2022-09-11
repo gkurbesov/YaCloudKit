@@ -19,7 +19,7 @@ namespace YaCloudKit.TTS
             }
         }
 
-        public static void AddMainHeaders(IRequestContext context, YandexTtsConfig config)
+        public static void AddAuthorizationHeaders(IRequestContext context, YandexTtsConfig config)
         {
             if (!string.IsNullOrWhiteSpace(config.TokenIAM) && !string.IsNullOrWhiteSpace(config.FolderID))
                 context.AddHeader(HeadAuth, HeadAuthBearer + " " + config.TokenIAM);

@@ -38,7 +38,7 @@ namespace YaCloudKit.TTS
             IRequestContext requestContext = new RequestContext();
             var requestId = Config.LoggingEnabled ? Guid.NewGuid().ToString() : null;
 
-            YandexTtsHeaderBuilder.AddMainHeaders(requestContext, Config);
+            YandexTtsHeaderBuilder.AddAuthorizationHeaders(requestContext, Config);
             YandexTtsHeaderBuilder.AddLoggingHeaders(requestContext, requestId);
 
             RequestParametersHelper.AddTextParam(requestContext, options.Text, options.SSML);
