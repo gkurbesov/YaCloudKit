@@ -14,5 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Run Message queue unit tests
+      - name: [MessageQueue] Run unit tests
         run: dotnet test ./src/MessageQueue/YaCloudKit.MQ.Tests/YaCloudKit.MQ.Tests.csproj --configuration Release
+        
+      - name: [TextToSpeech] Run unit tests
+        run: dotnet test ./src/TextToSpeech/YaCloudKit.TTS.Tests/YaCloudKit.TTS.Tests.csproj --configuration Release

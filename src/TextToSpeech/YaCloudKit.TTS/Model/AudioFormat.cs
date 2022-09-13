@@ -1,31 +1,32 @@
 ﻿using System;
 
-namespace YaCloudKit.TTS.Model
+namespace YaCloudKit.TTS
 {
-    public class FormatParameters
+    public class AudioFormat
     {
-        public static readonly FormatParameters OGG = new FormatParameters("oggopus");
-        public static readonly FormatParameters LPCM8000 = new FormatParameters("lpcm", 8000);
-        public static readonly FormatParameters LPCM16000 = new FormatParameters("lpcm", 16000);
-        public static readonly FormatParameters LPCM48000 = new FormatParameters("lpcm", 48000);
+        public static readonly AudioFormat Ogg = new("oggopus");
+        public static readonly AudioFormat Mp3 = new("mp3");
+        public static readonly AudioFormat Lpcm8000 = new("lpcm", 8000);
+        public static readonly AudioFormat Lpcm16000 = new("lpcm", 16000);
+        public static readonly AudioFormat Lpcm48000 = new("lpcm", 48000);
 
         /// <summary>
         /// Формат синтезируемого аудио.
         /// lpcm  - удиофайл синтезируется в формате LPCM без WAV-заголовка.
         /// oggopus - данные в аудиофайле кодируются с помощью аудиокодека OPUS и упаковываются в контейнер OGG
         /// </summary>
-        public string Format { get; set; }
+        public string Format { get; }
         /// <summary>
         /// Частота дискретизации синтезируемого аудио.
         /// Применяется для формата lpcm
         /// </summary>
-        public int? SampleRateHertz { get; set; }
+        public int? SampleRateHertz { get; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="format">Формат синтезируемого аудио</param>
-        public FormatParameters(string format)
+        public AudioFormat(string format)
             : this(format, null) { }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace YaCloudKit.TTS.Model
         /// </summary>
         /// <param name="format">Формат синтезируемого аудио</param>
         /// <param name="rate">астота дискретизации</param>
-        public FormatParameters(string format, int? rate)
+        public AudioFormat(string format, int? rate)
         {
             if (string.IsNullOrWhiteSpace(format))
                 throw new ArgumentNullException(nameof(format));

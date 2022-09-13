@@ -1,31 +1,30 @@
 ﻿using System.Net.Http.Headers;
-using YaCloudKit.Core;
 
-namespace YaCloudKit.TTS.Utils
+namespace YaCloudKit.TTS
 {
     public class YandexTtsHeaderBuilder
     {
-        public const string HEAD_AUTH = "Authorization";
-        public const string HEAD_AUTH_BEARER = "Bearer";
-        public const string HEAD_AUTH_APIKEY = "Api-Key";
-        public const string HEAD_REQUEST_ID = "x-client-request-id";
-        public const string HEAD_REQUEST_LOG = "x-data-logging-enabled";
+        public const string HeadAuth = "Authorization";
+        public const string HeadAuthBearer = "Bearer";
+        public const string HeadAuthApikey = "Api-Key";
+        public const string HeadRequestId = "x-client-request-id";
+        public const string HeadRequestLog = "x-data-logging-enabled";
 
         public static void AddLoggingHeaders(IRequestContext context, string requestId)
         {
             if (!string.IsNullOrWhiteSpace(requestId))
             {
-                context.AddHeader(HEAD_REQUEST_ID, requestId);
-                context.AddHeader(HEAD_REQUEST_LOG, "true");
+                context.AddHeader(HeadRequestId, requestId);
+                context.AddHeader(HeadRequestLog, "true");
             }
         }
 
-        public static void AddMainHeaders(IRequestContext context, YandexTtsConfig config)
+        public static void AddAuthorizationHeaders(IRequestContext context, YandexTtsConfig config)
         {
             if (!string.IsNullOrWhiteSpace(config.TokenIAM) && !string.IsNullOrWhiteSpace(config.FolderID))
-                context.AddHeader(HEAD_AUTH, HEAD_AUTH_BEARER + " " + config.TokenIAM);
+                context.AddHeader(HeadAuth, HeadAuthBearer + " " + config.TokenIAM);
             else if (!string.IsNullOrWhiteSpace(config.ApiKey))
-                context.AddHeader(HEAD_AUTH, HEAD_AUTH_APIKEY + " " + config.ApiKey);
+                context.AddHeader(HeadAuth, HeadAuthApikey + " " + config.ApiKey);
             else
                 throw new YandexTtsServiceException("Параметры авторизации не заданы");
         }
