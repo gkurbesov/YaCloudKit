@@ -25,3 +25,15 @@ jobs:
 
       - name: Test
         run: dotnet test ./src/YaCloudKit.sln --configuration Release --no-restore
+
+      - name: Pack YaCloudKit.MQ
+        run: dotnet pack ./src/MessageQueue/YaCloudKit.MQ/YaCloudKit.MQ.csproj -c Release -p:BuildNumber=${{ github.run_number }}
+
+      - name: Pack YaCloudKit.TTS
+        run: dotnet pack ./src/TextToSpeech/YaCloudKit.TTS/YaCloudKit.TTS.csproj -c Release -p:BuildNumber=${{ github.run_number }}
+
+      - name: Publish YaCloudKit.MQ
+        run: dotnet nuget push **/YaCloudKit.MQ/**/YaCloudKit.MQ.*.nupkg --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
+
+      - name: Publish YaCloudKit.TTS
+        run: dotnet nuget push **/YaCloudKit.TTS/**/YaCloudKit.TTS.*.nupkg --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json   
