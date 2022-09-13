@@ -22,11 +22,11 @@ namespace YaCloudKit.TTS
 
             context.AddParametr("voice", voice.Name);
 
-            if (!string.IsNullOrWhiteSpace(voice.Language))
+            if (voice.Language is not null)
                 context.AddParametr("lang", voice.Language);
-            if (!string.IsNullOrWhiteSpace(voice.Emotion))
+            if (voice.Emotion is not null)
                 context.AddParametr("emotion", voice.Emotion);
-            if (!string.IsNullOrWhiteSpace(voice.Emotion))
+            if (voice.Emotion is not null)
                 context.AddParametr("speed", voice.Speed);
         }
 
