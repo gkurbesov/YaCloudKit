@@ -53,7 +53,7 @@ namespace YaCloudKit.MQ.Utils
 
             var authString = new StringBuilder();
             authString.Append(ALGORITHM);
-            authString.AppendFormat(" Credential={0}/{1}, ", _config.AccessKeyID, scope);
+            authString.AppendFormat(" Credential={0}/{1}, ", _config.AccessKeyId, scope);
             authString.AppendFormat("SignedHeaders={0}, ", signedHeaders);
             authString.AppendFormat("Signature={0}", signature);
 

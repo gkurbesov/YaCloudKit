@@ -14,10 +14,10 @@ namespace YaCloudKit.MQ
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="accessKeyID">Идентификатор ключа сервисного аккаунта</param>
+        /// <param name="accessKeyId">Идентификатор ключа сервисного аккаунта</param>
         /// <param name="secretAccessKey">Секретный ключ сервисного аккаунта</param>
-        public YandexMqClient(string accessKeyID, string secretAccessKey) :
-            this(new YandexMqConfig(accessKeyID, secretAccessKey))
+        public YandexMqClient(string accessKeyId, string secretAccessKey) :
+            this(new YandexMqConfig(accessKeyId, secretAccessKey))
         { }
 
         public YandexMqClient(YandexMqConfig config) :

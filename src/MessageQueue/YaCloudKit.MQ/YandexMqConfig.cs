@@ -27,7 +27,7 @@ namespace YaCloudKit.MQ
         /// <summary>
         /// Идентификатор ключа сервисного аккаунта
         /// </summary>
-        public string AccessKeyID { get; set; }
+        public string AccessKeyId { get; set; }
         /// <summary>
         /// Секретный ключ сервисного аккаунта
         /// </summary>
@@ -53,7 +53,7 @@ namespace YaCloudKit.MQ
         {
             if (string.IsNullOrWhiteSpace(accessKeyId))
                 throw new ArgumentNullException(nameof(accessKeyId));
-            AccessKeyID = accessKeyId;
+            AccessKeyId = accessKeyId;
 
             if (string.IsNullOrWhiteSpace(secretAccessKey))
                 throw new ArgumentNullException(nameof(secretAccessKey));
@@ -75,7 +75,7 @@ namespace YaCloudKit.MQ
         {
             if (string.IsNullOrWhiteSpace(accessKeyId))
                 throw new ArgumentNullException(nameof(accessKeyId));
-            AccessKeyID = accessKeyId;
+            AccessKeyId = accessKeyId;
 
             if (string.IsNullOrWhiteSpace(secretAccessKey))
                 throw new ArgumentNullException(nameof(secretAccessKey));
