@@ -5,15 +5,14 @@
     <LangVersion>latest</LangVersion>
     <Description>Инструмент YaCloudKit для работы с очередью сообщений Yandex Cloud</Description>
     <Authors>Gennady Kurbesov</Authors>
-    <PackageLicenseExpression></PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit/tree/master/YaCloudKit.MQ</RepositoryUrl>
+    <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit</RepositoryUrl>
     <PackageTags>Яндекс, Облако, Yandex, Cloud, Message, Queue, kit, aws</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageIcon>logo-main.png</PackageIcon>
     <VersionMajor>0</VersionMajor>
-    <VersionMinor>4</VersionMinor>
+    <VersionMinor>5</VersionMinor>
     <BuildNumber>$(BuildNumber)</BuildNumber>
     <BuildNumber Condition="'$(BuildNumber)' == ''">0</BuildNumber>
     <PackageVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</PackageVersion>
