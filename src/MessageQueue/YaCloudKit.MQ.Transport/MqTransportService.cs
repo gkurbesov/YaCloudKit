@@ -41,15 +41,14 @@ public class MqTransportService : IMqTransportService
     {
         if (mq == null)
             throw new ArgumentNullException(nameof(mq));
-        if (queueUrl == null)
+        if (string.IsNullOrWhiteSpace(queueUrl))
             throw new ArgumentNullException(nameof(queueUrl));
-        if (converterName == null)
+        if (string.IsNullOrWhiteSpace(converterName))
             throw new ArgumentNullException(nameof(converterName));
         if (message == null)
             throw new ArgumentNullException(nameof(message));
-        
-        var request = new SendMessageRequest()
-            .SetQueueUrl(queueUrl);
+
+        var request = new SendMessageRequest().SetQueueUrl(queueUrl);
         
         _messageConverterComponent.Serialize(converterName, message, request);
 
