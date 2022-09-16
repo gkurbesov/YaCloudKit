@@ -17,5 +17,8 @@ jobs:
       - name: MessageQueue - run unit tests
         run: dotnet test ./src/MessageQueue/YaCloudKit.MQ.Tests/YaCloudKit.MQ.Tests.csproj --configuration Release
         
+      - name: MessageQueue Transport - run unit tests
+        run: dotnet test ./src/MessageQueue/YaCloudKit.MQ.Transport.Tests/YaCloudKit.MQ.Transport.Tests.csproj --configuration Release
+        
       - name: TextToSpeech - run unit tests
         run: dotnet test ./src/TextToSpeech/YaCloudKit.TTS.Tests/YaCloudKit.TTS.Tests.csproj --configuration Release

@@ -3,34 +3,36 @@ using System;
 
 namespace YaCloudKit.MQ.Transport.Converters
 {
-    /// <summary>
-    /// Стандартный JSON конвертер
-    /// </summary>
     public class JsonMessageConverter : IMessageConverter
     {
-        /// <summary>
-        /// Название конвертера
-        /// </summary>
-        public const string TAG = "json";
-
-        public T Deserialize<T>(string messageBody) where T : class
+        private readonly Formatting _formatting;
+        private readonly JsonSerializerSettings _settings;
+        public const string DefaultName = "json";
+        
+        public string Name => DefaultName;
+        
+        public JsonMessageConverter(Formatting formatting = Formatting.None, JsonSerializerSettings settings = null)
         {
-            return JsonConvert.DeserializeObject<T>(messageBody);
+            _formatting = formatting;
+            _settings = settings;
         }
 
         public object Deserialize(string messageBody, Type type)
         {
+            if (messageBody == null)
+                throw new ArgumentNullException(nameof(messageBody));
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
+            
             return JsonConvert.DeserializeObject(messageBody, type);
         }
 
         public string Serialize(object value)
         {
-            return Serialize(value, Formatting.None);
-        }
-
-        public string Serialize(object value, Formatting formatting, JsonSerializerSettings settings = null)
-        {
-            return JsonConvert.SerializeObject(value, formatting, settings);
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+            
+            return JsonConvert.SerializeObject(value, _formatting, _settings);
         }
     }
 }
