@@ -23,6 +23,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="$(AssemblyName).Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="..\..\..\Assets\logo-main.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>

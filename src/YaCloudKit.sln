@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.TTS.Tests", "Tex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ.Extensions.DependencyInjection", "MessageQueue\YaCloudKit.MQ.Extensions.DependencyInjection\YaCloudKit.MQ.Extensions.DependencyInjection.csproj", "{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ.Transport.Tests", "MessageQueue\YaCloudKit.MQ.Transport.Tests\YaCloudKit.MQ.Transport.Tests.csproj", "{56762F1C-98AA-4420-B60C-732CA325231F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56762F1C-98AA-4420-B60C-732CA325231F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56762F1C-98AA-4420-B60C-732CA325231F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56762F1C-98AA-4420-B60C-732CA325231F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56762F1C-98AA-4420-B60C-732CA325231F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{3F849A41-F8DA-430A-BE18-52A8C12FE012} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 		{80BFD0AD-E1CD-42E8-BFAA-6687844FA735} = {092A9018-57BC-42D7-85FD-3D4EA12EFC9D}
 		{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
+		{56762F1C-98AA-4420-B60C-732CA325231F} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB60A6CA-F76D-40F9-BFDD-ACA1F097B83D}
