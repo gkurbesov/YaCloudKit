@@ -169,14 +169,14 @@ public class MessageConverterComponentTests
     public void Message_Serialized()
     {
         var messageData = new Fixture().Create<TestMessage>();
-        var serialiedMessageData = new JsonMessageConverter().Serialize(messageData);
+        var serializedMessageData = new JsonMessageConverter().Serialize(messageData);
         var request = new SendMessageRequest();
 
         _component.Serialize(JsonMessageConverter.DefaultName, messageData, in request);
 
         request.MessageBody
             .Should()
-            .BeEquivalentTo(serialiedMessageData);
+            .BeEquivalentTo(serializedMessageData);
         request.MessageAttribute
             .Should()
             .Contain(x => x.Key == MqTransportDefaults.AttributeMessageType

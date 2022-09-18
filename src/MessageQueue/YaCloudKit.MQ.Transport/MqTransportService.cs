@@ -20,7 +20,7 @@ public class MqTransportService : IMqTransportService
         _serviceFactory = serviceFactory ?? throw new ArgumentNullException(nameof(serviceFactory));
     }
 
-    public Task ReceiveAsync(Message message, CancellationToken cancellationToken)
+    public Task HandleAsync(Message message, CancellationToken cancellationToken)
     {
         if (message == null)
             throw new ArgumentNullException(nameof(message));
@@ -37,21 +37,17 @@ public class MqTransportService : IMqTransportService
         return handler.Handle(deserializedMessage, cancellationToken, _serviceFactory);
     }
 
-    public Task SendAsync<TMessage>(IYandexMq mq, string queueUrl, string converterName, TMessage message, CancellationToken cancellationToken)
+    public Task<SendMessageRequest> TransformAsync<TMessage>(TMessage message, string converterName, CancellationToken cancellationToken)
     {
-        if (mq == null)
-            throw new ArgumentNullException(nameof(mq));
-        if (string.IsNullOrWhiteSpace(queueUrl))
-            throw new ArgumentNullException(nameof(queueUrl));
         if (string.IsNullOrWhiteSpace(converterName))
             throw new ArgumentNullException(nameof(converterName));
         if (message == null)
             throw new ArgumentNullException(nameof(message));
 
-        var request = new SendMessageRequest().SetQueueUrl(queueUrl);
+        var request = new SendMessageRequest();
         
         _messageConverterComponent.Serialize(converterName, message, request);
 
-        return mq.SendMessageAsync(request, cancellationToken);
+        return Task.FromResult(request);
     }
 }
