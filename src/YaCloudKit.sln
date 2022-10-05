@@ -3,17 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.Core", "YaCloudKit.Core\YaCloudKit.Core.csproj", "{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.MQ", "MessageQueue\YaCloudKit.MQ\YaCloudKit.MQ.csproj", "{EC003CF3-2892-46FA-BF19-2629E12CCBA9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.TTS", "TextToSpeech\YaCloudKit.TTS\YaCloudKit.TTS.csproj", "{E403257A-AAC5-4A94-AD73-6F4D06A70D75}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.IAM", "YaCloudKit.IAM\YaCloudKit.IAM.csproj", "{1BDD4216-326F-4781-AAA2-B08423671472}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.MQ.Transport", "MessageQueue\YaCloudKit.MQ.Transport\YaCloudKit.MQ.Transport.csproj", "{B8916BF5-47FC-4E1B-815B-093DF6A1E2B4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YaCloudKit.Monitoring", "YaCloudKit.Monitoring\YaCloudKit.Monitoring.csproj", "{80C1CCEC-E54E-485F-8B32-99AEC8625AF8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageQueue", "MessageQueue", "{9C193C93-C9A9-4921-8BE1-3F52A2395232}"
 EndProject
@@ -33,10 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{720A4EF8-4C16-41EA-9AEA-BE39EC49F718}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EC003CF3-2892-46FA-BF19-2629E12CCBA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC003CF3-2892-46FA-BF19-2629E12CCBA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC003CF3-2892-46FA-BF19-2629E12CCBA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,18 +35,10 @@ Global
 		{E403257A-AAC5-4A94-AD73-6F4D06A70D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E403257A-AAC5-4A94-AD73-6F4D06A70D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E403257A-AAC5-4A94-AD73-6F4D06A70D75}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1BDD4216-326F-4781-AAA2-B08423671472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BDD4216-326F-4781-AAA2-B08423671472}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BDD4216-326F-4781-AAA2-B08423671472}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BDD4216-326F-4781-AAA2-B08423671472}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8916BF5-47FC-4E1B-815B-093DF6A1E2B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B8916BF5-47FC-4E1B-815B-093DF6A1E2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8916BF5-47FC-4E1B-815B-093DF6A1E2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8916BF5-47FC-4E1B-815B-093DF6A1E2B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80C1CCEC-E54E-485F-8B32-99AEC8625AF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80C1CCEC-E54E-485F-8B32-99AEC8625AF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80C1CCEC-E54E-485F-8B32-99AEC8625AF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80C1CCEC-E54E-485F-8B32-99AEC8625AF8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3F849A41-F8DA-430A-BE18-52A8C12FE012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F849A41-F8DA-430A-BE18-52A8C12FE012}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F849A41-F8DA-430A-BE18-52A8C12FE012}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -70,7 +70,6 @@ public class MqTransportServiceTests
 
         var result = await service.TransformAsync(messageData, JsonMessageConverter.DefaultName, CancellationToken.None);
         
-        
         result.MessageBody
             .Should()
             .BeEquivalentTo(serializedMessageData);
