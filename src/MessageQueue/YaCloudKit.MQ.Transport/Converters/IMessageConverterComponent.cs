@@ -1,7 +1,7 @@
 ﻿using YaCloudKit.MQ.Model;
 using YaCloudKit.MQ.Model.Requests;
 
-namespace YaCloudKit.MQ.Transport.Converters;
+namespace YaCloudKit.MQ.Transport;
 
 public interface IMessageConverterComponent
 {
