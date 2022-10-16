@@ -4,27 +4,15 @@ using System.Linq;
 using YaCloudKit.MQ.Model;
 using YaCloudKit.MQ.Model.Requests;
 
-namespace YaCloudKit.MQ.Transport.Converters;
+namespace YaCloudKit.MQ.Transport;
 
 public class MessageConverterComponent : IMessageConverterComponent
 {
-    private readonly IDictionary<string, Type> _messageTypes;
-    private readonly Dictionary<string, IMessageConverter> _converters = new();
+    private readonly MessageConverterComponentOptions _options;
 
-    public MessageConverterComponent(IDictionary<string, Type> messageTypes, IEnumerable<IMessageConverter> converters)
+    public MessageConverterComponent(MessageConverterComponentOptions options)
     {
-        if (converters == null)
-            throw new ArgumentNullException(nameof(converters));
-
-        _messageTypes = messageTypes ?? throw new ArgumentNullException(nameof(messageTypes));
-
-        foreach (var converter in converters)
-        {
-            if (string.IsNullOrWhiteSpace(converter.Name))
-                throw new InvalidOperationException($"Converter {converter.GetType()} returned empty name");
-
-            _converters.Add(converter.Name, converter);
-        }
+        _options = options ?? throw new ArgumentNullException(nameof(options));
     }
 
     public object Deserialize(Message message)
@@ -47,10 +35,10 @@ public class MessageConverterComponent : IMessageConverterComponent
             throw new MqTransportException(
                 $"Message {message.MessageId} has no converter type attribute ({MqTransportDefaults.AttributeMessageConverter})");
 
-        if (!_messageTypes.TryGetValue(attrMessageType.StringValue, out var messageType))
+        if (!_options.MessageTypes.TryGetValue(attrMessageType.StringValue, out var messageType))
             throw new MqTransportException($"Message type {attrMessageType.StringValue} is not registered");
 
-        if (!_converters.TryGetValue(attrConverter.StringValue, out var converter))
+        if (!_options.Converters.TryGetValue(attrConverter.StringValue, out var converter))
             throw new MqTransportException($"Converter {attrConverter.StringValue} is not registered");
 
         return converter.Deserialize(message.Body, messageType);
@@ -60,17 +48,17 @@ public class MessageConverterComponent : IMessageConverterComponent
     {
         if (string.IsNullOrWhiteSpace(converterName))
             throw new ArgumentNullException(nameof(converterName));
-        
-        if (value == null) 
+
+        if (value == null)
             throw new ArgumentNullException(nameof(value));
 
         var messageType = value.GetType();
-        var messageTypeName = _messageTypes.SingleOrDefault(t => t.Value == messageType).Key;
-        
-        if(string.IsNullOrWhiteSpace(messageTypeName))
+        var messageTypeName = _options.MessageTypes.SingleOrDefault(t => t.Value == messageType).Key;
+
+        if (string.IsNullOrWhiteSpace(messageTypeName))
             throw new MqTransportException($"Message type name for {messageType.Name} is not registered");
-        
-        if(!_converters.TryGetValue(converterName, out var converter))
+
+        if (!_options.Converters.TryGetValue(converterName, out var converter))
             throw new MqTransportException($"Converter {converterName} is not registered");
 
         request.MessageBody = converter.Serialize(value);
@@ -87,5 +75,4 @@ public class MessageConverterComponent : IMessageConverterComponent
                 StringValue = converter.Name
             });
     }
-
 }
