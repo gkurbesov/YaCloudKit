@@ -1,6 +1,5 @@
 ﻿using AutoFixture;
 using FluentAssertions;
-using YaCloudKit.MQ.Transport.Converters;
 
 namespace YaCloudKit.MQ.Transport.Tests;
 
