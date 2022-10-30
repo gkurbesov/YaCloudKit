@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace YaCloudKit.MQ.Transport.Extensions.DependencyInjection;
 
@@ -27,6 +28,12 @@ public class MessageConverterComponentOptionsBuilder
 
     public MessageConverterComponentOptions Build()
     {
+        if (!_messageTypes.Any())
+            throw new InvalidOperationException("There are no registered message types");
+
+        if (!_converters.Any())
+            throw new InvalidOperationException("No registered converters");
+        
         return new MessageConverterComponentOptions(_messageTypes, _converters);
     }
 }

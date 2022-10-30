@@ -32,6 +32,9 @@ public class MessageConverterComponentOptions
             if (string.IsNullOrWhiteSpace(converter.Name))
                 throw new InvalidOperationException($"Converter {converter.GetType()} returned empty name");
 
+            if (_converters.ContainsKey(converter.Name))
+                throw new InvalidOperationException($"Converter named {converter.Name} has already been registered");
+
             _converters.Add(converter.Name, converter);
         }
 
