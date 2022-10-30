@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,27 +7,68 @@ namespace YaCloudKit.MQ.Transport.Extensions.DependencyInjection;
 
 public static class MqTransportServiceExtensions
 {
-    public static IServiceCollection AddHandlersFromAssemblies(
+    public static IServiceCollection AddMqTransport(
         this IServiceCollection services,
-        IEnumerable<Assembly> assembliesToScan)
+        Action<MessageConverterComponentOptionsBuilder> configuration,
+        params Assembly[] assembliesToScan)
     {
-        var handlerType = typeof(IMessageHandler<>);
-        var concretions = assembliesToScan
-            .SelectMany(a => a.DefinedTypes)
-            .Where(t => t.IsConcrete() && t.IsOpenGeneric())
-            .ToArray();
-
-        foreach (var type in concretions)
-        {
-            services.AddTransient(handlerType, type);
-        }
-        
-        return services;
+        return services
+            .AddMessageConverters(configuration)
+            .AddMessageConverterComponent()
+            .AddHandlersFromAssemblies(assembliesToScan)
+            .AddMqTransportService();
     }
     
-    public static IServiceCollection AddMessageConverterComponentOptions(
+    public static IServiceCollection AddMqTransport(
         this IServiceCollection services,
-        Action<IServiceProvider, MessageConverterComponentOptionsBuilder>  configuration)
+        Action<IServiceProvider, MessageConverterComponentOptionsBuilder> configuration,
+        params Assembly[] assembliesToScan)
+    {
+        return services
+            .AddMessageConverters(configuration)
+            .AddMessageConverterComponent()
+            .AddHandlersFromAssemblies(assembliesToScan)
+            .AddMqTransportService();
+    }
+
+    public static IServiceCollection AddMqTransportService(this IServiceCollection services)
+    {
+        return services.AddSingleton<IMqTransportService>(sp =>
+            new MqTransportService(
+                sp.GetRequiredService<IMessageConverterComponent>(),
+                sp.GetRequiredService));
+    }
+
+    public static IServiceCollection AddHandlersFromAssemblies(
+        this IServiceCollection services,
+        params Assembly[] assembliesToScan)
+    {
+        var handlerInterfaceType = typeof(IMessageHandler<>);
+
+        foreach (var concretionType in assembliesToScan
+                     .SelectMany(a => a.DefinedTypes)
+                     .Where(t => t.IsConcrete() && !t.IsOpenGeneric()))
+        {
+            var interfaceTypes = concretionType
+                .GetTypeInfo()
+                .GetInterfaces()
+                .Where(x => x.IsGenericType && x.GetGenericTypeDefinition() == handlerInterfaceType)
+                .ToArray();
+
+            if (!interfaceTypes.Any()) continue;
+
+            foreach (var interfaceType in interfaceTypes)
+            {
+                services.AddTransient(interfaceType, concretionType);
+            }
+        }
+
+        return services;
+    }
+
+    public static IServiceCollection AddMessageConverters(
+        this IServiceCollection services,
+        Action<IServiceProvider, MessageConverterComponentOptionsBuilder> configuration)
     {
         var builder = new MessageConverterComponentOptionsBuilder();
         return services.AddSingleton(sp =>
@@ -37,8 +77,8 @@ public static class MqTransportServiceExtensions
             return builder.Build();
         });
     }
-    
-    public static IServiceCollection AddMessageConverterComponentOptions(
+
+    public static IServiceCollection AddMessageConverters(
         this IServiceCollection services,
         Action<MessageConverterComponentOptionsBuilder> configuration)
     {
@@ -50,23 +90,5 @@ public static class MqTransportServiceExtensions
     public static IServiceCollection AddMessageConverterComponent(this IServiceCollection services)
     {
         return services.AddSingleton<IMessageConverterComponent, MessageConverterComponent>();
-    }
-
-    public static IServiceCollection AddMqTransportService(this IServiceCollection services)
-    {
-        return services.AddSingleton<IMqTransportService>(sp =>
-            new MqTransportService(
-                sp.GetRequiredService<IMessageConverterComponent>(),
-                sp.GetRequiredService));
-    }
-    
-    private static bool IsConcrete(this Type type)
-    {
-        return !type.GetTypeInfo().IsAbstract && !type.GetTypeInfo().IsInterface;
-    }
-    
-    private static bool IsOpenGeneric(this Type type)
-    {
-        return type.GetTypeInfo().IsGenericTypeDefinition || type.GetTypeInfo().ContainsGenericParameters;
     }
 }

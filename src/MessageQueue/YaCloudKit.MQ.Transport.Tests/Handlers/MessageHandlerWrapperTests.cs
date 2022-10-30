@@ -1,7 +1,6 @@
 ﻿using AutoFixture;
 using FluentAssertions;
 using Moq;
-
 namespace YaCloudKit.MQ.Transport.Tests.Handlers;
 
 public class MessageHandlerWrapperTests
