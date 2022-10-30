@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
         
       - name: Setup .NET 6
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
 
@@ -26,20 +26,8 @@ jobs:
       - name: Test
         run: dotnet test ./src/YaCloudKit.sln --configuration Release --no-restore
 
-      - name: Pack YaCloudKit.MQ
-        run: dotnet pack ./src/MessageQueue/YaCloudKit.MQ/YaCloudKit.MQ.csproj -c Release -p:BuildNumber=${{ github.run_number }}
-
-      - name: Pack YaCloudKit.MQ.Transport
-        run: dotnet pack ./src/MessageQueue/YaCloudKit.MQ.Transport/YaCloudKit.MQ.Transport.csproj -c Release -p:BuildNumber=${{ github.run_number }}
-
-      - name: Pack YaCloudKit.TTS
-        run: dotnet pack ./src/TextToSpeech/YaCloudKit.TTS/YaCloudKit.TTS.csproj -c Release -p:BuildNumber=${{ github.run_number }}
+      - name: Pack
+        run: dotnet pack ./src/MessageQueue/YaCloudKit.MQ/YaCloudKit.MQ.csproj -c Release
 
       - name: Publish YaCloudKit.MQ
-        run: dotnet nuget push **/YaCloudKit.MQ/**/YaCloudKit.MQ.*.nupkg --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
-
-      - name: Publish YaCloudKit.MQ.Transport
-        run: dotnet nuget push **/YaCloudKit.MQ.Transport/**/YaCloudKit.MQ.Transport.*.nupkg --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
-
-      - name: Publish YaCloudKit.TTS
-        run: dotnet nuget push **/YaCloudKit.TTS/**/YaCloudKit.TTS.*.nupkg --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json   
+        run: dotnet nuget push **/*.nupkg --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
