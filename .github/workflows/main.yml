@@ -27,7 +27,7 @@ jobs:
         run: dotnet test ./src/YaCloudKit.sln --configuration Release --no-restore
 
       - name: Pack
-        run: dotnet pack ./src/MessageQueue/YaCloudKit.MQ/YaCloudKit.MQ.csproj -c Release
+        run: dotnet pack ./src/YaCloudKit.sln -c Release
 
       - name: Publish YaCloudKit.MQ
         run: dotnet nuget push **/*.nupkg --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
