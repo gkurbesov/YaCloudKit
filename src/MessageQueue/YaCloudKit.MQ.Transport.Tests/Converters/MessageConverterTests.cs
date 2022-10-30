@@ -1,8 +1,4 @@
-﻿using AutoFixture;
-using FluentAssertions;
-using YaCloudKit.MQ.Transport.Converters;
-
-namespace YaCloudKit.MQ.Transport.Tests;
+﻿namespace YaCloudKit.MQ.Transport.Tests;
 
 public class MessageConverterTests
 {

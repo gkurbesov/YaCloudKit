@@ -25,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\YaCloudKit.MQ.Transport.Extensions.DependencyInjection\YaCloudKit.MQ.Transport.Extensions.DependencyInjection.csproj" />
       <ProjectReference Include="..\YaCloudKit.MQ.Transport\YaCloudKit.MQ.Transport.csproj" />
       <ProjectReference Include="..\YaCloudKit.MQ\YaCloudKit.MQ.csproj" />
     </ItemGroup>

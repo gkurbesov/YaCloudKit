@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace YaCloudKit.MQ.Extensions.DependencyInjection;
 
-public static class YandexMqClientExtension
+public static class YandexMqClientExtensions
 {
     public static IServiceCollection AddYandexMqClient(this IServiceCollection services, string accessKeyId, string secretAccessKey)
     {

@@ -1,10 +1,4 @@
-﻿using AutoFixture;
-using FluentAssertions;
-using YaCloudKit.MQ.Model;
-using YaCloudKit.MQ.Model.Requests;
-using YaCloudKit.MQ.Transport.Converters;
-
-namespace YaCloudKit.MQ.Transport.Tests;
+﻿namespace YaCloudKit.MQ.Transport.Tests;
 
 public class MessageConverterComponentTests
 {
@@ -22,8 +16,9 @@ public class MessageConverterComponentTests
             new JsonMessageConverter()
         };
 
-
-        _component = new MessageConverterComponent(messageTypes, converters);
+        var options = new MessageConverterComponentOptions(messageTypes, converters);
+        
+        _component = new MessageConverterComponent(options);
     }
 
     [Fact]

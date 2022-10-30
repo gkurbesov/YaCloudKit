@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using YaCloudKit.MQ.Model;
 using YaCloudKit.MQ.Model.Requests;
-using YaCloudKit.MQ.Transport.Converters;
 
 namespace YaCloudKit.MQ.Transport;
 

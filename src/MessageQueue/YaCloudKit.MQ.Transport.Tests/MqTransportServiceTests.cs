@@ -2,7 +2,6 @@
 using FluentAssertions;
 using Moq;
 using YaCloudKit.MQ.Model;
-using YaCloudKit.MQ.Transport.Converters;
 
 namespace YaCloudKit.MQ.Transport.Tests;
 
@@ -23,7 +22,9 @@ public class MqTransportServiceTests
             new JsonMessageConverter()
         };
 
-        _component = new MessageConverterComponent(messageTypes, converters);
+        var options = new MessageConverterComponentOptions(messageTypes, converters);
+
+        _component = new MessageConverterComponent(options);
         _messageHandlerMock = new Mock<IMessageHandler<TestMessage>>(MockBehavior.Strict);
     }
 
