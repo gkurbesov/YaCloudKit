@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{3B55
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ.Examples", "samples\YaCloudKit.MQ.Examples\YaCloudKit.MQ.Examples.csproj", "{0BFD6AEA-01EB-47F3-A9B9-DB5F222877BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ.Transport.Examples", "samples\YaCloudKit.MQ.Transport.Examples\YaCloudKit.MQ.Transport.Examples.csproj", "{EDBDB339-B140-4832-A54F-004D244808EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{0BFD6AEA-01EB-47F3-A9B9-DB5F222877BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BFD6AEA-01EB-47F3-A9B9-DB5F222877BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BFD6AEA-01EB-47F3-A9B9-DB5F222877BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDBDB339-B140-4832-A54F-004D244808EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBDB339-B140-4832-A54F-004D244808EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBDB339-B140-4832-A54F-004D244808EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBDB339-B140-4832-A54F-004D244808EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{56762F1C-98AA-4420-B60C-732CA325231F} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 		{1700EA26-6DBC-457F-924F-CB1DFAE3374D} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 		{0BFD6AEA-01EB-47F3-A9B9-DB5F222877BB} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
+		{EDBDB339-B140-4832-A54F-004D244808EA} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB60A6CA-F76D-40F9-BFDD-ACA1F097B83D}
