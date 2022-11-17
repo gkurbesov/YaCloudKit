@@ -18,16 +18,16 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Install dependencies
-        run: dotnet restore ./src/YaCloudKit.sln
+        run: dotnet restore ./YaCloudKit.sln
 
       - name: Build
-        run: dotnet build ./src/YaCloudKit.sln --configuration Release --no-restore
+        run: dotnet build ./YaCloudKit.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test ./src/YaCloudKit.sln --configuration Release --no-restore
+        run: dotnet test ./YaCloudKit.sln --configuration Release --no-restore
 
       - name: Pack
-        run: dotnet pack ./src/YaCloudKit.sln -c Release
+        run: dotnet pack ./YaCloudKit.sln -c Release
 
       - name: Publish YaCloudKit.MQ
         run: dotnet nuget push **/*.nupkg --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
