@@ -5,20 +5,25 @@ on: pull_request
 jobs:
   run_unit_tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     name: Run unit tests
     env:
       DOCKER_BUILDKIT: 1
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: MessageQueue - run unit tests
-        run: dotnet test ./src/MessageQueue/YaCloudKit.MQ.Tests/YaCloudKit.MQ.Tests.csproj --configuration Release
-        
-      - name: MessageQueue Transport - run unit tests
-        run: dotnet test ./src/MessageQueue/YaCloudKit.MQ.Transport.Tests/YaCloudKit.MQ.Transport.Tests.csproj --configuration Release
-        
-      - name: TextToSpeech - run unit tests
-        run: dotnet test ./src/TextToSpeech/YaCloudKit.TTS.Tests/YaCloudKit.TTS.Tests.csproj --configuration Release
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Install dependencies
+        run: dotnet restore ./YaCloudKit.sln
+
+      - name: Build
+        run: dotnet build ./YaCloudKit.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test ./YaCloudKit.sln --configuration Release --no-restore
