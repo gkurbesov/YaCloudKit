@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+        <LangVersion>latest</LangVersion>
+        <Description>Реализация методов регистраици зависимостей для YaCloudKit.TTS</Description>
+        <Authors>Gennady Kurbesov</Authors>
+        <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit</RepositoryUrl>
+        <PackageTags>Яндекс, Облако, Yandex, Cloud, TTS, AI, Voice, Speech</PackageTags>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <PackageIcon>logo-main.png</PackageIcon>
+        <VersionMajor>0</VersionMajor>
+        <VersionMinor>3</VersionMinor>
+        <BuildNumber>9</BuildNumber>
+        <PackageVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</PackageVersion>
+        <AssemblyVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</AssemblyVersion>
+        <FileVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</FileVersion>
+        <Version>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\YaCloudKit.TTS\YaCloudKit.TTS.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\..\Assets\logo-main.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+        <None Include="..\..\..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
+
+</Project>
