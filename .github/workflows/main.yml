@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
+
       - name: Setup .NET 6
         uses: actions/setup-dotnet@v3
         with:
@@ -29,5 +29,5 @@ jobs:
       - name: Pack
         run: dotnet pack ./YaCloudKit.sln -c Release
 
-      - name: Publish YaCloudKit.MQ
+      - name: Publish
         run: dotnet nuget push **/*.nupkg --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
