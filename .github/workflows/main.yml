@@ -1,13 +1,11 @@
 name: Main Build
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: build
     steps:
       - name: Checkout
         uses: actions/checkout@v3
