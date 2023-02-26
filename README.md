@@ -50,7 +50,7 @@ YaCloudKit.MQ.Transport - это набор сервисов и компонен
 
 ### Использование
 
-Создайте обработчик для сообщшения:
+Создайте обработчик для сообщения:
 ```csharp
 public class CustomerRegistrationHandler : IMessageHandler<CustomerRegistrationDto>
 {
