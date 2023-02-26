@@ -1,6 +1,6 @@
 # YaCloudKit ![](./assets/icon-main.png)
 <p align="center">
-    <img src="./Assets/logo-main.png">
+    <img src="./assets/logo-main.png">
 </p>
 Набор инструментов для работы с сервисами Yandex.Cloud
 
