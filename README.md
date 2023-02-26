@@ -72,7 +72,7 @@ public class CustomerRegistrationHandler : IMessageHandler<CustomerRegistrationD
 Сконфигурируйте зависимости:
 
 ```csharp
-services.AddYandexMqClient(YandexMqClientOptions.AccessKeyId, YandexMqClientOptions.SecretAccessKey);
+services.AddYandexMqClient("[Access Key Id]", "[Secret Access Key]");
 
 services.AddMqTransport(configure =>
     {
