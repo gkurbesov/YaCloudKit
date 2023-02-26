@@ -1,4 +1,4 @@
-# YaCloudKit ![](./Assets/icon-main.png)
+# YaCloudKit ![](./assets/icon-main.png)
 <p align="center">
     <img src="./Assets/logo-main.png">
 </p>
@@ -7,7 +7,6 @@
 [![Main Build](https://github.com/gkurbesov/YaCloudKit/actions/workflows/main.yml/badge.svg)](https://github.com/gkurbesov/YaCloudKit/actions/workflows/main.yml)
 [![Nuget](https://img.shields.io/nuget/v/YaCloudKit.MQ?label=MQ)](https://www.nuget.org/packages/YaCloudKit.MQ)
 [![Nuget](https://img.shields.io/nuget/v/YaCloudKit.TTS?label=TTS)](https://www.nuget.org/packages/YaCloudKit.TTS)
-[![Nuget](https://img.shields.io/nuget/v/YaCloudKit.IAM?label=IAM)](https://www.nuget.org/packages/YaCloudKit.IAM)
 ## Описание
 YaCloudKit - это набор инструментов, который позволит взаимодействовать вашему приложению с сервисами облачной платформы Яндекс.Облако.
 
