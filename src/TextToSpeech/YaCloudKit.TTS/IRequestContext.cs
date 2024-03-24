@@ -29,7 +29,7 @@ namespace YaCloudKit.TTS
         /// <param name="key">Ключ/имя параметра</param>
         /// <param name="value">значение параметра</param>
         /// <returns></returns>
-        IRequestContext AddParametr(string key, string value);
+        IRequestContext AddParameter(string key, string value);
 
         /// <summary>
         /// Добавить заголовок в словарь

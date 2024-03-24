@@ -12,7 +12,7 @@ namespace YaCloudKit.TTS
                 throw new ArgumentOutOfRangeException(nameof(text),
                     "The maximum text length must not exceed 5000 characters");
 
-            context.AddParametr(ssml ? "ssml" : "text", text);
+            context.AddParameter(ssml ? "ssml" : "text", text);
         }
 
         public static void AddVoiceParam(IRequestContext context, VoiceParameters voice)
@@ -20,14 +20,14 @@ namespace YaCloudKit.TTS
             if (voice == null)
                 throw new ArgumentNullException(nameof(voice));
 
-            context.AddParametr("voice", voice.Name);
+            context.AddParameter("voice", voice.Name);
 
             if (voice.Language is not null)
-                context.AddParametr("lang", voice.Language);
+                context.AddParameter("lang", voice.Language);
             if (voice.Emotion is not null)
-                context.AddParametr("emotion", voice.Emotion);
+                context.AddParameter("emotion", voice.Emotion);
             if (voice.Emotion is not null)
-                context.AddParametr("speed", voice.Speed);
+                context.AddParameter("speed", voice.Speed);
         }
 
         public static void AddFormatParam(IRequestContext context, AudioFormat format)
@@ -35,9 +35,9 @@ namespace YaCloudKit.TTS
             if (format == null || string.IsNullOrWhiteSpace(format.Format))
                 throw new ArgumentException(nameof(format));
 
-            context.AddParametr("format", format.Format);
+            context.AddParameter("format", format.Format);
             if (format.SampleRateHertz.HasValue)
-                context.AddParametr("sampleRateHertz", format.SampleRateHertz.ToString());
+                context.AddParameter("sampleRateHertz", format.SampleRateHertz.ToString());
         }
 
         public static void AddFolderParam(IRequestContext context, YandexTtsConfig config)
@@ -49,7 +49,7 @@ namespace YaCloudKit.TTS
                 if (string.IsNullOrWhiteSpace(config.FolderID))
                     throw new ArgumentNullException(nameof(config.FolderID));
 
-                context.AddParametr("folderId", config.FolderID);
+                context.AddParameter("folderId", config.FolderID);
             }
         }
     }
