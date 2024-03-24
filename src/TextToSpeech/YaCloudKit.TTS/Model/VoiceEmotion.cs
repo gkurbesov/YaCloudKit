@@ -4,9 +4,9 @@ namespace YaCloudKit.TTS;
 
 public class VoiceEmotion
 {
-    public static readonly VoiceEmotion Neutral = new VoiceEmotion("neutral");
-    public static readonly VoiceEmotion Good = new VoiceEmotion("good");
-    public static readonly VoiceEmotion Evil = new VoiceEmotion("evil");
+    public static readonly VoiceEmotion Neutral = new("neutral");
+    public static readonly VoiceEmotion Good = new("good");
+    public static readonly VoiceEmotion Evil = new("evil");
     
     public string Value { get; }
 

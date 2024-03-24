@@ -8,6 +8,11 @@ namespace YaCloudKit.TTS
     public class VoiceParameters
     {
         /// <summary>
+        /// Женский немецкий голос Lea
+        /// </summary>
+        public static readonly VoiceParameters Lea = new(VoiceName.Lea);
+        
+        /// <summary>
         /// Женский русский голос Alena
         /// </summary>
         public static readonly VoiceParameters Alena = new(VoiceName.Alena);
@@ -37,6 +42,30 @@ namespace YaCloudKit.TTS
         /// </summary>
         public static readonly VoiceParameters Ermil = new(VoiceName.Ermil);
 
+        /// <summary>
+        /// Женский казахский голос
+        /// </summary>
+        public static readonly VoiceParameters Amira = new(VoiceName.Amira);
+
+        /// <summary>
+        /// Мужской казахский голос
+        /// </summary>
+        public static readonly VoiceParameters Madi = new(VoiceName.Madi);
+
+        /// <summary>
+        /// Мужской английский голос
+        /// </summary>
+        public static readonly VoiceParameters John = new(VoiceName.John);
+
+        /// <summary>
+        /// Мужской русский голос
+        /// </summary>
+        public static readonly VoiceParameters Madirus = new(VoiceName.Madirus);
+
+        /// <summary>
+        /// Женский узбекский голос
+        /// </summary>
+        public static readonly VoiceParameters Nigora = new(VoiceName.Nigora);
 
         /// <summary>
         /// Название голоса. Подробнее см. список голосов
@@ -64,11 +93,18 @@ namespace YaCloudKit.TTS
         /// Инициалзация параметров голоса для генерации речи
         /// </summary>
         /// <param name="name">Название голоса</param>
-        public VoiceParameters(VoiceName name)
+        public VoiceParameters(
+            VoiceName name,
+            VoiceLanguage language = null,
+            string speed = null,
+            VoiceEmotion emotion = null)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException(nameof(name));
             Name = name;
+            Language = language;
+            Speed = speed;
+            Emotion = emotion;
         }
     }
 }
