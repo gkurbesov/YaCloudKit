@@ -25,7 +25,7 @@ namespace YaCloudKit.TTS
             Headers = headers ?? throw new ArgumentNullException(nameof(headers));
         }
 
-        public IRequestContext AddParametr(string key, string value)
+        public IRequestContext AddParameter(string key, string value)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentNullException(nameof(key));

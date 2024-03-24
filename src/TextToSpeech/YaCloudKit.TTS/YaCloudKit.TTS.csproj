@@ -12,8 +12,8 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageIcon>logo-main.png</PackageIcon>
     <VersionMajor>0</VersionMajor>
-    <VersionMinor>3</VersionMinor>
-    <BuildNumber>9</BuildNumber>
+    <VersionMinor>4</VersionMinor>
+    <BuildNumber>0</BuildNumber>
     <PackageVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</PackageVersion>
     <AssemblyVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</AssemblyVersion>
     <FileVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</FileVersion>
