@@ -22,7 +22,7 @@ jobs:
         run: dotnet build ./YaCloudKit.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test ./YaCloudKit.sln --configuration Release --no-restore
+        run: dotnet test --no-build ./YaCloudKit.sln --configuration Release --no-restore
 
       - name: Pack
         run: dotnet pack ./YaCloudKit.sln -c Release
