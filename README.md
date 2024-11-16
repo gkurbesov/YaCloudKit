@@ -2,32 +2,34 @@
 <p align="center">
     <img src="./assets/logo-main.png">
 </p>
-Набор инструментов для работы с сервисами Yandex.Cloud
+
+A set of tools for working with Yandex.Cloud services.
 
 [![Main Build](https://github.com/gkurbesov/YaCloudKit/actions/workflows/main.yml/badge.svg)](https://github.com/gkurbesov/YaCloudKit/actions/workflows/main.yml)
 [![Nuget](https://img.shields.io/nuget/v/YaCloudKit.MQ?label=MQ)](https://www.nuget.org/packages/YaCloudKit.MQ)
 [![Nuget](https://img.shields.io/nuget/v/YaCloudKit.TTS?label=TTS)](https://www.nuget.org/packages/YaCloudKit.TTS)
-## Описание
-YaCloudKit - это набор инструментов, который позволит взаимодействовать вашему приложению с сервисами облачной платформы Яндекс.Облако.
+## Description
+YaCloudKit is a set of tools that enables your application to interact with Yandex.Cloud platform services.
 
-Поддерживаются .Net Standard 2.0 и выше
+Supports .Net 8.0 and higher.
 
-## Инструменты
-В этом разделе представлен список инструментов, которые уже реализованы.
+## Tools
+This section lists the tools that are currently implemented.
 
-**Реализованно:**
-- [YaCloudKit.MQ](./src/MessageQueue) - клиент для работы с очередью сообщений Яндекс.Облака
-- [YaCloudKit.MQ.Transport](./src/MessageQueue) - расширение для клиента очереди сообщений, отвечает за де/сериализацию и обработку сообщений
-- [YaCloudKit.TTS](./src/TextToSpeech) - клиент SpeechKit для синтеза речи из текста
+**Implemented:**
+- [YaCloudKit.MQ](./src/MessageQueue) - a client for working with Yandex.Cloud Message Queue.
+- [YaCloudKit.MQ.Transport](./src/MessageQueue) - an extension for the message queue client, responsible for message serialization/deserialization and processing.
+- [YaCloudKit.TTS](./src/TextToSpeech) - a SpeechKit client for text-to-speech synthesis.
 
 ## YaCloudKit.MQ
 
-YaCloudKit.MQ - это клиент для работы с очередью сообщений Яндекс.Облака.
-Полностью адаптирова под сервис Yandex Message Queue и не имеет лишних неиспользуемых зависимостей и кода.
+YaCloudKit.MQ is a client for working with Yandex.Cloud Message Queue.
+It is fully tailored for the Yandex Message Queue service without unnecessary dependencies or code.
 
-### Использование
+### Usage
 
-Клиент легко подкючить и использовать всего в три шага:
+The client can be easily connected and used in three simple steps:
+
 ```csharp
 // Step 1. create client instance
 var client = new YandexMqClient("[Access Key Id]", "[Secret Access Key]");
@@ -41,16 +43,14 @@ var message = new SendMessageRequest()
 await client.SendMessageAsync(message);
 ```
 
-Больше примеров можно [посмотреть тут](./samples/YaCloudKit.MQ.Examples)
+More examples can be found [here](./samples/YaCloudKit.MQ.Examples)
 
 ## YaCloudKit.MQ.Transport
+YaCloudKit.MQ.Transport is a set of services and components designed to simplify message processing from the message queue.
 
-YaCloudKit.MQ.Transport - это набор сервисов и компонентов призваных упростить обработку сообщений из очереди сообщений.
+### Usage
 
-
-### Использование
-
-Создайте обработчик для сообщения:
+Create a handler for your message:
 ```csharp
 public class CustomerRegistrationHandler : IMessageHandler<CustomerRegistrationDto>
 {
@@ -69,7 +69,7 @@ public class CustomerRegistrationHandler : IMessageHandler<CustomerRegistrationD
 }
 ```
 
-Сконфигурируйте зависимости:
+Configure dependencies:
 
 ```csharp
 services.AddYandexMqClient("[Access Key Id]", "[Secret Access Key]");
@@ -83,7 +83,8 @@ services.AddMqTransport(configure =>
     Assembly.GetExecutingAssembly());
 ```
 
-Получите одбновление из очереди и обработайте их:
+Receive updates from the queue and process them:
+
 ```csharp
 IYandexMq client = ... // Get IYandexMq
 IMqTransportService transport = ... // Get IMqTransportService
@@ -107,8 +108,12 @@ if(response.HttpStatusCode == HttpStatusCode.OK && response.Messages.Count > 0)
 }
 ```
 
-Больше примеров можно [посмотреть тут](./samples/YaCloudKit.MQ.Transport.Examples)
+More examples can be found [here](./samples/YaCloudKit.MQ.Transport.Examples)
 
-## Лицензия
-YaCloudKit предоставляется как есть по лицензии MIT. Для получения дополнительной информации см. [LICENSE](./LICENSE).
+
+## License
+YaCloudKit is provided "as is" under the MIT License.
+
+For more information, see [LICENSE](./LICENSE).
+
 
