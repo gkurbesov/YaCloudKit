@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postbox", "src\Postbox", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.Postbox", "src\Postbox\YaCloudKit.Postbox\YaCloudKit.Postbox.csproj", "{7279CD76-4983-46AC-BAAF-5FB55E3D4F45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.Postbox.Examples", "samples\YaCloudKit.Postbox.Examples\YaCloudKit.Postbox.Examples.csproj", "{B4F2DC67-A932-4AB6-B20D-5A858DED75A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{7279CD76-4983-46AC-BAAF-5FB55E3D4F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7279CD76-4983-46AC-BAAF-5FB55E3D4F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7279CD76-4983-46AC-BAAF-5FB55E3D4F45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4F2DC67-A932-4AB6-B20D-5A858DED75A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4F2DC67-A932-4AB6-B20D-5A858DED75A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4F2DC67-A932-4AB6-B20D-5A858DED75A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4F2DC67-A932-4AB6-B20D-5A858DED75A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +98,7 @@ Global
 		{EDBDB339-B140-4832-A54F-004D244808EA} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 		{8796825F-8B82-4EDA-B21C-9D552168407B} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 		{7279CD76-4983-46AC-BAAF-5FB55E3D4F45} = {8C4A0E1A-081F-4208-BCDC-115029DC9FF0}
+		{B4F2DC67-A932-4AB6-B20D-5A858DED75A4} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB60A6CA-F76D-40F9-BFDD-ACA1F097B83D}
