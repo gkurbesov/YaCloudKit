@@ -12,12 +12,7 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup .NET 6
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 6.0.x
+        uses: actions/checkout@v4
 
       - name: Install dependencies
         run: dotnet restore ./YaCloudKit.sln
@@ -26,4 +21,4 @@ jobs:
         run: dotnet build ./YaCloudKit.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test ./YaCloudKit.sln --configuration Release --no-restore
+        run: dotnet test --no-build ./YaCloudKit.sln --configuration Release --no-restore

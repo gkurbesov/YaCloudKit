@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Xunit;
-using YaCloudKit.MQ.Extensions.DependencyInjection;
 
 namespace YaCloudKit.MQ.Tests;
 

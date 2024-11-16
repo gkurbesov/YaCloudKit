@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace YaCloudKit.MQ.Transport.Extensions.DependencyInjection;
+namespace YaCloudKit.MQ.Transport.DependencyInjection;
 
 public class MessageConverterComponentOptionsBuilder
 {

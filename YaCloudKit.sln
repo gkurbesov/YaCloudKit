@@ -17,11 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TextToSpeech", "src\TextToS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.TTS.Tests", "src\TextToSpeech\YaCloudKit.TTS.Tests\YaCloudKit.TTS.Tests.csproj", "{80BFD0AD-E1CD-42E8-BFAA-6687844FA735}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ.Extensions.DependencyInjection", "src\MessageQueue\YaCloudKit.MQ.Extensions.DependencyInjection\YaCloudKit.MQ.Extensions.DependencyInjection.csproj", "{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ.Transport.Tests", "src\MessageQueue\YaCloudKit.MQ.Transport.Tests\YaCloudKit.MQ.Transport.Tests.csproj", "{56762F1C-98AA-4420-B60C-732CA325231F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ.Transport.Extensions.DependencyInjection", "src\MessageQueue\YaCloudKit.MQ.Transport.Extensions.DependencyInjection\YaCloudKit.MQ.Transport.Extensions.DependencyInjection.csproj", "{1700EA26-6DBC-457F-924F-CB1DFAE3374D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{3B55C34B-BA59-4ABB-87C5-59153FF74CB5}"
 EndProject
@@ -30,8 +26,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ.Transport.Examples", "samples\YaCloudKit.MQ.Transport.Examples\YaCloudKit.MQ.Transport.Examples.csproj", "{EDBDB339-B140-4832-A54F-004D244808EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.TTS.Example", "samples\YaCloudKit.TTS.Example\YaCloudKit.TTS.Example.csproj", "{8796825F-8B82-4EDA-B21C-9D552168407B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.TTS.DependencyInjection", "src\TextToSpeech\YaCloudKit.TTS.DependencyInjection\YaCloudKit.TTS.DependencyInjection.csproj", "{85A09BEE-89D3-4C8E-84F2-8AA664F0308C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,18 +53,10 @@ Global
 		{80BFD0AD-E1CD-42E8-BFAA-6687844FA735}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80BFD0AD-E1CD-42E8-BFAA-6687844FA735}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80BFD0AD-E1CD-42E8-BFAA-6687844FA735}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56762F1C-98AA-4420-B60C-732CA325231F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56762F1C-98AA-4420-B60C-732CA325231F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56762F1C-98AA-4420-B60C-732CA325231F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56762F1C-98AA-4420-B60C-732CA325231F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1700EA26-6DBC-457F-924F-CB1DFAE3374D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1700EA26-6DBC-457F-924F-CB1DFAE3374D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1700EA26-6DBC-457F-924F-CB1DFAE3374D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1700EA26-6DBC-457F-924F-CB1DFAE3374D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0BFD6AEA-01EB-47F3-A9B9-DB5F222877BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0BFD6AEA-01EB-47F3-A9B9-DB5F222877BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BFD6AEA-01EB-47F3-A9B9-DB5F222877BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -83,10 +69,6 @@ Global
 		{8796825F-8B82-4EDA-B21C-9D552168407B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8796825F-8B82-4EDA-B21C-9D552168407B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8796825F-8B82-4EDA-B21C-9D552168407B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85A09BEE-89D3-4C8E-84F2-8AA664F0308C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85A09BEE-89D3-4C8E-84F2-8AA664F0308C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85A09BEE-89D3-4C8E-84F2-8AA664F0308C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85A09BEE-89D3-4C8E-84F2-8AA664F0308C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,13 +79,10 @@ Global
 		{B8916BF5-47FC-4E1B-815B-093DF6A1E2B4} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 		{3F849A41-F8DA-430A-BE18-52A8C12FE012} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 		{80BFD0AD-E1CD-42E8-BFAA-6687844FA735} = {092A9018-57BC-42D7-85FD-3D4EA12EFC9D}
-		{EE9F6062-4AAE-497C-872B-3C6EF3BDF24F} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 		{56762F1C-98AA-4420-B60C-732CA325231F} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
-		{1700EA26-6DBC-457F-924F-CB1DFAE3374D} = {9C193C93-C9A9-4921-8BE1-3F52A2395232}
 		{0BFD6AEA-01EB-47F3-A9B9-DB5F222877BB} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 		{EDBDB339-B140-4832-A54F-004D244808EA} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 		{8796825F-8B82-4EDA-B21C-9D552168407B} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
-		{85A09BEE-89D3-4C8E-84F2-8AA664F0308C} = {092A9018-57BC-42D7-85FD-3D4EA12EFC9D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB60A6CA-F76D-40F9-BFDD-ACA1F097B83D}

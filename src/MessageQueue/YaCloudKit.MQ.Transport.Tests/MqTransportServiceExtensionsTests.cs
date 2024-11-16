@@ -1,4 +1,6 @@
-﻿namespace YaCloudKit.MQ.Transport.Tests;
+﻿using YaCloudKit.MQ.Transport.DependencyInjection;
+
+namespace YaCloudKit.MQ.Transport.Tests;
 
 public class MqTransportServiceExtensionsTests
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace YaCloudKit.MQ.Transport.Extensions.DependencyInjection;
+namespace YaCloudKit.MQ.Transport.DependencyInjection;
 
 internal static class TypeExtensions
 {
