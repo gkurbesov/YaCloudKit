@@ -1,9 +1,8 @@
 ﻿using System.Net;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using YaCloudKit.MQ.Extensions.DependencyInjection;
 using YaCloudKit.MQ.Model.Requests;
-using YaCloudKit.MQ.Transport.Extensions.DependencyInjection;
+using YaCloudKit.MQ.Transport.DependencyInjection;
 
 namespace YaCloudKit.MQ.Transport.Examples;
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace YaCloudKit.MQ.Extensions.DependencyInjection;
+namespace YaCloudKit.MQ;
 
-public static class YandexMqClientExtensions
+public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddYandexMqClient(this IServiceCollection services, string accessKeyId, string secretAccessKey)
     {

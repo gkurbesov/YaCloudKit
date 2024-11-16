@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using YaCloudKit.MQ.Extensions.DependencyInjection;
-using YaCloudKit.MQ.Model.Responses;
-using YaCloudKit.MQ.Transport.Extensions.DependencyInjection;
+using YaCloudKit.MQ.Transport.DependencyInjection;
 
 namespace YaCloudKit.MQ.Transport.Examples;
 

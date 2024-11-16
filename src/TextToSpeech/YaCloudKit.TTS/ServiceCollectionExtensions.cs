@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace YaCloudKit.TTS.DependencyInjection
+namespace YaCloudKit.TTS
 {
-    public static class YandexTtsClientExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddYandexTtsClient(this IServiceCollection services, string apiKey)
         {

@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Description>Инструмент YaCloudKit для работы с сервисом Yandex SpeechKit для синтеза речи</Description>
-    <Authors>Gennady Kurbesov</Authors>
+    <Description>YaCloudKit: A tool for working with the Yandex SpeechKit service for speech synthesis.</Description>
+    <Authors>Gennadii Kurbesov</Authors>
     <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit</RepositoryUrl>
     <PackageTags>Яндекс, Облако, Yandex, Cloud, TTS, AI, Voice, Speech</PackageTags>
@@ -12,7 +12,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageIcon>logo-main.png</PackageIcon>
     <VersionMajor>0</VersionMajor>
-    <VersionMinor>4</VersionMinor>
+    <VersionMinor>5</VersionMinor>
     <BuildNumber>0</BuildNumber>
     <PackageVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</PackageVersion>
     <AssemblyVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</AssemblyVersion>
@@ -33,6 +33,11 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace YaCloudKit.MQ.Transport.Extensions.DependencyInjection;
+namespace YaCloudKit.MQ.Transport.DependencyInjection;
 
 public static class MqTransportServiceExtensions
 {

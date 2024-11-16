@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <LangVersion>latest</LangVersion>
 
-    <Description>Инструмент YaCloudKit для работы с очередью сообщений Yandex Cloud</Description>
-    <Authors>Gennady Kurbesov</Authors>
+    <Description>YaCloudKit: a tool for working with Yandex Cloud Message Queue.</Description>
+    <Authors>Gennadii Kurbesov</Authors>
     <PackageProjectUrl>https://github.com/gkurbesov/YaCloudKit</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gkurbesov/YaCloudKit</RepositoryUrl>
-    <PackageTags>Яндекс, Облако, Yandex, Cloud, Message, Queue, kit, aws</PackageTags>
+    <PackageTags>Яндекс, Облако, Yandex, Cloud, Message, Queue, kit, aws, MQ</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageIcon>logo-main.png</PackageIcon>
     <VersionMajor>0</VersionMajor>
-    <VersionMinor>8</VersionMinor>
+    <VersionMinor>9</VersionMinor>
     <BuildNumber>0</BuildNumber>
     <PackageVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</PackageVersion>
     <AssemblyVersion>$(VersionMajor).$(VersionMinor).$(BuildNumber)$(VersionTag)</AssemblyVersion>
@@ -41,7 +41,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
   </ItemGroup>
 
 </Project>
