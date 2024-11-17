@@ -24,4 +24,5 @@ var yandexIamServiceClient = serviceProvider.GetRequiredService<IYandexIamServic
 
 var iamTokenResponse = await yandexIamServiceClient.GetIamForServiceAccountAsync();
 
-Console.WriteLine(iamTokenResponse);
+Console.WriteLine("IAM token: " + iamTokenResponse.IamToken.Substring(0, 20) + "...");
+Console.WriteLine("Expires at: " + iamTokenResponse.ExpiresAt);
