@@ -1,6 +1,6 @@
 ﻿namespace YaCloudKit.IAM.Rsa;
 
-public abstract class YandexCachedPrivateKeyProvider(bool cache = false) : IDisposable
+public abstract class YandexCachedPrivateKeyProvider(bool cache = false) : IYandexPrivateKeyProvider, IDisposable
 {
     private readonly SemaphoreSlim _semaphore = new(1, 1);
     private char[]? _privateKey;
