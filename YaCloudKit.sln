@@ -27,6 +27,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.MQ.Transport.Exa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.TTS.Example", "samples\YaCloudKit.TTS.Example\YaCloudKit.TTS.Example.csproj", "{8796825F-8B82-4EDA-B21C-9D552168407B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityAccessManagement", "src\IdentityAccessManagement", "{A584AADB-F033-49CE-8740-D75C8B21D387}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.IAM", "src\IdentityAccessManagement\YaCloudKit.IAM\YaCloudKit.IAM.csproj", "{6AF165C7-DAA3-4000-9352-994954A9C77D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.IAM.Examples", "samples\YaCloudKit.IAM.Examples\YaCloudKit.IAM.Examples.csproj", "{26E7F91F-B3A5-4EE7-A615-BB524ABFDA74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +75,14 @@ Global
 		{8796825F-8B82-4EDA-B21C-9D552168407B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8796825F-8B82-4EDA-B21C-9D552168407B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8796825F-8B82-4EDA-B21C-9D552168407B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AF165C7-DAA3-4000-9352-994954A9C77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF165C7-DAA3-4000-9352-994954A9C77D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF165C7-DAA3-4000-9352-994954A9C77D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF165C7-DAA3-4000-9352-994954A9C77D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26E7F91F-B3A5-4EE7-A615-BB524ABFDA74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26E7F91F-B3A5-4EE7-A615-BB524ABFDA74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26E7F91F-B3A5-4EE7-A615-BB524ABFDA74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26E7F91F-B3A5-4EE7-A615-BB524ABFDA74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +97,8 @@ Global
 		{0BFD6AEA-01EB-47F3-A9B9-DB5F222877BB} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 		{EDBDB339-B140-4832-A54F-004D244808EA} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 		{8796825F-8B82-4EDA-B21C-9D552168407B} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
+		{6AF165C7-DAA3-4000-9352-994954A9C77D} = {A584AADB-F033-49CE-8740-D75C8B21D387}
+		{26E7F91F-B3A5-4EE7-A615-BB524ABFDA74} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB60A6CA-F76D-40F9-BFDD-ACA1F097B83D}
