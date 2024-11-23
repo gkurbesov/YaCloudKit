@@ -9,6 +9,7 @@ A set of tools for working with Yandex.Cloud services.
 [![Nuget](https://img.shields.io/nuget/v/YaCloudKit.MQ?label=MQ)](https://www.nuget.org/packages/YaCloudKit.MQ)
 [![Nuget](https://img.shields.io/nuget/v/YaCloudKit.TTS?label=TTS)](https://www.nuget.org/packages/YaCloudKit.TTS)
 [![Nuget](https://img.shields.io/nuget/v/YaCloudKit.IAM?label=IAM)](https://www.nuget.org/packages/YaCloudKit.IAM)
+[![Nuget](https://img.shields.io/nuget/v/YaCloudKit.Postbox?label=Postbox)](https://www.nuget.org/packages/YaCloudKit.Postbox)
 ## Description
 YaCloudKit is a set of tools that enables your application to interact with Yandex.Cloud platform services.
 
