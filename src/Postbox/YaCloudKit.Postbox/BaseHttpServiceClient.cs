@@ -10,7 +10,7 @@ using YaCloudKit.Postbox.Model.Responses;
 
 namespace YaCloudKit.Postbox;
 
-internal abstract class BaseHttpServiceClient(HttpClient httpClient)
+public abstract class BaseHttpServiceClient(HttpClient httpClient)
 {
     private readonly AsyncRetryPolicy<HttpResponseMessage> retryPolicy =
         HttpPolicyExtensions

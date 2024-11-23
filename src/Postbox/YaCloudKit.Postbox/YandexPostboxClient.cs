@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -10,12 +11,36 @@ namespace YaCloudKit.Postbox;
 
 public class YandexPostboxClient(
     ILogger<YandexPostboxClient> logger,
-    HttpClient httpClient) : IYandexPostboxClient
+    HttpClient httpClient,
+    IYandexPostboxIamProvider iamProvider) : BaseHttpServiceClient(httpClient), IYandexPostboxClient
 {
-    public Task<SendEmailResponse> SendMailAsync(
+    public async Task<SendEmailResponse> SendMailAsync(
         SendEmailRequest request,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        ArgumentNullException.ThrowIfNull(request);
+
+        var iamToken = await iamProvider.GetIamTokenAsync(cancellationToken);
+        
+        LogSendEmailRequest(request);
+        
+        return await ExecuteJsonAsync<SendEmailResponse>(
+            async client =>
+            {
+                client.DefaultRequestHeaders.Add("X-YaCloud-SubjectToken", iamToken);
+                var response = await client.PostAsJsonAsync(YandexPostboxDefaults.SendEmailUrl, request, cancellationToken);
+                return response;
+            },
+            cancellationToken);
+    }
+    
+    private void LogSendEmailRequest(SendEmailRequest request)
+    {
+        var destination = string.Join(", ", request.Destination.ToAddresses);
+        var subject = request.Content.Simple?.Subject.Data ?? "Empty";
+        logger.LogDebug("Send email request: {FromEmailAddress} -> {Destination} Subject: {Subject}",
+            request.FromEmailAddress,
+            destination,
+            subject);
     }
 }
