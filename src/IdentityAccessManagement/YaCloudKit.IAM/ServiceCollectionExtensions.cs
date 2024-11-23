@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using YaCloudKit.IAM.Jwt;
 using YaCloudKit.IAM.Rsa;
+using YaCloudKit.IAM.TokenProvider;
 
 namespace YaCloudKit.IAM;
 
@@ -74,6 +75,20 @@ public static class ServiceCollectionExtensions
                     httpClient.BaseAddress = new Uri(YandexIamOptions.ApiHost);
                     httpClient.Timeout = requestTimeout ?? TimeSpan.FromSeconds(10);
                 });
+        return services;
+    }
+    
+    public static IServiceCollection AddYandexIamTokenProvider<TProvider>(this IServiceCollection services)
+        where TProvider : class, IYandexIamTokenProvider
+    {
+        services.TryAddSingleton<IYandexIamTokenProvider, TProvider>();
+        return services;
+    }
+    
+    public static IServiceCollection AddDefaultYandexIamTokenProvider(
+        this IServiceCollection services)
+    {
+        services.AddYandexIamTokenProvider<DefaultYandexIamTokenProvider>();
         return services;
     }
     
