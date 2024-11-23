@@ -13,7 +13,9 @@ namespace YaCloudKit.Postbox;
 internal abstract class BaseHttpServiceClient(HttpClient httpClient)
 {
     private readonly AsyncRetryPolicy<HttpResponseMessage> retryPolicy =
-        HttpPolicyExtensions.HandleTransientHttpError().RetryAsync(2);
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(500));
 
     protected async Task<TResponse> ExecuteJsonAsync<TResponse>(
         Func<HttpClient, Task<HttpResponseMessage>> httpAction,
