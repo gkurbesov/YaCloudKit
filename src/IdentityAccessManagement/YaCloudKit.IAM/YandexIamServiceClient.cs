@@ -11,9 +11,11 @@ public class YandexIamServiceClient(HttpClient httpClient, YandexJsonWebTokenGen
     : IYandexIamServiceClient
 {
     private const string RequestUri = "iam/v1/tokens";
-    
+
     private readonly AsyncRetryPolicy<HttpResponseMessage> _retryPolicy =
-        HttpPolicyExtensions.HandleTransientHttpError().RetryAsync(2);
+        HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .WaitAndRetryAsync(2, _ => TimeSpan.FromMilliseconds(500));
 
     public async Task<IamTokenResponse> GetIamForYandexAccountAsync(
         string yandexPassportOauthToken,
@@ -31,7 +33,7 @@ public class YandexIamServiceClient(HttpClient httpClient, YandexJsonWebTokenGen
 
     public async Task<IamTokenResponse> GetIamForServiceAccountAsync(CancellationToken cancellationToken = default)
     {
-        if(jsonWebTokenGenerator is null)
+        if (jsonWebTokenGenerator is null)
             throw new InvalidOperationException("JsonWebTokenGenerator is not provided");
         var jwt = await jsonWebTokenGenerator.GenerateJwtAsync(cancellationToken);
 
