@@ -10,37 +10,43 @@ using YaCloudKit.Postbox.Model.Responses;
 namespace YaCloudKit.Postbox;
 
 public class YandexPostboxClient(
-    ILogger<YandexPostboxClient> logger,
-    HttpClient httpClient,
-    IYandexPostboxIamProvider iamProvider) : BaseHttpServiceClient(httpClient), IYandexPostboxClient
+	ILogger<YandexPostboxClient> logger,
+	HttpClient httpClient,
+	IYandexPostboxIamProvider iamProvider) : BaseHttpServiceClient(httpClient), IYandexPostboxClient
 {
-    public async Task<SendEmailResponse> SendMailAsync(
-        SendEmailRequest request,
-        CancellationToken cancellationToken = default)
-    {
-        ArgumentNullException.ThrowIfNull(request);
+	public async Task<SendEmailResponse> SendMailAsync(
+		SendEmailRequest request,
+		CancellationToken cancellationToken = default)
+	{
+		ArgumentNullException.ThrowIfNull(request);
 
-        var iamToken = await iamProvider.GetIamTokenAsync(cancellationToken);
-        
-        LogSendEmailRequest(request);
-        
-        return await ExecuteJsonAsync<SendEmailResponse>(
-            async client =>
-            {
-                client.DefaultRequestHeaders.Add("X-YaCloud-SubjectToken", iamToken);
-                var response = await client.PostAsJsonAsync(YandexPostboxDefaults.SendEmailUrl, request, cancellationToken);
-                return response;
-            },
-            cancellationToken);
-    }
-    
-    private void LogSendEmailRequest(SendEmailRequest request)
-    {
-        var destination = string.Join(", ", request.Destination.ToAddresses);
-        var subject = request.Content.Simple?.Subject.Data ?? "Empty";
-        logger.LogDebug("Send email request: {FromEmailAddress} -> {Destination} Subject: {Subject}",
-            request.FromEmailAddress,
-            destination,
-            subject);
-    }
+		var iamToken = await iamProvider.GetIamTokenAsync(cancellationToken);
+
+		LogSendEmailRequest(request);
+
+		return await ExecuteJsonAsync<SendEmailResponse>(
+			async client =>
+			{
+				if (client.DefaultRequestHeaders.Contains("X-YaCloud-SubjectToken"))
+				{
+					client.DefaultRequestHeaders.Remove("X-YaCloud-SubjectToken");
+				}
+
+				client.DefaultRequestHeaders.Add("X-YaCloud-SubjectToken", iamToken);
+				var response =
+					await client.PostAsJsonAsync(YandexPostboxDefaults.SendEmailUrl, request, cancellationToken);
+				return response;
+			},
+			cancellationToken);
+	}
+
+	private void LogSendEmailRequest(SendEmailRequest request)
+	{
+		var destination = string.Join(", ", request.Destination.ToAddresses);
+		var subject = request.Content.Simple?.Subject.Data ?? "Empty";
+		logger.LogDebug("Send email request: {FromEmailAddress} -> {Destination} Subject: {Subject}",
+			request.FromEmailAddress,
+			destination,
+			subject);
+	}
 }
