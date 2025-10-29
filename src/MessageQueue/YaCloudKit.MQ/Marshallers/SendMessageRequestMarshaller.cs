@@ -25,7 +25,7 @@ namespace YaCloudKit.MQ.Marshallers
 
             if (!string.IsNullOrWhiteSpace(input.MessageDeduplicationId))
                 context.AddParametr("MessageDeduplicationId", input.MessageDeduplicationId);
-            if (!string.IsNullOrWhiteSpace(input.MessageDeduplicationId))
+            if (!string.IsNullOrWhiteSpace(input.MessageGroupId))
                 context.AddParametr("MessageGroupId", input.MessageGroupId);
 
             return context;
