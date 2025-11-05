@@ -27,9 +27,7 @@ public static class ServiceCollectionExtensions
 			.Bind(configuration.GetSection(YandexCertificateManagerOptions.SectionName));
 	}
 
-	public static IHttpClientBuilder AddYandexCertificateManagerClient(
-		this IServiceCollection services,
-		IConfiguration configuration)
+	public static IHttpClientBuilder AddYandexCertificateManagerClient(this IServiceCollection services)
 	{
 		if (services.Any(x => x.ServiceType == typeof(IYandexCertificateManagerIamProvider)) == false)
 			throw new InvalidOperationException("IYandexCertificateManagerIamProvider is not registered");
@@ -44,9 +42,7 @@ public static class ServiceCollectionExtensions
 			});
 	}
 
-	public static IHttpClientBuilder AddYandexCertificateContentClient(
-		this IServiceCollection services,
-		IConfiguration configuration)
+	public static IHttpClientBuilder AddYandexCertificateContentClient(this IServiceCollection services)
 	{
 		if (services.Any(x => x.ServiceType == typeof(IYandexCertificateManagerIamProvider)) == false)
 			throw new InvalidOperationException("IYandexCertificateManagerIamProvider is not registered");

@@ -45,6 +45,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CertificateManager ", "Cert
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.CertificateManager", "src\CertificateManager\YaCloudKit.CertificateManager\YaCloudKit.CertificateManager.csproj", "{BD88FC79-11EC-4590-B0EB-744E17F3E64F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YaCloudKit.CertificateManager.Examples", "samples\YaCloudKit.CertificateManager.Examples\YaCloudKit.CertificateManager.Examples.csproj", "{F6CE33DC-1981-486F-B661-28BB6411C200}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{BD88FC79-11EC-4590-B0EB-744E17F3E64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD88FC79-11EC-4590-B0EB-744E17F3E64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD88FC79-11EC-4590-B0EB-744E17F3E64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6CE33DC-1981-486F-B661-28BB6411C200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6CE33DC-1981-486F-B661-28BB6411C200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6CE33DC-1981-486F-B661-28BB6411C200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6CE33DC-1981-486F-B661-28BB6411C200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +137,7 @@ Global
 		{7279CD76-4983-46AC-BAAF-5FB55E3D4F45} = {8C4A0E1A-081F-4208-BCDC-115029DC9FF0}
 		{B4F2DC67-A932-4AB6-B20D-5A858DED75A4} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 		{BD88FC79-11EC-4590-B0EB-744E17F3E64F} = {1E3A8F2E-E90B-4900-91B1-581049907861}
+		{F6CE33DC-1981-486F-B661-28BB6411C200} = {3B55C34B-BA59-4ABB-87C5-59153FF74CB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB60A6CA-F76D-40F9-BFDD-ACA1F097B83D}
